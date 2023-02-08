@@ -7,8 +7,9 @@ export type TextPropsType = {
 }
 
 type SpanStyleType = {
-  size?: string
   color?: string
+  size?: string
+  weight?: string
 }
 
 const Text: React.FC<TextPropsType> = (props) => {
@@ -18,8 +19,9 @@ const Text: React.FC<TextPropsType> = (props) => {
 
 const StyledSpan = styled.span<SpanStyleType>(
   (style) => `
-    font-size: ${style.size ? style.size : 'inherit'};
     color: ${style.color ? style.color : 'inherit'};
+    font-size: ${style.size ? style.size : 'inherit'};
+    font-weight: ${style.weight ? style.weight : 'inherit'};
   `
 )
 
