@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import Text from 'src/view/components/atoms/Text'
 import Logo from 'src/view/components/atoms/Logo'
 import LoginButton from './LoginButton'
-import { color } from 'src/styles/color.ts'
+import { color } from 'src/styles/color'
 
 const Content: React.FC = () => {
   const DeviceType = useContext(DeviceTypeContext)
