@@ -1,5 +1,7 @@
 import styled from 'styled-components'
 
+export type RoundBoxProps = RoundBoxStyleType
+
 type RoundBoxStyleType = {
   shadow?: string
   background?: string

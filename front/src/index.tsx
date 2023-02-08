@@ -7,10 +7,10 @@ import './index.css'
 const getDeviceType = (): DeviceType => {
   const width = window.innerWidth
   if (width < 960) return 'mobile'
-  else return 'desktop'
+  else return 'pc'
 }
 
-export type DeviceType = 'mobile' | 'desktop'
+export type DeviceType = 'mobile' | 'pc'
 export const DeviceTypeContext = createContext<DeviceType>(getDeviceType())
 
 const Index: React.FC = () => {

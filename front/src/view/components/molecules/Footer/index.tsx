@@ -13,7 +13,7 @@ const Footer: React.FC = () => {
       return (
         <StyledFooter justify="space-between">{FooterContent}</StyledFooter>
       )
-    case 'desktop':
+    case 'pc':
       return <StyledFooter justify="flex-end">{FooterContent}</StyledFooter>
   }
 }
