@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 
 type RoundBoxStyleType = {
-  justify?: string
   shadow?: string
   background?: string
 }
@@ -9,9 +8,7 @@ type RoundBoxStyleType = {
 const RoundBox = styled.footer<RoundBoxStyleType>(
   (style) => `
     border-radius: 24px;
-    display: flex;
-    justify-content: ${style.justify};
-    box-shadow: ${style.shadow};
+    box-shadow: ${style.shadow ? style.shadow : 'none'};
     background: ${style.background ? style.background : 'none'}
   `
 )
