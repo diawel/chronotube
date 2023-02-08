@@ -1,0 +1,21 @@
+version: '3' # docker-composeのバージョン
+services:
+  app:
+    build:
+      # イメージを作るためのDockerfileがある場所
+      context: . # Dockerfileのある場所
+      dockerfile: Dockerfile
+    container_name: chronotube_front
+    volumes:
+      # ローカルのデータにコンテナのデータをマウントする。
+      - ./front:/usr/src/app
+      - /usr/src/app/node_modules
+    working_dir: /usr/src/app # デフォルトの作業ディレクトリを指定
+    command: sh -c 'npm run dev'
+    environment:
+      - CHOKIDAR_USEPOLLING=true # docker環境の中でホットリロードを有効にします。
+    tty: true
+    stdin_open: true
+    ports:
+      - "3000:3000" # 左がローカル、右がDocker内のポート
+      - "3001:3001" # 左がローカル、右がDocker内のポート(build用)

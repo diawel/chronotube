@@ -1,0 +1,6 @@
+node_modules/
+build/
+*.html
+*.md
+*.svg
+*.lock
