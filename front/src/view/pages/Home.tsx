@@ -1,5 +1,10 @@
+import { useContext } from 'react'
+import { DeviceTypeContext } from 'src/index'
+
 const Home: React.FC = () => {
-  return <div>Home</div>
+  const DeviceType = useContext(DeviceTypeContext)
+  console.log('render')
+  return <div>{DeviceType}</div>
 }
 
 export default Home
