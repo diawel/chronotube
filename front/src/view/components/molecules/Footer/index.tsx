@@ -21,7 +21,7 @@ const Footer: React.FC = () => {
 const textStyle = { color: color.darkGray, size: '12px' }
 
 const TextWrapper = styled.div`
-  margin: 8px 8px;
+  margin: 8px;
 `
 
 const FooterContent = (
