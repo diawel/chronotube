@@ -5,7 +5,7 @@ import RoundBox from 'src/view/components/atoms/RoundBox'
 
 const LoginButton: React.FC = () => {
   return (
-    <a href="/redirect.php">
+    <a href="/api/redirect.php">
       <RoundBox style={{ background: color.white }}>
         <InnerBox>
           <Text style={{ color: color.black, size: '12px' }}>
