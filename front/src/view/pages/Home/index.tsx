@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 import { DeviceTypeContext } from 'src/index'
-import NoData from '../components/templates/Home/NoData'
+import NoData from './NoData'
 
 const Home: React.FC = () => {
   const DeviceType = useContext(DeviceTypeContext)
