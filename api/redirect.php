@@ -11,9 +11,14 @@ $client_secret = json_decode(
 $state = bin2hex(random_bytes(128/8));
 $_SESSION['state'] = $state;
 
+$referer = $_SERVER['HTTP_REFERER'];
+$parsed_referer = parse_url($referer);
+$origin = $parsed_referer['scheme'] . '://' . $parsed_referer['host'];
+$origin .= $parsed_referer['port'] ? (':' . $parsed_referer['port']) : '';
+
 $query = http_build_query([
   'client_id' => $client_secret['web']['client_id'],
-  'redirect_uri' => 'https://chronotube.diawel.me/api/callback.php',
+  'redirect_uri' => $origin . '/api/callback.php',
   'response_type' => 'code',
   'scope' => 'https://www.googleapis.com/auth/youtube.readonly',
   'state' => $state

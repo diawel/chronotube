@@ -1,5 +1,4 @@
 <?php
 $PATH = [
-  'Google' => '../lib/google',
-  'WMCache' => '../lib/wmcache'
+  'Google' => '../lib/google'
 ];

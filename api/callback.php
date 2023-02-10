@@ -2,6 +2,8 @@
 session_start();
 ini_set('max_execution_time', 90);
 
+$subscription = [];
+
 if ($_SESSION['state'] == $_GET['state'] && isset($_GET['code'])) {
   unset($_SESSION['state']);
 
@@ -31,8 +33,31 @@ if ($_SESSION['state'] == $_GET['state'] && isset($_GET['code'])) {
   }
   fetch(null);
 
-  $_SESSION['subscription'] = json_encode($channels);
-  $_SESSION['fetched'] = time();
+  $GLOBALS['subscription'] = $channels;
 }
-header('Location: https://chronotube.diawel.me/');
-exit;
+?>
+
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <script src="https://unpkg.com/dexie/dist/dexie.js"></script>
+    <script>
+      const db = new Dexie('CacheList')
+      db.version(1).stores({files: 'purpose, blob'})
+
+      db.files.put({
+        purpose: 'subscription',
+        blob: new Blob([
+          '<?php echo str_replace(['\\', "'"], ['\\\\', "\\'"], json_encode($subscription)) ?>'
+        ], {type: 'application/json'})
+      }).then(() => {
+        location.href = '/'
+      }).catch((error) => {
+        console.error(error)
+      })
+    </script>
+  </body>
+</html>
