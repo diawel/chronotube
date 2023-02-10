@@ -30,46 +30,37 @@ if ($_SESSION['state'] == $_GET['state'] && isset($_GET['code'])) {
     $channels = array_merge($channels, $response->items);
 
     if ($response->nextPageToken) fetch($response->nextPageToken);
-    else {
-      $GLOBALS['subscription'] = $channels;
-      render();
-    }
   }
   fetch(null);
+
+  $GLOBALS['subscription'] = $channels;
 } else {
   header('Location: /');
   exit;
 }
-
-function render() {
-  $json = str_replace(['\\', "'"], ['\\\\', "\\'"], json_encode($GLOBALS['subscription']));
-  echo <<< EOM
-    <!DOCTYPE html>
-    <html lang="ja">
-      <head>
-        <meta charset="UTF-8" />
-      </head>
-      <body>
-        <script src="https://unpkg.com/dexie/dist/dexie.js"></script>
-        <script>
-          const db = new Dexie('CacheList')
-          db.version(1).stores({files: 'purpose, blob'})
-
-          db.files.put({
-            purpose: 'subscription',
-            blob: new Blob([
-              '{$json}'
-            ], {type: 'application/json'})
-          }).then(() => {
-            location.href = '/'
-          }).catch((error) => {
-            console.error(error)
-          })
-        </script>
-      </body>
-    </html>
-  EOM;
-}
 ?>
 
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <script src="https://unpkg.com/dexie/dist/dexie.js"></script>
+    <script>
+      const db = new Dexie('CacheList')
+      db.version(1).stores({files: 'purpose, blob'})
 
+      db.files.put({
+        purpose: 'subscription',
+        blob: new Blob([
+          '<?php echo str_replace(['\\', "'"], ['\\\\', "\\'"], json_encode($subscription)) ?>'
+        ], {type: 'application/json'})
+      }).then(() => {
+        location.href = '/'
+      }).catch((error) => {
+        console.error(error)
+      })
+    </script>
+  </body>
+</html>
