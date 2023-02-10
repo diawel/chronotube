@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import { DeviceTypeContext } from 'src/index'
 import styled from 'styled-components'
-import Text from 'src/view/components/atoms/Text'
+import TextBlock from 'src/view/components/atoms/TextBlock'
 import Logo from 'src/view/components/atoms/Logo'
 import { color } from 'src/common/styles/color'
 
@@ -10,11 +10,9 @@ const LogoBox: React.FC = () => {
   return (
     <Wrapper>
       <Logo width={DeviceType === 'mobile' ? '220px' : '280px'} />
-      <div>
-        <Text style={{ color: color.black, size: '12px' }}>
-          YouTubeのチャンネル登録日を検索
-        </Text>
-      </div>
+      <TextBlock style={{ color: color.black, size: '12px' }}>
+        YouTubeのチャンネル登録日を検索
+      </TextBlock>
     </Wrapper>
   )
 }

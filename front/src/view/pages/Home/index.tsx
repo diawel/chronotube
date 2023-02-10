@@ -1,11 +1,15 @@
-import { useContext } from 'react'
-import { DeviceTypeContext } from 'src/index'
 import NoData from './NoData'
+import Default from './Default'
+import { useLiveQuery } from 'dexie-react-hooks'
+import { subscription } from 'src/common/utils/db/Subscription'
 
 const Home: React.FC = () => {
-  const DeviceType = useContext(DeviceTypeContext)
-  console.log(DeviceType)
-  return <NoData />
+  const channels = useLiveQuery(
+    async () => await subscription.channels.toArray()
+  )
+
+  if (channels?.length) return <Default />
+  else return <NoData />
 }
 
 export default Home
