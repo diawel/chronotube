@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import { color } from 'src/styles/color'
+import { color } from 'src/common/styles/color'
 import Text from '../../atoms/Text'
 import styled from 'styled-components'
 import { DeviceTypeContext } from 'src/index'

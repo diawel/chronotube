@@ -3,7 +3,7 @@ import { DeviceTypeContext } from 'src/index'
 import styled from 'styled-components'
 import Text from 'src/view/components/atoms/Text'
 import Logo from 'src/view/components/atoms/Logo'
-import { color } from 'src/styles/color'
+import { color } from 'src/common/styles/color'
 
 const LogoBox: React.FC = () => {
   const DeviceType = useContext(DeviceTypeContext)

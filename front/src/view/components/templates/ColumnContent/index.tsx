@@ -1,5 +1,5 @@
 import { ReactNode } from 'react'
-import { color } from 'src/styles/color'
+import { color } from 'src/common/styles/color'
 import styled from 'styled-components'
 import Wrap from '../../atoms/Wrap'
 import FixedFooter from '../../molecules/FixedFooter'

@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import Text from 'src/view/components/atoms/Text'
-import { color } from 'src/styles/color'
+import { color } from 'src/common/styles/color'
 import RoundBox from 'src/view/components/atoms/RoundBox'
 
 const LoginButton: React.FC = () => {
