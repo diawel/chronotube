@@ -1,6 +1,8 @@
 import React, { createContext, useState, useEffect } from 'react'
 import ReactDOM from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
+import { cacheList } from 'src/common/utils/db/CacheList'
+import { storeSubscription } from 'src/common/utils/db/Subscription'
 import App from './view/App'
 import './index.css'
 
@@ -23,6 +25,26 @@ const Index: React.FC = () => {
 
     window.addEventListener('resize', onResize)
     return () => window.removeEventListener('resize', onResize)
+  }, [])
+
+  useEffect(() => {
+    cacheList.files
+      .toCollection()
+      .each(async (file) => {
+        switch (file.purpose) {
+          case 'subscription':
+            await storeSubscription(file.blob)
+            break
+          default:
+            console.error('Unknown cache')
+        }
+      })
+      .then(async () => {
+        await cacheList.files.clear()
+      })
+      .catch((error) => {
+        console.error(error)
+      })
   }, [])
 
   return (
