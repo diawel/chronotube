@@ -29,7 +29,6 @@ const Index: React.FC = () => {
 
   useEffect(() => {
     cacheList.files
-      .toCollection()
       .each(async (file) => {
         switch (file.purpose) {
           case 'subscription':

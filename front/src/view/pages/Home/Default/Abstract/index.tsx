@@ -8,9 +8,7 @@ import SideSlider from 'src/view/components/atoms/SideSlider'
 import Wrap from 'src/view/components/atoms/Wrap'
 
 const Abstract: React.FC = () => {
-  const channels = useLiveQuery(
-    async () => await subscription.channels.toArray()
-  )
+  const channels = useLiveQuery(async () => await subscription.channels.count())
 
   const channelsFetched: Date | undefined = useLiveQuery(
     async () => await subscription.meta.get('fetched')
@@ -20,7 +18,7 @@ const Abstract: React.FC = () => {
     <Wrap key={0}>
       <TitledValue
         title="登録チャンネル数"
-        value={channels ? channels.length.toString() : ''}
+        value={channels ? channels.toString() : ''}
       />
       <TitledValue title="総再生数" value="なし" />
     </Wrap>,
