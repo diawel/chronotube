@@ -6,6 +6,7 @@ import { useLiveQuery } from 'dexie-react-hooks'
 import { subscription } from 'src/common/utils/db/Subscription'
 import SideSlider from 'src/view/components/atoms/SideSlider'
 import Wrap from 'src/view/components/atoms/Wrap'
+import { dateToString } from 'src/common/utils/dateToString'
 
 const Abstract: React.FC = () => {
   const channels = useLiveQuery(async () => await subscription.channels.count())
@@ -25,15 +26,7 @@ const Abstract: React.FC = () => {
     <Wrap key={1}>
       <TitledValue
         title="登録チャンネル最終更新"
-        value={
-          channelsFetched
-            ? channelsFetched.getFullYear().toString() +
-              '.' +
-              (channelsFetched.getMonth() + 1).toString() +
-              '.' +
-              channelsFetched.getDate().toString()
-            : ''
-        }
+        value={channelsFetched ? dateToString(channelsFetched) : ''}
       />
       <TitledValue title="最新の再生履歴" value="なし" />
     </Wrap>,
