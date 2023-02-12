@@ -52,11 +52,11 @@ const Abstract: React.FC = () => {
 }
 
 const MobileWrapper = styled.div`
-  padding: 36px 0;
+  padding: 36px 0 24px;
 `
 
 const PcWrapper = styled.div`
-  padding: 36px 60px;
+  padding: 36px 60px 24px;
 `
 
 const InnerWrapper = styled.div`

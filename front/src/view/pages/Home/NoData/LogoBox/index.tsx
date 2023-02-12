@@ -10,7 +10,7 @@ const LogoBox: React.FC = () => {
   return (
     <Wrapper>
       <Logo width={DeviceType === 'mobile' ? '220px' : '280px'} />
-      <TextBlock style={{ color: color.black, size: '12px' }}>
+      <TextBlock color={color.black} size="12px">
         YouTubeのチャンネル登録日を検索
       </TextBlock>
     </Wrapper>

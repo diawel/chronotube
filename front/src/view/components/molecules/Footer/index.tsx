@@ -28,18 +28,20 @@ const FooterContent = (
   <Wrap>
     <a href="https://diawel.me/">
       <TextWrapper>
-        <Text style={textStyle}>diawel.me</Text>
+        <Text {...textStyle}>diawel.me</Text>
       </TextWrapper>
     </a>
     <Link to="/privacy">
       <TextWrapper>
-        <Text style={textStyle}>プライバシーポリシー</Text>
+        <Text {...textStyle}>プライバシーポリシー</Text>
       </TextWrapper>
     </Link>
   </Wrap>
 )
 
-const StyledFooter = styled.footer<{ justify: string }>(
+type StyledFoterStyleType = { justify: string }
+
+const StyledFooter = styled.footer<StyledFoterStyleType>(
   (style) => `
     margin: 0 8px;
     display: flex;

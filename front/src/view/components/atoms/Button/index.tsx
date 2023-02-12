@@ -2,16 +2,16 @@ import { ReactNode } from 'react'
 import styled from 'styled-components'
 
 export type ButtonPropsType = {
-  handleClick: () => void
+  onClick: () => void
   children: ReactNode
 }
 
 const Button: React.FC<ButtonPropsType> = (props) => {
-  const { handleClick, children } = props
-  const onClick = (): void => {
-    handleClick()
+  const { onClick, children } = props
+  const handleClick = (): void => {
+    onClick()
   }
-  return <StyledButton onClick={onClick}>{children}</StyledButton>
+  return <StyledButton onClick={handleClick}>{children}</StyledButton>
 }
 
 const StyledButton = styled.button`

@@ -1,7 +1,13 @@
 import Abstract from './Abstract'
+import Control from './Control'
 
 const Default: React.FC = () => {
-  return <Abstract />
+  return (
+    <div>
+      <Abstract />
+      <Control />
+    </div>
+  )
 }
 
 export default Default

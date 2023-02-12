@@ -7,7 +7,7 @@ type RoundBoxStyleType = {
   background?: string
 }
 
-const RoundBox = styled.footer<RoundBoxStyleType>(
+const RoundBox = styled.div<RoundBoxStyleType>(
   (style) => `
     border-radius: 24px;
     box-shadow: ${style.shadow ? style.shadow : 'none'};

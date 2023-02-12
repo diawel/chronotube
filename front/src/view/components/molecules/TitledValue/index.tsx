@@ -14,8 +14,8 @@ const TitledValue: React.FC<TitledValuePropsType> = (props) => {
   const { title, value } = props
   return (
     <Wrapper>
-      <TextBlock style={titleStyle}>{title}</TextBlock>
-      <TextBlock style={valueStyle}>{value}</TextBlock>
+      <TextBlock {...titleStyle}>{title}</TextBlock>
+      <TextBlock {...valueStyle}>{value}</TextBlock>
     </Wrapper>
   )
 }

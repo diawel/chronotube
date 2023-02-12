@@ -29,7 +29,7 @@ const OuterWrapper = styled.div`
 
 const InnerWrapper = styled.div`
   width: 100%;
-  max-width: 360px;
+  max-width: 440px;
   margin-bottom: 80px;
   padding: 16px;
 `

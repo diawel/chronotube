@@ -12,7 +12,9 @@ const PrimaryButton: React.FC<PrimaryButtonPropsType> = (props) => {
   return (
     <RoundBox style={{ background: color.white }}>
       <InnerBox>
-        <Text style={{ color: color.black, size: '12px' }}>{text}</Text>
+        <Text color={color.black} size="12px">
+          {text}
+        </Text>
       </InnerBox>
     </RoundBox>
   )
@@ -20,6 +22,7 @@ const PrimaryButton: React.FC<PrimaryButtonPropsType> = (props) => {
 
 const InnerBox = styled.div`
   height: 48px;
+  margin: 0 24px;
   display: flex;
   justify-content: center;
   align-items: center;
