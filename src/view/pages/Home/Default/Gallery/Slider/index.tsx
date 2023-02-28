@@ -27,7 +27,7 @@ const Slider: React.FC<SliderPropsType> = (props) => {
             if (!filter || name.toLowerCase().includes(filter.toLowerCase())) {
               return (
                 <Link to={`/channel/${id}`} key={id}>
-                  <CardWrapper scroller={scrollerRef.current}>
+                  <CardWrapper scroller={scrollerRef.current} filter={filter}>
                     <ChannelCard
                       thumbnail={thumbnail.high}
                       name={name}

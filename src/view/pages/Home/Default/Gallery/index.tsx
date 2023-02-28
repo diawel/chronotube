@@ -14,8 +14,7 @@ const Gallery: React.FC = () => {
   const [filter, setFilter] = useState('')
 
   const channels = useLiveQuery(
-    async () => await subscription.channels.toArray(),
-    [filter]
+    async () => await subscription.channels.toArray()
   )
 
   return (
