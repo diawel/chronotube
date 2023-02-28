@@ -14,7 +14,8 @@ const RoundBox = styled.div<RoundBoxStyleType>(
   (style) => `
     border-radius: 24px;
     box-shadow: ${style.shadow ? style.shadow : 'none'};
-    background: ${style.background ? style.background : 'none'}
+    background: ${style.background ? style.background : 'none'};
+    overflow: hidden;
   `
 )
 

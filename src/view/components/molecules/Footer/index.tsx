@@ -6,6 +6,8 @@ import { DeviceTypeContext } from 'src/index'
 import Wrap from '../../atoms/Wrap'
 import { Link } from 'react-router-dom'
 
+export const footerHeight = '40px'
+
 const Footer: React.FC = () => {
   const deviceType = useContext(DeviceTypeContext)
   switch (deviceType) {
@@ -46,6 +48,7 @@ const StyledFooter = styled.footer<StyledFoterStyleType>(
     margin: 0 8px;
     display: flex;
     justify-content: ${style.justify};
+    height: ${footerHeight};
   `
 )
 

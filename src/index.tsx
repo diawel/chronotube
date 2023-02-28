@@ -8,7 +8,7 @@ import './index.css'
 
 const getDeviceType = (): DeviceType => {
   const width = window.innerWidth
-  if (width < 960) return 'mobile'
+  if (width < 680) return 'mobile'
   else return 'pc'
 }
 

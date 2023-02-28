@@ -38,6 +38,7 @@ const PulldownBox: React.FC<PulldownListPropsType> = (props) => {
 
 const Base = styled.div`
   position: relative;
+  z-index: 100;
 `
 
 const Background = styled.div`
@@ -54,10 +55,10 @@ type WrapperStyleType = {
 
 const Wrapper = styled.div<WrapperStyleType>(
   (style) => `
+    width: ${style.width};
     position: absolute;
     top: 0;
     left: 0;
-    width: ${style.width};
   `
 )
 

@@ -1,3 +1,4 @@
+import Footer from 'src/view/components/molecules/Footer'
 import Abstract from './Abstract'
 import Control from './Control'
 import Gallery from './Gallery'
@@ -8,6 +9,7 @@ const Default: React.FC = () => {
       <Abstract />
       <Control />
       <Gallery />
+      <Footer />
     </div>
   )
 }

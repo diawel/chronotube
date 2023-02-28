@@ -3,6 +3,7 @@ import { color } from 'src/common/styles/color'
 import styled from 'styled-components'
 import Wrap from '../../atoms/Wrap'
 import FixedFooter from '../../molecules/FixedFooter'
+import { footerHeight } from '../../molecules/Footer'
 
 export type ColumnContentPropsType = {
   children: ReactNode
@@ -29,8 +30,8 @@ const OuterWrapper = styled.div`
 
 const InnerWrapper = styled.div`
   width: 100%;
-  max-width: 440px;
-  margin-bottom: 80px;
+  max-width: 384px;
+  margin-bottom: calc(${footerHeight} * 2);
   padding: 16px;
 `
 

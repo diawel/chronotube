@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import Footer from 'src/view/components/molecules/Footer'
+import Footer, { footerHeight } from 'src/view/components/molecules/Footer'
 
 export type FixedFooterPropsType = FooterBoxStyleType
 
@@ -21,9 +21,8 @@ const FooterBox = styled.div<FooterBoxStyleType>(
     position: fixed;
     bottom: 0;
     width: 100%;
-    height: 40px;
     background: ${style.background};
-    box-shadow: 0 0 40px 40px ${style.background};
+    box-shadow: 0 0 ${footerHeight} ${footerHeight} ${style.background};
   `
 )
 

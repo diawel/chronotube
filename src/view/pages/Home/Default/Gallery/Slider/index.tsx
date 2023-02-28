@@ -1,46 +1,79 @@
+import { useContext, useRef } from 'react'
 import styled from 'styled-components'
-import RoundBox from 'src/view/components/atoms/RoundBox'
-import { color } from 'src/common/styles/color'
+import ChannelCard from 'src/view/components/molecules/ChannelCard'
+import CardWrapper from './CardWrapper'
+import { ChannelType } from 'src/common/utils/types/youtube'
+import { Link } from 'react-router-dom'
+import { dateToString } from 'src/common/utils/dateToString'
+import { DeviceTypeContext } from 'src/index'
+import SliderControl from './SliderControl'
 
-const Slider: React.FC = () => {
+export type SliderPropsType = {
+  channels: ChannelType[]
+  filter: string
+}
+
+const Slider: React.FC<SliderPropsType> = (props) => {
+  const { channels, filter } = props
+  const scrollerRef = useRef(null)
+  const deviceType = useContext(DeviceTypeContext)
+
   return (
-    <OuterWrapper>
-      <InnerWrapper>
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-      </InnerWrapper>
-    </OuterWrapper>
+    <Wrapper>
+      <Scroller ref={scrollerRef}>
+        <InnerWrapper>
+          {channels.map((channel) => {
+            const { id, name, subscribeDate, thumbnail } = channel
+            if (!filter || name.toLowerCase().includes(filter.toLowerCase())) {
+              return (
+                <Link to={`/channel/${id}`} key={id}>
+                  <CardWrapper scroller={scrollerRef.current}>
+                    <ChannelCard
+                      thumbnail={thumbnail.high}
+                      name={name}
+                      snippet={`${dateToString(subscribeDate)}に登録`}
+                    />
+                  </CardWrapper>
+                </Link>
+              )
+            }
+          })}
+        </InnerWrapper>
+      </Scroller>
+      {deviceType == 'pc' ? (
+        <SliderControl scroller={scrollerRef.current} />
+      ) : (
+        ''
+      )}
+    </Wrapper>
   )
 }
 
-const OuterWrapper = styled.div`
+const Wrapper = styled.div`
+  position: relative;
+`
+
+const Scroller = styled.div`
   overflow: auto;
   scroll-snap-type: x mandatory;
   &::-webkit-scrollbar {
     display: none;
   }
   scrollbar-width: none;
-  padding: 0 50%;
+  padding-bottom: 48px;
+  margin-bottom: -48px;
+  position: relative;
+  z-index: 10;
 `
 
 const InnerWrapper = styled.div`
   display: flex;
   width: fit-content;
-`
-
-const Card = styled.div`
-  width: calc(100vw - 128px);
-  max-width: calc(440px - 128px);
-  height: 300px;
-  background: ${color.white};
-  margin: 0 8px;
-  scroll-snap-align: center;
+  padding: 0 50%;
+  height: 320px;
+  &:has(*) {
+    height: auto;
+  }
 `
 
 export default Slider
