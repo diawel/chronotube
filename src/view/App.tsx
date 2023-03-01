@@ -1,19 +1,32 @@
 import { Routes, Route } from 'react-router-dom'
 import Home from './pages/Home'
-import { useLiveQuery } from 'dexie-react-hooks'
 import { cacheList } from 'src/common/utils/db/CacheList'
 import Wrap from './components/atoms/Wrap'
+import { useEffect } from 'react'
+import { storeSubscription } from 'src/common/utils/db/subscription'
 
 const App: React.FC = () => {
-  const cachedFiles = useLiveQuery(async () => await cacheList.files.toArray())
+  useEffect(() => {
+    cacheList.files
+      .each(async (file) => {
+        switch (file.purpose) {
+          case 'subscription':
+            await storeSubscription(file.blob)
+            break
+          default:
+            console.error('Unknown cache')
+        }
+      })
+      .then(async () => {
+        await cacheList.files.clear()
+      })
+      .catch((error) => {
+        console.error(error)
+      })
+  }, [])
 
   return (
     <Wrap>
-      <div>
-        {cachedFiles?.map((file) => (
-          <div key={file.purpose}>{file.purpose}</div>
-        ))}
-      </div>
       <Routes>
         <Route path="/" element={<Home />} />
       </Routes>
