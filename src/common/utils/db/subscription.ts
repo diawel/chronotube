@@ -14,7 +14,7 @@ export interface Meta {
   value: any
 }
 
-export class Subscription extends Dexie {
+class Subscription extends Dexie {
   channels!: Table<Channel>
   meta!: Table<Meta>
 

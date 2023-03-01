@@ -2,14 +2,14 @@ import { useContext, useRef } from 'react'
 import styled from 'styled-components'
 import ChannelCard from 'src/view/components/molecules/ChannelCard'
 import CardContainer, { cardOuterWidth } from './CardContainer'
-import { ChannelType } from 'src/common/utils/types/youtube'
+import { Channel } from 'src/common/utils/db/subscription'
 import { Link } from 'react-router-dom'
 import { dateToString } from 'src/common/utils/dateToString'
 import { DeviceTypeContext } from 'src/index'
 import SliderControl from './SliderControl'
 
 export type SliderPropsType = {
-  channels: ChannelType[]
+  channels: Channel[]
   filter: string
 }
 
