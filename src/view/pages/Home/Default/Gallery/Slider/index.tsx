@@ -18,32 +18,33 @@ const Slider: React.FC<SliderPropsType> = (props) => {
   const scrollerRef = useRef(null)
   const deviceType = useContext(DeviceTypeContext)
 
+  let cardIndex = 0
+  const cardList = channels.map((channel) => {
+    const { id, name, subscribeDate, thumbnail } = channel
+    if (!filter || name.toLowerCase().includes(filter.toLowerCase())) {
+      return (
+        <Link to={`/channel/${id}`} key={id}>
+          <CardContainer
+            scroller={scrollerRef.current}
+            id={id}
+            index={cardIndex++}
+            filter={filter}
+          >
+            <ChannelCard
+              thumbnail={thumbnail.high}
+              name={name}
+              snippet={`${dateToString(subscribeDate)}に登録`}
+            />
+          </CardContainer>
+        </Link>
+      )
+    }
+  })
+
   return (
     <Wrapper>
       <Scroller ref={scrollerRef}>
-        <InnerWrapper>
-          {channels.map((channel, ci) => {
-            const { id, name, subscribeDate, thumbnail } = channel
-            if (!filter || name.toLowerCase().includes(filter.toLowerCase())) {
-              return (
-                <Link to={`/channel/${id}`} key={id}>
-                  <CardContainer
-                    scroller={scrollerRef.current}
-                    id={id}
-                    index={ci}
-                    filter={filter}
-                  >
-                    <ChannelCard
-                      thumbnail={thumbnail.high}
-                      name={name}
-                      snippet={`${dateToString(subscribeDate)}に登録`}
-                    />
-                  </CardContainer>
-                </Link>
-              )
-            }
-          })}
-        </InnerWrapper>
+        <InnerWrapper>{cardList}</InnerWrapper>
       </Scroller>
       {deviceType == 'pc' ? (
         <SliderControl scroller={scrollerRef.current} />
