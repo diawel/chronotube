@@ -21,7 +21,7 @@ class Subscription extends Dexie {
   constructor() {
     super('Subscription')
     this.version(1).stores({
-      channels: 'id, name, subscribeDate, thumbnail, playCount',
+      channels: 'id, name, subscribeDate, playCount',
       meta: 'purpose, value',
     })
   }
