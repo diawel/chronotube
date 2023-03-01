@@ -36,6 +36,7 @@ const Mobile: React.FC = () => {
 const Wrapper = styled.div`
   padding: 0 16px;
   max-width: 384px;
+  margin: auto;
 `
 
 const PrimaryButtonWrapper = styled.div`
