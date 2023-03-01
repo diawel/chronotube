@@ -1,8 +1,0 @@
-{
-  "editor.tabSize": 2,
-  "editor.insertSpaces": true,
-  "editor.defaultFormatter": "esbenp.prettier-vscode", // フォーマッターをPrettierにする
-  "editor.formatOnSave": true, // ファイル保存時にフォーマットを実行
-  "eslint.workingDirectories": ["./"],
-  "files.eol": "\n"
-}
