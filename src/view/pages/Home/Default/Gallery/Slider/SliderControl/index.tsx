@@ -2,12 +2,11 @@ import { color } from 'src/common/styles/color'
 import ArrowCircle from 'src/view/components/atoms/ArrowCircle'
 import Button from 'src/view/components/atoms/Button'
 import styled from 'styled-components'
+import { cardOuterWidth } from '../CardContainer'
 
 export type SliderControlPropsType = {
   scroller: HTMLElement | null
 }
-
-const cardWidth = 380 - 128
 
 const SliderControl: React.FC<SliderControlPropsType> = (props) => {
   const { scroller } = props
@@ -26,7 +25,7 @@ const SliderControl: React.FC<SliderControlPropsType> = (props) => {
       <ButtonWrapper>
         <Button
           onClick={() => {
-            scrollBy(-cardWidth)
+            scrollBy(-cardOuterWidth)
           }}
         >
           <ArrowCircle direction="LEFT" />
@@ -35,7 +34,7 @@ const SliderControl: React.FC<SliderControlPropsType> = (props) => {
       <ButtonWrapper>
         <Button
           onClick={() => {
-            scrollBy(cardWidth)
+            scrollBy(cardOuterWidth)
           }}
         >
           <ArrowCircle direction="RIGHT" />

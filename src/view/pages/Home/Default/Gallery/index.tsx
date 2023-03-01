@@ -1,9 +1,10 @@
 import { useLiveQuery } from 'dexie-react-hooks'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { color } from 'src/common/styles/color'
 import chevronDown from 'src/common/svg/chevronDown'
 import { subscription } from 'src/common/utils/db/Subscription'
+import { sessionStorageKey } from 'src/common/utils/sessionStorage'
 import Icon from 'src/view/components/atoms/Icon'
 import Input from 'src/view/components/atoms/Input'
 import Text from 'src/view/components/atoms/Text'
@@ -11,7 +12,12 @@ import styled from 'styled-components'
 import Slider from './Slider'
 
 const Gallery: React.FC = () => {
-  const [filter, setFilter] = useState('')
+  const [filter, setFilter] = useState(
+    sessionStorage.getItem(sessionStorageKey.filter) || ''
+  )
+  useEffect(() => {
+    sessionStorage.setItem(sessionStorageKey.filter, filter)
+  }, [filter])
 
   const channels = useLiveQuery(
     async () => await subscription.channels.toArray()

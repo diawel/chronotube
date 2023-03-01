@@ -1,7 +1,7 @@
 import { useContext, useRef } from 'react'
 import styled from 'styled-components'
 import ChannelCard from 'src/view/components/molecules/ChannelCard'
-import CardWrapper from './CardWrapper'
+import CardContainer, { cardOuterWidth } from './CardContainer'
 import { ChannelType } from 'src/common/utils/types/youtube'
 import { Link } from 'react-router-dom'
 import { dateToString } from 'src/common/utils/dateToString'
@@ -22,18 +22,23 @@ const Slider: React.FC<SliderPropsType> = (props) => {
     <Wrapper>
       <Scroller ref={scrollerRef}>
         <InnerWrapper>
-          {channels.map((channel) => {
+          {channels.map((channel, ci) => {
             const { id, name, subscribeDate, thumbnail } = channel
             if (!filter || name.toLowerCase().includes(filter.toLowerCase())) {
               return (
                 <Link to={`/channel/${id}`} key={id}>
-                  <CardWrapper scroller={scrollerRef.current} filter={filter}>
+                  <CardContainer
+                    scroller={scrollerRef.current}
+                    id={id}
+                    index={ci}
+                    filter={filter}
+                  >
                     <ChannelCard
                       thumbnail={thumbnail.high}
                       name={name}
                       snippet={`${dateToString(subscribeDate)}に登録`}
                     />
-                  </CardWrapper>
+                  </CardContainer>
                 </Link>
               )
             }
@@ -69,7 +74,7 @@ const Scroller = styled.div`
 const InnerWrapper = styled.div`
   display: flex;
   width: fit-content;
-  padding: 0 50%;
+  padding: 0 calc(50% - ${cardOuterWidth / 2}px);
   height: 320px;
   &:has(*) {
     height: auto;
