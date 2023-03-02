@@ -40,7 +40,6 @@ type rawHistoryType = {
 
 export const storeWatchHistory = async (rawHistory: rawHistoryType[]) => {
   const parsedHistory = rawHistory
-    .reverse()
     .filter(
       (history) =>
         history.titleUrl &&
