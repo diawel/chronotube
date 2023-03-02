@@ -4,6 +4,7 @@ import { cacheList } from 'src/common/utils/db/cacheList'
 import Wrap from './components/atoms/Wrap'
 import { useEffect } from 'react'
 import { storeSubscription } from 'src/common/utils/db/subscription'
+import AddHistory from './pages/AddHistory'
 
 const App: React.FC = () => {
   useEffect(() => {
@@ -29,6 +30,7 @@ const App: React.FC = () => {
     <Wrap>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/addhistory" element={<AddHistory />} />
       </Routes>
     </Wrap>
   )

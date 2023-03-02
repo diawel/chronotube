@@ -21,7 +21,7 @@ class WatchHistory extends Dexie {
   constructor() {
     super('WatchHistory')
     this.version(1).stores({
-      histories: 'playbackDate, header, id, title, uploader',
+      histories: 'playbackDate, header, id, title, uploader.id',
       meta: 'purpose, value',
     })
   }
@@ -33,41 +33,42 @@ type rawHistoryType = {
   header: string
   title: string
   titleUrl?: string
-  subtitles: { name: string; url?: string }[]
+  subtitles?: { name: string; url?: string }[]
   time: string
   products: string[]
 }
 
-const addWatchHistory = async (
-  history: rawHistoryType,
-  lastHistory?: History
-) => {
-  if (!history.titleUrl || !history.subtitles[0].url) return
-  const playbackDate = new Date(history.time)
-  if (!lastHistory || playbackDate > lastHistory.playbackDate) {
-    const parsedTitleUrl = history.titleUrl.match(/v=([\w-]+)/)
-    const parsedTitle = history.title.match(/(.*)\sを視聴しました/)
-    const parsedSubtitleUrl =
-      history.subtitles[0].url.match(/\/channel\/([\w-]+)/)
-    if (!parsedTitleUrl || !parsedTitle || !parsedSubtitleUrl) return
-    await watchHistory.histories.add({
-      playbackDate: playbackDate,
-      header: history.header,
-      id: parsedTitleUrl[1],
-      title: parsedTitle[1],
-      uploader: {
-        id: parsedSubtitleUrl[1],
-        name: history.subtitles[0].name,
-      },
-    })
-  }
-}
+export const storeWatchHistory = async (rawHistory: rawHistoryType[]) => {
+  const parsedHistory = rawHistory
+    .reverse()
+    .filter(
+      (history) =>
+        history.titleUrl &&
+        history.subtitles &&
+        history.subtitles[0].url &&
+        history.subtitles[0].name
+    )
+    .map((history) => {
+      const filteredHistory = history as rawHistoryType & {
+        titleUrl: string
+        subtitles: [{ url: string; name: string }]
+      }
+      const parsedTitleUrl = filteredHistory.titleUrl.match(/v=([\w-]+)/) || []
+      const parsedTitle =
+        filteredHistory.title.match(/(.*)\sを視聴しました/) || []
+      const parsedSubtitleUrl =
+        filteredHistory.subtitles[0].url?.match(/\/channel\/([\w-]+)/) || []
 
-export const storeWatchHistory = async (json: Blob): Promise<void> => {
-  const parsed: rawHistoryType[] = JSON.parse(await json.text())
-  await watchHistory.histories.toCollection().last(async (lastHistory) => {
-    await parsed.forEach(async (history) => {
-      await addWatchHistory(history, lastHistory)
+      return {
+        playbackDate: new Date(filteredHistory.time),
+        header: filteredHistory.header,
+        id: parsedTitleUrl[1],
+        title: parsedTitle[1],
+        uploader: {
+          id: parsedSubtitleUrl[1],
+          name: filteredHistory.subtitles[0].name,
+        },
+      }
     })
-  })
+  await watchHistory.histories.bulkPut(parsedHistory)
 }
