@@ -13,7 +13,7 @@ const Abstract: React.FC = () => {
   const channelCount = useLiveQuery(
     async () => await subscription.channels.count()
   )
-  const channelsFetched: Date | undefined = useLiveQuery(
+  const channelsFetched = useLiveQuery(
     async () => await subscription.meta.get('fetched')
   )?.value
   const historyCount = useLiveQuery(

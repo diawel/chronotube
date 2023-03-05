@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import { cardOuterWidth } from '../CardContainer'
 
 export type SliderControlPropsType = {
-  scroller?: HTMLElement
+  scroller: HTMLElement | null
 }
 
 const SliderControl: React.FC<SliderControlPropsType> = (props) => {

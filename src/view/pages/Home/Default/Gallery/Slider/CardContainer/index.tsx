@@ -3,7 +3,7 @@ import { sessionStorageKey } from 'src/common/utils/sessionStorage'
 import styled from 'styled-components'
 
 export type CardContainerPropsType = {
-  scroller?: HTMLElement
+  scroller: HTMLElement | null
   filter: string
   id: string
   index: number
