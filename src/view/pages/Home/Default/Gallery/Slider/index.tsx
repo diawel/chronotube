@@ -66,8 +66,8 @@ const Scroller = styled.div`
     display: none;
   }
   scrollbar-width: none;
-  padding-bottom: 48px;
-  margin-bottom: -48px;
+  padding: 16px 0 48px;
+  margin: -16px 0 -48px;
   position: relative;
   z-index: 10;
 `
