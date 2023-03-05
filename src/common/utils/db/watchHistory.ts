@@ -1,5 +1,7 @@
 import Dexie, { Table } from 'dexie'
 import { ChannelAbstractType } from 'src/common/utils/types/youtube'
+import * as t from 'io-ts'
+import { isRight } from 'fp-ts/lib/Either'
 
 export interface History {
   header: string
@@ -31,51 +33,53 @@ export const watchHistory = new WatchHistory()
 
 export type StoreWatchHistoryProgressType = 'parse' | 'store' | 'finished'
 
-type RawHistoryType = {
-  header: string
-  title: string
-  titleUrl?: string
-  subtitles?: { name: string; url?: string }[]
-  time: string
-  products: string[]
+const History = t.type({
+  header: t.string,
+  title: t.string,
+  titleUrl: t.string,
+  subtitles: t.array(
+    t.type({
+      name: t.string,
+      url: t.string,
+    })
+  ),
+  time: t.string,
+})
+
+type HistoryType = t.TypeOf<typeof History>
+
+export const validateHistoryies = (rawHistories: any): HistoryType[] => {
+  if (Array.isArray(rawHistories)) {
+    return rawHistories.filter((rawHistory: any) => {
+      return isRight(History.decode(rawHistory))
+    })
+  }
+  return []
 }
 
-export const storeWatchHistory = async (
-  rawHistories: RawHistoryType[],
+export const storeWatchHistories = async (
+  histories: HistoryType[],
   progressSetter?: (progress: StoreWatchHistoryProgressType) => void
 ) => {
   progressSetter && progressSetter('parse')
-  const parsedHistory = rawHistories
-    .filter(
-      (history) =>
-        history.titleUrl &&
-        history.subtitles &&
-        history.subtitles[0].url &&
-        history.subtitles[0].name
-    )
-    .map((history) => {
-      const filteredHistory = history as RawHistoryType & {
-        titleUrl: string
-        subtitles: [{ url: string; name: string }]
-      }
-      const parsedTitleUrl = filteredHistory.titleUrl.match(/v=([\w-]+)/) || []
-      const parsedTitle =
-        filteredHistory.title.match(/(.*)\sを視聴しました/) || []
-      const parsedSubtitleUrl =
-        filteredHistory.subtitles[0].url?.match(/\/channel\/([\w-]+)/) || []
+  const parsedHistories = histories.map((history) => {
+    const parsedTitleUrl = history.titleUrl.match(/v=([\w-]+)/) || []
+    const parsedTitle = history.title.match(/(.*)\sを視聴しました/) || []
+    const parsedSubtitleUrl =
+      history.subtitles[0].url?.match(/\/channel\/([\w-]+)/) || []
 
-      return {
-        playbackDate: new Date(filteredHistory.time),
-        header: filteredHistory.header,
-        id: parsedTitleUrl[1],
-        title: parsedTitle[1],
-        uploader: {
-          id: parsedSubtitleUrl[1],
-          name: filteredHistory.subtitles[0].name,
-        },
-      }
-    })
+    return {
+      playbackDate: new Date(history.time),
+      header: history.header,
+      id: parsedTitleUrl[1],
+      title: parsedTitle[1],
+      uploader: {
+        id: parsedSubtitleUrl[1],
+        name: history.subtitles[0].name,
+      },
+    }
+  })
   progressSetter && progressSetter('store')
-  await watchHistory.histories.bulkPut(parsedHistory)
+  await watchHistory.histories.bulkPut(parsedHistories)
   progressSetter && progressSetter('finished')
 }

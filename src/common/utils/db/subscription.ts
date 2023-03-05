@@ -1,5 +1,7 @@
 import Dexie, { Table } from 'dexie'
 import { ThumbnailsType } from 'src/common/utils/types/youtube'
+import * as t from 'io-ts'
+import { isRight } from 'fp-ts/lib/Either'
 
 export interface Channel {
   id: string
@@ -35,31 +37,41 @@ export type StoreSubscriptionProgressType =
   | 'store'
   | 'finished'
 
-type RawSubscriptionType = {
-  etag: string
-  id: string
-  kind: string
-  snippet: {
-    channelId: string
-    description: string
-    publishedAt: string
-    resourceId: {
-      channelId: string
-      kind: string
-    }
-    thumbnails: ThumbnailsType
-    title: string
-  }
+const Thumbnail = t.type({
+  url: t.string,
+})
+
+const Channel = t.type({
+  snippet: t.type({
+    publishedAt: t.string,
+    resourceId: t.type({ channelId: t.string }),
+    thumbnails: t.type({
+      default: Thumbnail,
+      high: Thumbnail,
+      medium: Thumbnail,
+    }),
+    title: t.string,
+  }),
+})
+
+type ChannelType = t.TypeOf<typeof Channel>
+
+export const validateChannels = (rawChannels: any): ChannelType[] => {
+  if (Array.isArray(rawChannels))
+    return rawChannels.filter((rawChannel: any) => {
+      return isRight(Channel.decode(rawChannel))
+    })
+  return []
 }
 
-export const storeSubscription = async (
-  RawSubscriptions: RawSubscriptionType[],
+export const storeChannels = async (
+  channels: ChannelType[],
   progressSetter?: (progress: StoreSubscriptionProgressType) => void
 ) => {
   progressSetter && progressSetter('init')
   await subscription.channels.clear()
   progressSetter && progressSetter('parse')
-  const parsedSubscriptions = RawSubscriptions.map((channel) => {
+  const parsedSubscriptions = channels.map((channel) => {
     return {
       id: channel.snippet.resourceId.channelId,
       name: channel.snippet.title,

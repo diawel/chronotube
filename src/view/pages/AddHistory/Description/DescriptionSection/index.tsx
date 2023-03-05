@@ -13,7 +13,7 @@ const DescriptionSection: React.FC<DescriptionSectionPropsType> = (props) => {
   return (
     <Wrapper>
       <TextWrapper>
-        <TextBlock color={color.black} size="16px">
+        <TextBlock color={color.black} size="14px">
           {text}
         </TextBlock>
       </TextWrapper>

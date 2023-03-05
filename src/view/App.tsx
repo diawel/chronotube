@@ -3,7 +3,10 @@ import Home from './pages/Home'
 import { cacheList } from 'src/common/utils/db/cacheList'
 import Wrap from './components/atoms/Wrap'
 import { useEffect } from 'react'
-import { storeSubscription } from 'src/common/utils/db/subscription'
+import {
+  storeChannels,
+  validateChannels,
+} from 'src/common/utils/db/subscription'
 import AddHistory from './pages/AddHistory'
 
 const App: React.FC = () => {
@@ -12,7 +15,9 @@ const App: React.FC = () => {
       .each(async (file) => {
         switch (file.purpose) {
           case 'subscription':
-            await storeSubscription(JSON.parse(await file.blob.text()))
+            await storeChannels(
+              validateChannels(JSON.parse(await file.blob.text()))
+            )
             console.log('done')
             break
           default:

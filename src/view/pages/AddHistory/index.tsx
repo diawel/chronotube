@@ -4,6 +4,7 @@ import ColumnContent from 'src/view/components/templates/ColumnContent'
 import Abstract from './Abstract'
 import CompleteButton from './CompleteButton'
 import Description from './Description'
+import Loading from './Loading'
 import UploadButton from './UploadButton'
 
 export type ProgressType = StoreWatchHistoryProgressType | 'ready' | 'init'
@@ -13,13 +14,17 @@ const AddHistory: React.FC = () => {
 
   return (
     <ColumnContent>
-      {progress == 'ready' || progress == 'finished' ? <Abstract /> : ''}
+      {progress == 'ready' || progress == 'finished' ? (
+        <Abstract />
+      ) : (
+        <Loading progress={progress} />
+      )}
       {progress == 'ready' ? (
         <UploadButton progressSetter={setProgress} />
       ) : (
         <CompleteButton progress={progress} />
       )}
-      {Description}
+      {progress == 'ready' && Description}
     </ColumnContent>
   )
 }
