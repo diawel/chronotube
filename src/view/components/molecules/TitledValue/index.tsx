@@ -7,14 +7,15 @@ export type TitledValuePropsType = {
   value: string
 }
 
-const titleStyle = { color: color.black, size: '12px' }
 const valueStyle = { color: color.black, size: '36px', weight: 'bold' }
 
 const TitledValue: React.FC<TitledValuePropsType> = (props) => {
   const { title, value } = props
   return (
     <Wrapper>
-      <TextBlock {...titleStyle}>{title}</TextBlock>
+      <TextBlock color={color.black} size="12px">
+        {title}
+      </TextBlock>
       <TextBlock {...valueStyle}>{value}</TextBlock>
     </Wrapper>
   )

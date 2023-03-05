@@ -4,9 +4,11 @@ import { useLiveQuery } from 'dexie-react-hooks'
 import { subscription } from 'src/common/utils/db/subscription'
 
 const Home: React.FC = () => {
-  const channels = useLiveQuery(async () => await subscription.channels.count())
+  const channelCount = useLiveQuery(
+    async () => await subscription.channels.count()
+  )
 
-  if (channels) return <Default />
+  if (channelCount) return <Default />
   else return <NoData />
 }
 

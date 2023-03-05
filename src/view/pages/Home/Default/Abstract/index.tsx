@@ -9,8 +9,9 @@ import Wrap from 'src/view/components/atoms/Wrap'
 import { dateToString } from 'src/common/utils/dateToString'
 
 const Abstract: React.FC = () => {
-  const channels = useLiveQuery(async () => await subscription.channels.count())
-
+  const channelCount = useLiveQuery(
+    async () => await subscription.channels.count()
+  )
   const channelsFetched: Date | undefined = useLiveQuery(
     async () => await subscription.meta.get('fetched')
   )?.value
@@ -19,7 +20,7 @@ const Abstract: React.FC = () => {
     <Wrap key={0}>
       <TitledValue
         title="登録チャンネル数"
-        value={channels ? channels.toString() : ''}
+        value={channelCount ? channelCount.toString() : ''}
       />
       <TitledValue title="総再生数" value="なし" />
     </Wrap>,
