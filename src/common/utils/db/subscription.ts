@@ -59,7 +59,7 @@ export const storeSubscription = async (
   progressSetter && progressSetter('init')
   await subscription.channels.clear()
   progressSetter && progressSetter('parse')
-  const parsedSubscription = RawSubscriptions.map((channel) => {
+  const parsedSubscriptions = RawSubscriptions.map((channel) => {
     return {
       id: channel.snippet.resourceId.channelId,
       name: channel.snippet.title,
@@ -68,7 +68,7 @@ export const storeSubscription = async (
     }
   })
   progressSetter && progressSetter('store')
-  await subscription.channels.bulkAdd(parsedSubscription)
+  await subscription.channels.bulkAdd(parsedSubscriptions)
   await subscription.meta.put({
     purpose: 'fetched',
     value: new Date(),

@@ -75,9 +75,7 @@ export const storeWatchHistory = async (
         },
       }
     })
-
   progressSetter && progressSetter('store')
   await watchHistory.histories.bulkPut(parsedHistory)
-
   progressSetter && progressSetter('finished')
 }
