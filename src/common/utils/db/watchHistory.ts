@@ -29,9 +29,9 @@ class WatchHistory extends Dexie {
 
 export const watchHistory = new WatchHistory()
 
-export type storeHistoryProgressType = 'parse' | 'store' | 'finished'
+export type StoreWatchHistoryProgressType = 'parse' | 'store' | 'finished'
 
-type rawHistoryType = {
+type RawHistoryType = {
   header: string
   title: string
   titleUrl?: string
@@ -41,11 +41,11 @@ type rawHistoryType = {
 }
 
 export const storeWatchHistory = async (
-  rawHistory: rawHistoryType[],
-  progressSetter?: (progress: storeHistoryProgressType) => void
+  rawHistories: RawHistoryType[],
+  progressSetter?: (progress: StoreWatchHistoryProgressType) => void
 ) => {
   progressSetter && progressSetter('parse')
-  const parsedHistory = rawHistory
+  const parsedHistory = rawHistories
     .filter(
       (history) =>
         history.titleUrl &&
@@ -54,7 +54,7 @@ export const storeWatchHistory = async (
         history.subtitles[0].name
     )
     .map((history) => {
-      const filteredHistory = history as rawHistoryType & {
+      const filteredHistory = history as RawHistoryType & {
         titleUrl: string
         subtitles: [{ url: string; name: string }]
       }

@@ -12,7 +12,8 @@ const App: React.FC = () => {
       .each(async (file) => {
         switch (file.purpose) {
           case 'subscription':
-            await storeSubscription(file.blob)
+            await storeSubscription(JSON.parse(await file.blob.text()))
+            console.log('done')
             break
           default:
             console.error('Unknown cache')

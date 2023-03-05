@@ -29,19 +29,49 @@ class Subscription extends Dexie {
 
 export const subscription = new Subscription()
 
-export const storeSubscription = async (json: Blob): Promise<void> => {
+export type StoreSubscriptionProgressType =
+  | 'init'
+  | 'parse'
+  | 'store'
+  | 'finished'
+
+type RawSubscriptionType = {
+  etag: string
+  id: string
+  kind: string
+  snippet: {
+    channelId: string
+    description: string
+    publishedAt: string
+    resourceId: {
+      channelId: string
+      kind: string
+    }
+    thumbnails: ThumbnailsType
+    title: string
+  }
+}
+
+export const storeSubscription = async (
+  RawSubscriptions: RawSubscriptionType[],
+  progressSetter?: (progress: StoreSubscriptionProgressType) => void
+) => {
+  progressSetter && progressSetter('init')
   await subscription.channels.clear()
-  const parsed = JSON.parse(await json.text())
-  await parsed.forEach(async (channel: any) => {
-    await subscription.channels.add({
+  progressSetter && progressSetter('parse')
+  const parsedSubscription = RawSubscriptions.map((channel) => {
+    return {
       id: channel.snippet.resourceId.channelId,
       name: channel.snippet.title,
       subscribeDate: new Date(channel.snippet.publishedAt),
       thumbnail: channel.snippet.thumbnails,
-    })
+    }
   })
+  progressSetter && progressSetter('store')
+  await subscription.channels.bulkAdd(parsedSubscription)
   await subscription.meta.put({
     purpose: 'fetched',
     value: new Date(),
   })
+  progressSetter && progressSetter('finished')
 }
