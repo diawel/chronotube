@@ -19,36 +19,41 @@ const Gallery: React.FC = () => {
     sessionStorage.setItem(sessionStorageKey.filter, filter)
   }, [filter])
 
-  const channels = useLiveQuery(
-    async () => await subscription.channels.toArray()
-  )
+  const liveQuery = useLiveQuery(async () => {
+    return {
+      channels: await subscription.channels.toArray(),
+    }
+  })
 
-  return (
-    <div>
-      <TextWrapper>
-        <Text color={color.darkGray} size="12px">
-          登録済みのチャンネル
-        </Text>
-      </TextWrapper>
-      <Slider channels={channels ? channels : []} filter={filter} />
-      <BottomNav>
-        <Link to="/channels">
-          <LinkContent>
-            <Text color={color.black} size="12px">
-              すべて表示
-              <Icon svg={chevronDown} size="16px" rotate="270deg" />
-            </Text>
-          </LinkContent>
-        </Link>
-        <Input
-          type="text"
-          value={filter}
-          valueSetter={setFilter}
-          placeholder="チャンネルを検索"
-        />
-      </BottomNav>
-    </div>
-  )
+  if (liveQuery) {
+    return (
+      <div>
+        <TextWrapper>
+          <Text color={color.darkGray} size="12px">
+            登録済みのチャンネル
+          </Text>
+        </TextWrapper>
+        <Slider channels={liveQuery.channels} filter={filter} />
+        <BottomNav>
+          <Link to="/channels">
+            <LinkContent>
+              <Text color={color.black} size="12px">
+                すべて表示
+                <Icon svg={chevronDown} size="16px" rotate="270deg" />
+              </Text>
+            </LinkContent>
+          </Link>
+          <Input
+            type="text"
+            value={filter}
+            valueSetter={setFilter}
+            placeholder="チャンネルを検索"
+          />
+        </BottomNav>
+      </div>
+    )
+  }
+  return <></>
 }
 
 const TextWrapper = styled.div`

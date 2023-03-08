@@ -22,11 +22,12 @@ const CardContainer: React.FC<CardContainerPropsType> = (props) => {
   const [inited, setInited] = useState(false)
 
   useEffect(() => {
-    if (sessionStorage.getItem(sessionStorageKey.scrollAt) == id && scroller) {
-      scroller.scroll(cardOuterWidth * index + cardWidth / 2, 0)
+    if (scroller) {
+      if (sessionStorage.getItem(sessionStorageKey.scrollAt) == id)
+        scroller.scroll(cardOuterWidth * index + cardWidth / 2, 0)
+      setInited(true)
     }
-    setInited(true)
-  }, [])
+  }, [scroller])
 
   const adjustStyle = () => {
     if (containerRef.current) {
@@ -52,7 +53,7 @@ const CardContainer: React.FC<CardContainerPropsType> = (props) => {
       scroller?.addEventListener('scroll', adjustStyle)
       return () => scroller?.removeEventListener('scroll', adjustStyle)
     }
-  }, [inited, scroller])
+  }, [inited])
   useEffect(() => {
     if (inited) adjustStyle()
   }, [inited, filter])
