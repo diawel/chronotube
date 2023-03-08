@@ -1,6 +1,7 @@
 import TextBlock from 'src/view/components/atoms/TextBlock'
 import { color } from 'src/common/styles/color'
 import styled from 'styled-components'
+import { fontSize } from 'src/common/styles/fontSize'
 
 export type TitledRangePropsType = {
   title: string
@@ -8,18 +9,17 @@ export type TitledRangePropsType = {
   end: string
 }
 
-const titleStyle = { color: color.black, size: '12px' }
-const valueStyle = { color: color.black, size: '36px', weight: 'bold' }
+const valueStyle = { color: color.black, size: fontSize.title, weight: 'bold' }
 
 const TitledRange: React.FC<TitledRangePropsType> = (props) => {
   const { title, start, end } = props
   return (
     <Wrapper>
-      <TextBlock color={color.black} size="12px">
+      <TextBlock color={color.black} size={fontSize.regular}>
         {title}
       </TextBlock>
       <TextBlock {...valueStyle}>{start}</TextBlock>
-      <TextBlock color={color.black} size="24px">
+      <TextBlock color={color.black} size={fontSize.large}>
         ↓
       </TextBlock>
       <TextBlock {...valueStyle}>{end}</TextBlock>

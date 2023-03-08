@@ -2,6 +2,7 @@ import styled from 'styled-components'
 import Text from 'src/view/components/atoms/Text'
 import { color } from 'src/common/styles/color'
 import RoundBox from 'src/view/components/atoms/RoundBox'
+import { fontSize } from 'src/common/styles/fontSize'
 
 export type PrimaryButtonPropsType = {
   text: string
@@ -12,7 +13,7 @@ const PrimaryButton: React.FC<PrimaryButtonPropsType> = (props) => {
   return (
     <RoundBox style={{ background: color.white }}>
       <InnerBox>
-        <Text color={color.black} size="12px">
+        <Text color={color.black} size={fontSize.small}>
           {text}
         </Text>
       </InnerBox>

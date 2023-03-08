@@ -2,6 +2,7 @@ import { useLiveQuery } from 'dexie-react-hooks'
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { color } from 'src/common/styles/color'
+import { fontSize } from 'src/common/styles/fontSize'
 import chevronDown from 'src/common/svg/chevronDown'
 import { subscription } from 'src/common/utils/db/subscription'
 import { sessionStorageKey } from 'src/common/utils/sessionStorage'
@@ -29,7 +30,7 @@ const Gallery: React.FC = () => {
     return (
       <div>
         <TextWrapper>
-          <Text color={color.darkGray} size="12px">
+          <Text color={color.darkGray} size={fontSize.small}>
             登録済みのチャンネル
           </Text>
         </TextWrapper>
@@ -37,7 +38,7 @@ const Gallery: React.FC = () => {
         <BottomNav>
           <Link to="/channels">
             <LinkContent>
-              <Text color={color.black} size="12px">
+              <Text color={color.black} size={fontSize.small}>
                 すべて表示
                 <Icon svg={chevronDown} size="16px" rotate="270deg" />
               </Text>

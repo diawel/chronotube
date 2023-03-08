@@ -1,4 +1,5 @@
 import { color } from 'src/common/styles/color'
+import { fontSize } from 'src/common/styles/fontSize'
 import LoadingIcon from 'src/view/components/atoms/LoadingIcon'
 import TextBlock from 'src/view/components/atoms/TextBlock'
 import styled from 'styled-components'
@@ -24,7 +25,7 @@ const Loading: React.FC<LoadingPropsType> = (props) => {
       <IconWrapper>
         <LoadingIcon />
       </IconWrapper>
-      <TextBlock color={color.black} size="12px">
+      <TextBlock color={color.black} size={fontSize.small}>
         {progressSnippet[progress]}
       </TextBlock>
     </Wrapper>

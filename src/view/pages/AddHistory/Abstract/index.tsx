@@ -6,6 +6,7 @@ import TitledRange from 'src/view/components/molecules/TitledRange'
 import TitledValue from 'src/view/components/molecules/TitledValue'
 import styled from 'styled-components'
 import TextBlock from 'src/view/components/atoms/TextBlock'
+import { fontSize } from 'src/common/styles/fontSize'
 
 const Abstract: React.FC = () => {
   const liveQuery = useLiveQuery(async () => {
@@ -44,11 +45,11 @@ const Abstract: React.FC = () => {
     return (
       <Wrapper>
         <TitleWrapper>
-          <TextBlock color={color.black} size="36px" weight="bold">
+          <TextBlock color={color.black} size={fontSize.title} weight="bold">
             再生履歴を追加
           </TextBlock>
         </TitleWrapper>
-        <TextBlock color={color.black} size="14px">
+        <TextBlock color={color.black} size={fontSize.regular}>
           再生履歴を追加すると、より詳しい情報が確認できます。
         </TextBlock>
       </Wrapper>

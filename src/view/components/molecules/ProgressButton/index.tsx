@@ -2,6 +2,7 @@ import styled from 'styled-components'
 import Text from 'src/view/components/atoms/Text'
 import { color } from 'src/common/styles/color'
 import RoundBox from 'src/view/components/atoms/RoundBox'
+import { fontSize } from 'src/common/styles/fontSize'
 
 export type ProgressButtonPropsType = {
   text?: string
@@ -17,7 +18,7 @@ const ProgressButton: React.FC<ProgressButtonPropsType> = (props) => {
       }}
     >
       <InnerBox>
-        <Text color={color.white} size="12px">
+        <Text color={color.white} size={fontSize.small}>
           {text ? text : `${Math.floor(progress)}%`}
         </Text>
       </InnerBox>

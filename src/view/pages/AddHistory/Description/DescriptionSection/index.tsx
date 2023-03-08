@@ -1,5 +1,6 @@
 import { ReactNode } from 'react'
 import { color } from 'src/common/styles/color'
+import { fontSize } from 'src/common/styles/fontSize'
 import TextBlock from 'src/view/components/atoms/TextBlock'
 import styled from 'styled-components'
 
@@ -13,7 +14,7 @@ const DescriptionSection: React.FC<DescriptionSectionPropsType> = (props) => {
   return (
     <Wrapper>
       <TextWrapper>
-        <TextBlock color={color.black} size="14px">
+        <TextBlock color={color.black} size={fontSize.regular}>
           {text}
         </TextBlock>
       </TextWrapper>

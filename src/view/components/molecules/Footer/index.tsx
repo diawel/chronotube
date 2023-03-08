@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import { DeviceTypeContext } from 'src/index'
 import Wrap from '../../atoms/Wrap'
 import { Link } from 'react-router-dom'
+import { fontSize } from 'src/common/styles/fontSize'
 
 export const footerHeight = '40px'
 
@@ -20,7 +21,7 @@ const Footer: React.FC = () => {
   }
 }
 
-const textStyle = { color: color.darkGray, size: '12px' }
+const textStyle = { color: color.darkGray, size: fontSize.small }
 
 const TextWrapper = styled.div`
   margin: 8px;

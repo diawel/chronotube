@@ -1,4 +1,5 @@
 import { color } from 'src/common/styles/color'
+import { fontSize } from 'src/common/styles/fontSize'
 import { ThumbnailType } from 'src/common/utils/types/youtube'
 import styled from 'styled-components'
 import ClampedText from '../../atoms/ClampedText'
@@ -24,7 +25,7 @@ const ChannelCard: React.FC<ChannelCardPropsType> = (props) => {
         <ClampedText
           lineClamp="1"
           color={color.black}
-          size="12px"
+          size={fontSize.regular}
           weight="bold"
         >
           {name}
@@ -32,7 +33,7 @@ const ChannelCard: React.FC<ChannelCardPropsType> = (props) => {
         <ClampedText
           lineClamp="1"
           color={color.black}
-          size="18px"
+          size={fontSize.medium}
           weight="bold"
         >
           {snippet}

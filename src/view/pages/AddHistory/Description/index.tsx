@@ -1,4 +1,5 @@
 import { color } from 'src/common/styles/color'
+import { fontSize } from 'src/common/styles/fontSize'
 import TextBlock from 'src/view/components/atoms/TextBlock'
 import PrimaryButton from 'src/view/components/molecules/PrimaryButton'
 import styled from 'styled-components'
@@ -24,7 +25,7 @@ const DescriptionImage = styled.img`
 const Description = (
   <Wrapper>
     <TitleWrapper>
-      <TextBlock color={color.black} size="16px" weight="bold">
+      <TextBlock color={color.black} size={fontSize.medium} weight="bold">
         再生履歴の書き出し方
       </TextBlock>
     </TitleWrapper>
