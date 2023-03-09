@@ -1,8 +1,5 @@
 import { useState } from 'react'
-import {
-  exportWatchHistories,
-  ExportWatchHistoryProgressType,
-} from 'src/common/utils/db/watchHistory'
+import { exportWatchHistories } from 'src/common/utils/db/watchHistory'
 import Button from 'src/view/components/atoms/Button'
 import PrimaryButton from 'src/view/components/molecules/PrimaryButton'
 import ColumnContent from 'src/view/components/templates/ColumnContent'
