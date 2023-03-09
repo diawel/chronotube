@@ -8,6 +8,7 @@ import {
   validateChannels,
 } from 'src/common/utils/db/subscription'
 import AddHistory from './pages/AddHistory'
+import UpdateSubscription from './pages/UpdateSubscription'
 
 const App: React.FC = () => {
   useEffect(() => {
@@ -37,6 +38,7 @@ const App: React.FC = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/addhistory" element={<AddHistory />} />
+        <Route path="/updatesubscription" element={<UpdateSubscription />} />
       </Routes>
     </Wrap>
   )

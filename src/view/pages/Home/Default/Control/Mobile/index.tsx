@@ -12,7 +12,7 @@ const Mobile: React.FC = () => {
     <Wrapper>
       <StableButtons>
         <PrimaryButtonWrapper>
-          <Link to="/login">
+          <Link to="/updatesubscription">
             <PrimaryButton text="登録チャンネルを更新" />
           </Link>
         </PrimaryButtonWrapper>
