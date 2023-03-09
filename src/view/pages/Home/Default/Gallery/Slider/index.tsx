@@ -1,15 +1,15 @@
-import { useContext, useRef } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
 import ChannelCard from 'src/view/components/molecules/ChannelCard'
 import CardContainer, { cardOuterWidth } from './CardContainer'
-import { ChannelType } from 'src/common/utils/types/youtube'
+import { Channel } from 'src/common/utils/db/subscription'
 import { Link } from 'react-router-dom'
 import { dateToString } from 'src/common/utils/dateToString'
 import { DeviceTypeContext } from 'src/index'
 import SliderControl from './SliderControl'
 
 export type SliderPropsType = {
-  channels: ChannelType[]
+  channels: Channel[]
   filter: string
 }
 
@@ -17,6 +17,15 @@ const Slider: React.FC<SliderPropsType> = (props) => {
   const { channels, filter } = props
   const scrollerRef = useRef(null)
   const deviceType = useContext(DeviceTypeContext)
+  const [scroller, setScroller] = useState<HTMLElement | null>(null)
+
+  useEffect(() => {
+    const checkScrollerRendered = () => {
+      if (scrollerRef.current) setScroller(scrollerRef.current)
+      else window.requestAnimationFrame(checkScrollerRendered)
+    }
+    checkScrollerRendered()
+  }, [])
 
   let cardIndex = 0
   const cardList = channels.map((channel) => {
@@ -24,12 +33,7 @@ const Slider: React.FC<SliderPropsType> = (props) => {
     if (!filter || name.toLowerCase().includes(filter.toLowerCase())) {
       return (
         <Link to={`/channel/${id}`} key={id}>
-          <CardContainer
-            scroller={scrollerRef.current}
-            id={id}
-            index={cardIndex++}
-            filter={filter}
-          >
+          <CardContainer {...{ scroller, id, filter }} index={cardIndex++}>
             <ChannelCard
               thumbnail={thumbnail.high}
               name={name}
@@ -46,11 +50,7 @@ const Slider: React.FC<SliderPropsType> = (props) => {
       <Scroller ref={scrollerRef}>
         <InnerWrapper>{cardList}</InnerWrapper>
       </Scroller>
-      {deviceType == 'pc' ? (
-        <SliderControl scroller={scrollerRef.current} />
-      ) : (
-        ''
-      )}
+      {deviceType == 'pc' ? <SliderControl scroller={scroller} /> : ''}
     </Wrapper>
   )
 }
@@ -66,8 +66,8 @@ const Scroller = styled.div`
     display: none;
   }
   scrollbar-width: none;
-  padding-bottom: 48px;
-  margin-bottom: -48px;
+  padding: 16px 0 48px;
+  margin: -16px 0 -48px;
   position: relative;
   z-index: 10;
 `

@@ -2,6 +2,7 @@ import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import Text from 'src/view/components/atoms/Text'
 import { color } from 'src/common/styles/color'
+import { fontSize } from 'src/common/styles/fontSize'
 
 export type PulldownOptionType = {
   linkTo: string
@@ -14,7 +15,7 @@ const PulldownOption: React.FC<PulldownOptionType> = (prop) => {
   return (
     <Link to={linkTo}>
       <Wrapper>
-        <Text color={color.black} size="12px">
+        <Text color={color.black} size={fontSize.small}>
           {text}
         </Text>
       </Wrapper>

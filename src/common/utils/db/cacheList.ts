@@ -5,7 +5,7 @@ export interface File {
   blob: Blob
 }
 
-export class CacheList extends Dexie {
+class CacheList extends Dexie {
   files!: Table<File>
 
   constructor() {

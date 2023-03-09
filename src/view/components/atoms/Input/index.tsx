@@ -1,4 +1,5 @@
 import { color } from 'src/common/styles/color'
+import { fontSize } from 'src/common/styles/fontSize'
 import styled from 'styled-components'
 
 export type InputPropsType = {
@@ -30,7 +31,7 @@ const StyledInput = styled.input`
   appearance: none;
   border-radius: 24px;
   color: ${color.black};
-  font-size: 12px;
+  font-size: ${fontSize.regular};
   border: none;
   outline: none;
   display: flex;
@@ -41,6 +42,7 @@ const StyledInput = styled.input`
   box-sizing: border-box;
   &::placeholder {
     color: ${color.darkGray};
+    font-size: ${fontSize.small};
   }
 `
 

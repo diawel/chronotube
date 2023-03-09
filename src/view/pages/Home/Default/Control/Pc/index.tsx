@@ -4,7 +4,7 @@ import Option from './Option'
 const Pc: React.FC = () => {
   return (
     <Wrapper>
-      <Option linkTo="/login" text="登録チャンネルを更新" />
+      <Option linkTo="/updatesubscription" text="登録チャンネルを更新" />
       <Option linkTo="/addhistory" text="再生履歴を追加" />
       <Option linkTo="/backup" text="再生履歴をバックアップ" />
     </Wrapper>

@@ -1,8 +1,6 @@
-export type ChannelType = {
+export type ChannelAbstractType = {
   id: string
   name: string
-  subscribeDate: Date
-  thumbnail: ThumbnailsType
 }
 
 export type ThumbnailsType = {
