@@ -1,12 +1,7 @@
 import { useLiveQuery } from 'dexie-react-hooks'
-import { color } from 'src/common/styles/color'
 import { dateToString } from 'src/common/utils/dateToString'
-import { watchHistory } from 'src/common/utils/db/watchHistory'
-import TitledRange from 'src/view/components/molecules/TitledRange'
 import TitledValue from 'src/view/components/molecules/TitledValue'
 import styled from 'styled-components'
-import TextBlock from 'src/view/components/atoms/TextBlock'
-import { fontSize } from 'src/common/styles/fontSize'
 import { subscription } from 'src/common/utils/db/subscription'
 
 const Abstract: React.FC = () => {

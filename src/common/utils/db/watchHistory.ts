@@ -83,3 +83,43 @@ export const storeWatchHistories = async (
   await watchHistory.histories.bulkPut(parsedHistories)
   progressSetter && progressSetter('finished')
 }
+
+export type ExportWatchHistoryProgressType =
+  | 'read'
+  | 'convert'
+  | 'file'
+  | 'finished'
+
+export const exportWatchHistories = async (
+  progressSetter?: (progress: ExportWatchHistoryProgressType) => void
+) => {
+  progressSetter && progressSetter('read')
+  const histories = await watchHistory.histories.toArray()
+  progressSetter && progressSetter('convert')
+  const convertedHistories: HistoryType[] = histories.map((history) => {
+    return {
+      header: history.header,
+      title: `${history.title} を視聴しました`,
+      titleUrl: `https://www.youtube.com/watch?v=${history.id}`,
+      subtitles: [
+        {
+          name: history.uploader.name,
+          url: `https://www.youtube.com/channel/${history.uploader.id}`,
+        },
+      ],
+      time: history.playbackDate.toISOString(),
+    }
+  })
+  progressSetter && progressSetter('file')
+  const a = document.createElement('a')
+  const blob = URL.createObjectURL(
+    new Blob([JSON.stringify(convertedHistories)], {
+      type: 'application/json',
+    })
+  )
+  a.href = blob
+  a.download = 'watch-history.json'
+  document.body.appendChild(a)
+  a.click()
+  progressSetter && progressSetter('finished')
+}

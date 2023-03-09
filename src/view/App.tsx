@@ -9,6 +9,7 @@ import {
 } from 'src/common/utils/db/subscription'
 import AddHistory from './pages/AddHistory'
 import UpdateSubscription from './pages/UpdateSubscription'
+import Backup from './pages/Buckup'
 
 const App: React.FC = () => {
   useEffect(() => {
@@ -39,6 +40,7 @@ const App: React.FC = () => {
         <Route path="/" element={<Home />} />
         <Route path="/addhistory" element={<AddHistory />} />
         <Route path="/updatesubscription" element={<UpdateSubscription />} />
+        <Route path="/backup" element={<Backup />} />
       </Routes>
     </Wrap>
   )
