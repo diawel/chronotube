@@ -15,7 +15,7 @@ const ColumnContent: React.FC<ColumnContentPropsType> = (props) => {
       <OuterWrapper>
         <InnerWrapper>{children}</InnerWrapper>
       </OuterWrapper>
-      {hideFooter ? '' : <Footer />}
+      {hideFooter ? <></> : <Footer />}
     </Wrap>
   )
 }

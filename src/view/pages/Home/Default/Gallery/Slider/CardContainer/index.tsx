@@ -63,7 +63,7 @@ const CardContainer: React.FC<CardContainerPropsType> = (props) => {
       {isVisible ? (
         <div style={{ transform: `scale(${scale})` }}>{children}</div>
       ) : (
-        ''
+        <></>
       )}
     </Container>
   )
