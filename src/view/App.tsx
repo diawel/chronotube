@@ -10,6 +10,7 @@ import {
 import AddHistory from './pages/AddHistory'
 import UpdateSubscription from './pages/UpdateSubscription'
 import Backup from './pages/Buckup'
+import Channels from './pages/Channels'
 
 const App: React.FC = () => {
   useEffect(() => {
@@ -41,6 +42,7 @@ const App: React.FC = () => {
         <Route path="/addhistory" element={<AddHistory />} />
         <Route path="/updatesubscription" element={<UpdateSubscription />} />
         <Route path="/backup" element={<Backup />} />
+        <Route path="/channels" element={<Channels />} />
       </Routes>
     </Wrap>
   )

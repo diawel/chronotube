@@ -9,23 +9,19 @@ export type ChannelCardPropsType = {
   thumbnail: ThumbnailType
   name: string
   snippet: string
+  listed?: boolean
 }
 
 const ChannelCard: React.FC<ChannelCardPropsType> = (props) => {
-  const { thumbnail, name, snippet } = props
+  const { thumbnail, name, snippet, listed } = props
   return (
-    <RoundBox shadow={`0px 16px 32px ${color.shadow}`} background={color.white}>
-      <RoundBox
-        shadow={`0px 16px 32px ${color.shadow}`}
-        background={color.white}
-      >
-        <CoverImage src={thumbnail.url} />
-      </RoundBox>
+    <RoundBox background={color.white}>
+      <CoverImage src={thumbnail.url} />
       <TextWrapper>
         <ClampedText
           lineClamp="1"
           color={color.black}
-          size={fontSize.regular}
+          size={listed ? fontSize.regular : fontSize.medium}
           weight="bold"
         >
           {name}
@@ -33,8 +29,7 @@ const ChannelCard: React.FC<ChannelCardPropsType> = (props) => {
         <ClampedText
           lineClamp="1"
           color={color.black}
-          size={fontSize.medium}
-          weight="bold"
+          size={listed ? fontSize.small : fontSize.regular}
         >
           {snippet}
         </ClampedText>
@@ -48,6 +43,8 @@ const CoverImage = styled.img`
   aspect-ratio: 1;
   object-fit: cover;
   display: block;
+  box-shadow: 0px 16px 32px ${color.shadow};
+  border-radius: 24px;
 `
 
 const TextWrapper = styled.div`

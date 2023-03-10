@@ -27,7 +27,7 @@ const CardContainer: React.FC<CardContainerPropsType> = (props) => {
         scroller.scroll(cardOuterWidth * index + cardWidth / 2, 0)
       setInited(true)
     }
-  }, [scroller])
+  }, [scroller, filter])
 
   const adjustStyle = () => {
     if (containerRef.current) {
