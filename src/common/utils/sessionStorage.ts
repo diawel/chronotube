@@ -1,4 +1,6 @@
 export const sessionStorageKey = {
   filter: 'filter',
-  scrollAt: 'scrollAt',
+  scrollAtGallery: 'scrollAtGallery',
+  scrollAtList: 'scrollAtList',
+  sortBy: 'sortBy',
 }

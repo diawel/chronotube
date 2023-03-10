@@ -17,7 +17,7 @@ const PulldownButton: React.FC<PulldownButtonType> = (props) => {
   return (
     <Wrapper>
       <Button onClick={onClick}>
-        <ArrowCircle direction={isOpen ? 'UP' : 'DOWN'} />
+        <ArrowCircle direction="DOWN" />
       </Button>
     </Wrapper>
   )

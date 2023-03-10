@@ -5,7 +5,7 @@ import CardContainer, { cardOuterWidth } from './CardContainer'
 import { Channel } from 'src/common/utils/db/subscription'
 import { Link } from 'react-router-dom'
 import { dateToString } from 'src/common/utils/dateToString'
-import { DeviceTypeContext } from 'src/index'
+import { DeviceContext } from 'src/index'
 import SliderControl from './SliderControl'
 
 export type SliderPropsType = {
@@ -16,7 +16,7 @@ export type SliderPropsType = {
 const Slider: React.FC<SliderPropsType> = (props) => {
   const { channels, filter } = props
   const scrollerRef = useRef(null)
-  const deviceType = useContext(DeviceTypeContext)
+  const deviceType = useContext(DeviceContext)
   const [scroller, setScroller] = useState<HTMLElement | null>(null)
 
   useEffect(() => {

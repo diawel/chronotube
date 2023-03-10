@@ -2,7 +2,7 @@ import { useContext } from 'react'
 import { color } from 'src/common/styles/color'
 import Text from '../../atoms/Text'
 import styled from 'styled-components'
-import { DeviceTypeContext } from 'src/index'
+import { DeviceContext } from 'src/index'
 import Wrap from '../../atoms/Wrap'
 import { Link } from 'react-router-dom'
 import { fontSize } from 'src/common/styles/fontSize'
@@ -10,7 +10,7 @@ import { fontSize } from 'src/common/styles/fontSize'
 export const footerHeight = '40px'
 
 const Footer: React.FC = () => {
-  const deviceType = useContext(DeviceTypeContext)
+  const deviceType = useContext(DeviceContext)
   switch (deviceType) {
     case 'mobile':
       return (

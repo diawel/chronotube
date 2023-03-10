@@ -2,6 +2,7 @@ import Dexie, { Table } from 'dexie'
 import { ChannelAbstractType } from 'src/common/utils/types/youtube'
 import * as t from 'io-ts'
 import { isRight } from 'fp-ts/lib/Either'
+import { updatePlayCount } from './subscription'
 
 export interface History {
   header: string
@@ -81,6 +82,7 @@ export const storeWatchHistories = async (
   })
   progressSetter && progressSetter('store')
   await watchHistory.histories.bulkPut(parsedHistories)
+  await updatePlayCount()
   progressSetter && progressSetter('finished')
 }
 

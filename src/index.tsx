@@ -11,7 +11,7 @@ const getDeviceType = (): DeviceType => {
 }
 
 export type DeviceType = 'mobile' | 'pc'
-export const DeviceTypeContext = createContext<DeviceType>(getDeviceType())
+export const DeviceContext = createContext<DeviceType>(getDeviceType())
 
 const Index: React.FC = () => {
   const [deviceType, setDeviceType] = useState<DeviceType>(getDeviceType())
@@ -26,11 +26,11 @@ const Index: React.FC = () => {
   }, [])
 
   return (
-    <DeviceTypeContext.Provider value={deviceType}>
+    <DeviceContext.Provider value={deviceType}>
       <BrowserRouter>
         <App />
       </BrowserRouter>
-    </DeviceTypeContext.Provider>
+    </DeviceContext.Provider>
   )
 }
 

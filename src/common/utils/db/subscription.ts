@@ -2,13 +2,14 @@ import Dexie, { Table } from 'dexie'
 import { ThumbnailsType } from 'src/common/utils/types/youtube'
 import * as t from 'io-ts'
 import { isRight } from 'fp-ts/lib/Either'
+import { watchHistory } from './watchHistory'
 
 export interface Channel {
   id: string
   name: string
   subscribeDate: Date
   thumbnail: ThumbnailsType
-  playCount?: number
+  playCount: number
 }
 
 export interface Meta {
@@ -77,13 +78,29 @@ export const storeChannels = async (
       name: channel.snippet.title,
       subscribeDate: new Date(channel.snippet.publishedAt),
       thumbnail: channel.snippet.thumbnails,
+      playCount: 0,
     }
   })
   progressSetter && progressSetter('store')
   await subscription.channels.bulkAdd(parsedSubscriptions)
+  await updatePlayCount()
   await subscription.meta.put({
     purpose: 'fetched',
     value: new Date(),
   })
   progressSetter && progressSetter('finished')
+}
+
+export const updatePlayCount = async () => {
+  const playCountList: {
+    [key: string]: number
+  } = {}
+  await subscription.channels.toCollection().each(async (channel: Channel) => {
+    playCountList[channel.id] = channel.playCount = await watchHistory.histories
+      .where({ 'uploader.id': channel.id })
+      .count()
+  })
+  await subscription.channels.toCollection().modify((channel: Channel) => {
+    channel.playCount = playCountList[channel.id]
+  })
 }

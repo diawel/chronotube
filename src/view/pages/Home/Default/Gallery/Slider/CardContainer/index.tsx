@@ -23,7 +23,7 @@ const CardContainer: React.FC<CardContainerPropsType> = (props) => {
 
   useEffect(() => {
     if (scroller) {
-      if (sessionStorage.getItem(sessionStorageKey.scrollAt) == id)
+      if (sessionStorage.getItem(sessionStorageKey.scrollAtGallery) == id)
         scroller.scroll(cardOuterWidth * index + cardWidth / 2, 0)
       setInited(true)
     }
@@ -38,7 +38,7 @@ const CardContainer: React.FC<CardContainerPropsType> = (props) => {
         setIsVisible(true)
         const distanceToCenter = Math.abs(width - left - right)
         if (distanceToCenter < wrapper.clientWidth) {
-          sessionStorage.setItem(sessionStorageKey.scrollAt, id)
+          sessionStorage.setItem(sessionStorageKey.scrollAtGallery, id)
           setScale(1 - (distanceToCenter * 0.1) / wrapper.clientWidth)
         } else {
           setScale(0.9)
