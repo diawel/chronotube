@@ -21,7 +21,6 @@ const keyValuePair: KeyValuePairType[] = [
 
 const SortBySelect: React.FC = () => {
   const { sortBy, setSortBy } = useContext(SearchContext)
-  const deviceType = useContext(DeviceContext)
   const [isPulldownOpen, setIsPulldownOpen] = useState(false)
 
   return (

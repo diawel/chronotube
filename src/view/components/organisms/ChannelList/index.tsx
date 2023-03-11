@@ -79,7 +79,7 @@ const ChannelList: React.FC<ChannelListPropsType> = (props) => {
       {!cardIndex && (
         <EmptyResult>
           <Text color={color.black} size={fontSize.medium} weight="bold">
-            「{filter}」に一致する結果はありません。
+            「{filter}」に一致するチャンネルがありません。
           </Text>
         </EmptyResult>
       )}

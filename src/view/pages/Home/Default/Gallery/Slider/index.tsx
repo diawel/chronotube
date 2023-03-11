@@ -7,6 +7,9 @@ import { Link } from 'react-router-dom'
 import { dateToString } from 'src/common/utils/dateToString'
 import { DeviceContext } from 'src/index'
 import SliderControl from './SliderControl'
+import Text from 'src/view/components/atoms/Text'
+import { color } from 'src/common/styles/color'
+import { fontSize } from 'src/common/styles/fontSize'
 
 export type SliderPropsType = {
   channels: Channel[]
@@ -25,7 +28,7 @@ const Slider: React.FC<SliderPropsType> = (props) => {
       else window.requestAnimationFrame(checkScrollerRendered)
     }
     checkScrollerRendered()
-  }, [])
+  }, [scrollerRef.current])
 
   let cardIndex = 0
   const cardList = channels.map((channel) => {
@@ -48,9 +51,22 @@ const Slider: React.FC<SliderPropsType> = (props) => {
   return (
     <Wrapper>
       <Scroller ref={scrollerRef}>
-        <InnerWrapper>{cardList}</InnerWrapper>
+        {cardIndex ? (
+          <InnerWrapper>{cardList}</InnerWrapper>
+        ) : (
+          <EmptyResult>
+            <Text color={color.black} size={fontSize.medium} weight="bold">
+              「{filter}」に一致するチャンネルがありません。
+            </Text>
+          </EmptyResult>
+        )}
       </Scroller>
-      {deviceType == 'pc' ? <SliderControl scroller={scroller} /> : <></>}
+
+      {cardIndex && deviceType == 'pc' ? (
+        <SliderControl scroller={scroller} />
+      ) : (
+        <></>
+      )}
     </Wrapper>
   )
 }
@@ -77,9 +93,16 @@ const InnerWrapper = styled.div`
   width: fit-content;
   padding: 0 calc(50% - ${cardOuterWidth / 2}px);
   height: 320px;
-  &:has(*) {
-    height: auto;
-  }
+`
+
+const EmptyResult = styled.div`
+  margin: 0 auto;
+  padding: 24px;
+  display: flex;
+  width: fit-content;
+  max-width: 100%;
+  height: 320px;
+  align-items: center;
 `
 
 export default Slider
