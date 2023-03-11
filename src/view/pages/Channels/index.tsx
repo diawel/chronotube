@@ -1,5 +1,5 @@
 import { SortByType } from 'src/view/components/organisms/ChannelList'
-import { createContext, useContext, useEffect, useState } from 'react'
+import { createContext, useEffect, useState } from 'react'
 import TopBox from './TopBox'
 import SearchedChannelList from './SearchedChannelList'
 import { sessionStorageKey } from 'src/common/utils/sessionStorage'

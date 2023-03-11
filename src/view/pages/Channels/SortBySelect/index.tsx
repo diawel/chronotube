@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useState } from 'react'
 import { color } from 'src/common/styles/color'
 import { fontSize } from 'src/common/styles/fontSize'
 import chevronDown from 'src/common/svg/chevronDown'
