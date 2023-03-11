@@ -2,7 +2,6 @@ import { SortByType } from 'src/view/components/organisms/ChannelList'
 import { createContext, useContext, useEffect, useState } from 'react'
 import TopBox from './TopBox'
 import SearchedChannelList from './SearchedChannelList'
-import FootBox from './FootBox'
 import styled from 'styled-components'
 import { DeviceContext } from 'src/index'
 import { sessionStorageKey } from 'src/common/utils/sessionStorage'
@@ -46,7 +45,6 @@ const Channels: React.FC = () => {
       <ListWrapper bottomMargin={deviceType == 'mobile' ? '80px' : '0'}>
         <SearchedChannelList />
       </ListWrapper>
-      <FootBox />
     </SearchContext.Provider>
   )
 }

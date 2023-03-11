@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { color } from 'src/common/styles/color'
 import { DeviceContext } from 'src/index'
 import Logo from 'src/view/components/atoms/Logo'
@@ -8,49 +8,65 @@ import SortBySelect from '../SortBySelect'
 
 const TopBox: React.FC = () => {
   const deviceType = useContext(DeviceContext)
+  const [isFloating, setIsFloating] = useState(false)
+  useEffect(() => {
+    const onBodyScroll = () => {
+      setIsFloating(window.scrollY != 0)
+    }
+    document.addEventListener('scroll', onBodyScroll)
+    return () => document.removeEventListener('scroll', onBodyScroll)
+  }, [])
 
   return (
     <Wrapper
-      padding={deviceType == 'mobile' ? '8px 16px' : '12px 24px'}
-      fixed={deviceType == 'pc'}
+      padding={
+        deviceType == 'mobile'
+          ? isFloating
+            ? '8px 16px'
+            : '16px'
+          : '12px 24px'
+      }
+      shadow={isFloating ? `0px 16px 32px ${color.shadow}` : 'none'}
     >
-      <Logo height="36px" />
       {deviceType == 'pc' && (
-        <InputWrapper>
-          <FilterInput />
-        </InputWrapper>
+        <LogoWrapper>
+          <Logo height="36px" />
+        </LogoWrapper>
       )}
+      <InputWrapper>
+        <FilterInput />
+      </InputWrapper>
       <SortBySelect />
     </Wrapper>
   )
 }
 
+const LogoWrapper = styled.div`
+  margin-right: 24px;
+`
+
 type WrapperStyleType = {
   padding: string
-  fixed: boolean
+  shadow: string
 }
 
 const Wrapper = styled.div<WrapperStyleType>(
   (style) => `
-    ${
-      style.fixed
-        ? `
-          position: sticky;
-          top: 0;
-        `
-        : ''
-    }
     padding: ${style.padding};
+    background: ${color.lightGray};
+    box-shadow: ${style.shadow};
+    position: sticky;
+    top: 0;
     display: flex;
     align-items: center;
     height: 48px;
-    background: ${color.lightGray};
+    transition: box-shadow 0.3s, padding 0.3s;
   `
 )
 
 const InputWrapper = styled.div`
   width: 320px;
-  margin: 0 16px;
+  margin-right: 16px;
 `
 
 export default TopBox
