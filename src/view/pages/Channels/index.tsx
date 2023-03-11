@@ -42,21 +42,9 @@ const Channels: React.FC = () => {
       value={{ ...{ filter, setFilter, sortBy, setSortBy } }}
     >
       <TopBox />
-      <ListWrapper bottomMargin={deviceType == 'mobile' ? '80px' : '0'}>
-        <SearchedChannelList />
-      </ListWrapper>
+      <SearchedChannelList />
     </SearchContext.Provider>
   )
 }
-
-type ListWrapperStyleType = {
-  bottomMargin: string
-}
-
-const ListWrapper = styled.div<ListWrapperStyleType>(
-  (style) => `
-    margin-bottom: ${style.bottomMargin};
-  `
-)
 
 export default Channels

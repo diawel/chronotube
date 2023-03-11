@@ -1,7 +1,8 @@
 import { useLiveQuery } from 'dexie-react-hooks'
 import { useContext } from 'react'
-import { Channel, subscription } from 'src/common/utils/db/subscription'
+import { subscription } from 'src/common/utils/db/subscription'
 import ChannelList from 'src/view/components/organisms/ChannelList'
+import styled from 'styled-components'
 import { SearchContext } from '..'
 
 const SearchedChannelList: React.FC = () => {
@@ -16,5 +17,9 @@ const SearchedChannelList: React.FC = () => {
     return <ChannelList channels={liveQuery.channels} {...{ filter, sortBy }} />
   return <></>
 }
+
+const Wrapper = styled.div`
+  margin: 16px 0;
+`
 
 export default SearchedChannelList

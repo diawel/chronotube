@@ -26,6 +26,7 @@ const TopBox: React.FC = () => {
             : '16px'
           : '12px 24px'
       }
+      background={isFloating ? color.lightGray : 'transparent'}
       shadow={isFloating ? `0px 16px 32px ${color.shadow}` : 'none'}
     >
       {deviceType == 'pc' && (
@@ -47,20 +48,21 @@ const LogoWrapper = styled.div`
 
 type WrapperStyleType = {
   padding: string
+  background: string
   shadow: string
 }
 
 const Wrapper = styled.div<WrapperStyleType>(
   (style) => `
     padding: ${style.padding};
-    background: ${color.lightGray};
+    background: ${style.background};
     box-shadow: ${style.shadow};
     position: sticky;
     top: 0;
     display: flex;
     align-items: center;
     height: 48px;
-    transition: box-shadow 0.3s, padding 0.3s;
+    transition: box-shadow 0.3s, padding 0.3s, background 0.15s;
   `
 )
 
