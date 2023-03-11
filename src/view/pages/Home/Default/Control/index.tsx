@@ -1,10 +1,10 @@
 import { useContext } from 'react'
-import { DeviceTypeContext } from 'src/index'
+import { DeviceContext } from 'src/index'
 import Pc from './Pc'
 import Mobile from './Mobile'
 
 const Control: React.FC = () => {
-  const deviceType = useContext(DeviceTypeContext)
+  const deviceType = useContext(DeviceContext)
   switch (deviceType) {
     case 'mobile':
       return <Mobile />

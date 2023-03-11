@@ -4,7 +4,7 @@ import PulldownBox from 'src/view/components/molecules/PulldownBox'
 import PrimaryButton from 'src/view/components/molecules/PrimaryButton'
 import PulldownButton from './PulldownButton'
 import { Link } from 'react-router-dom'
-import PulldownOption from './PulldownOption'
+import Pulldown from 'src/view/pages/Home/Default/Control/Mobile/PulldownOption'
 
 const Mobile: React.FC = () => {
   const [isPulldownOpen, setIsPulldownOpen] = useState(false)
@@ -26,8 +26,8 @@ const Mobile: React.FC = () => {
         isOpen={isPulldownOpen}
         isOpenSetter={setIsPulldownOpen}
       >
-        <PulldownOption linkTo="/addhistory" text="再生履歴を追加" />
-        <PulldownOption linkTo="/backup" text="再生履歴をバックアップ" />
+        <Pulldown linkTo="/addhistory" text="再生履歴を追加" />
+        <Pulldown linkTo="/backup" text="再生履歴をバックアップ" />
       </PulldownBox>
     </Wrapper>
   )

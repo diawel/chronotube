@@ -1,6 +1,6 @@
 import { ReactNode, useContext } from 'react'
 import styled from 'styled-components'
-import { DeviceTypeContext } from 'src/index'
+import { DeviceContext } from 'src/index'
 import TitledValue from 'src/view/components/molecules/TitledValue'
 import { useLiveQuery } from 'dexie-react-hooks'
 import { subscription } from 'src/common/utils/db/subscription'
@@ -60,7 +60,7 @@ const Abstract: React.FC = () => {
     ]
   }
 
-  const deviceType = useContext(DeviceTypeContext)
+  const deviceType = useContext(DeviceContext)
   switch (deviceType) {
     case 'mobile':
       return (

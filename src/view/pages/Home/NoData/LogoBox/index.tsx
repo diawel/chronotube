@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import { DeviceTypeContext } from 'src/index'
+import { DeviceContext } from 'src/index'
 import styled from 'styled-components'
 import TextBlock from 'src/view/components/atoms/TextBlock'
 import Logo from 'src/view/components/atoms/Logo'
@@ -7,7 +7,7 @@ import { color } from 'src/common/styles/color'
 import { fontSize } from 'src/common/styles/fontSize'
 
 const LogoBox: React.FC = () => {
-  const DeviceType = useContext(DeviceTypeContext)
+  const DeviceType = useContext(DeviceContext)
   return (
     <Wrapper>
       <Logo width={DeviceType === 'mobile' ? '220px' : '280px'} />

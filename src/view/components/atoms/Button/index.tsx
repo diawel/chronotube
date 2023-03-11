@@ -20,6 +20,7 @@ const StyledButton = styled.button`
   background: none;
   border: none;
   cursor: pointer;
+  text-align: inherit;
 `
 
 export default Button
