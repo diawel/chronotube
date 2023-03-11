@@ -2,8 +2,6 @@ import { SortByType } from 'src/view/components/organisms/ChannelList'
 import { createContext, useContext, useEffect, useState } from 'react'
 import TopBox from './TopBox'
 import SearchedChannelList from './SearchedChannelList'
-import styled from 'styled-components'
-import { DeviceContext } from 'src/index'
 import { sessionStorageKey } from 'src/common/utils/sessionStorage'
 
 type searchType = {
@@ -27,7 +25,6 @@ const Channels: React.FC = () => {
     (sessionStorage.getItem(sessionStorageKey.sortBy) as SortByType) ||
       'subscribeDate'
   )
-  const deviceType = useContext(DeviceContext)
 
   useEffect(() => {
     sessionStorage.setItem(sessionStorageKey.filter, filter)

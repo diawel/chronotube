@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { color } from 'src/common/styles/color'
 import { DeviceContext } from 'src/index'
 import Logo from 'src/view/components/atoms/Logo'
@@ -31,7 +32,9 @@ const TopBox: React.FC = () => {
     >
       {deviceType == 'pc' && (
         <LogoWrapper>
-          <Logo height="36px" />
+          <Link to="/">
+            <Logo height="36px" />
+          </Link>
         </LogoWrapper>
       )}
       <InputWrapper>

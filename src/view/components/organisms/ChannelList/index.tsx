@@ -72,9 +72,10 @@ const ChannelList: React.FC<ChannelListPropsType> = (props) => {
           )
         }
       })}
-      {[...Array(sortedChannels.length)].map((element, ei) => {
-        return <FillBox key={ei} gap={gap} />
-      })}
+      {cardIndex > 0 &&
+        [...Array(sortedChannels.length)].map((element, ei) => {
+          return <FillBox key={ei} gap={gap} />
+        })}
       {!cardIndex && (
         <EmptyResult>
           <Text color={color.black} size={fontSize.medium} weight="bold">
