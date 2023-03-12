@@ -10,7 +10,7 @@ class CacheList extends Dexie {
 
   constructor() {
     super('CacheList')
-    this.version(1).stores({ files: 'purpose, blob' })
+    this.version(1).stores({ files: 'purpose' })
   }
 }
 
