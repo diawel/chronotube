@@ -22,7 +22,6 @@ const App: React.FC = () => {
             await storeChannels(
               validateChannels(JSON.parse(await file.blob.text()))
             )
-            console.log('done')
             break
           default:
             console.error('Unknown cache')
@@ -37,16 +36,14 @@ const App: React.FC = () => {
   }, [])
 
   return (
-    <Wrap>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/addhistory" element={<AddHistory />} />
-        <Route path="/updatesubscription" element={<UpdateSubscription />} />
-        <Route path="/backup" element={<Backup />} />
-        <Route path="/channels" element={<Channels />} />
-        <Route path="/channel/:id" element={<Channel />} />
-      </Routes>
-    </Wrap>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/addhistory" element={<AddHistory />} />
+      <Route path="/updatesubscription" element={<UpdateSubscription />} />
+      <Route path="/backup" element={<Backup />} />
+      <Route path="/channels" element={<Channels />} />
+      <Route path="/channel/:id" element={<Channel />} />
+    </Routes>
   )
 }
 

@@ -48,7 +48,6 @@ const UploadButton: React.FC<UploadButtonPropsType> = (props) => {
         validateHistoryies(JSON.parse(jsonText)),
         progressSetter
       )
-      console.log('done')
     },
     acceptTypeList: ['.json', '.zip'],
   }

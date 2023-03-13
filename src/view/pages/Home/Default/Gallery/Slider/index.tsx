@@ -53,12 +53,14 @@ const Slider: React.FC<SliderPropsType> = (props) => {
       <Scroller ref={scrollerRef}>
         {cardIndex ? (
           <InnerWrapper>{cardList}</InnerWrapper>
-        ) : (
+        ) : channels.length ? (
           <EmptyResult>
             <Text color={color.black} size={fontSize.medium} weight="bold">
               「{filter}」に一致するチャンネルがありません。
             </Text>
           </EmptyResult>
+        ) : (
+          <></>
         )}
       </Scroller>
       {cardIndex && deviceType == 'pc' && <SliderControl scroller={scroller} />}
