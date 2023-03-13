@@ -3,7 +3,6 @@ import { color } from 'src/common/styles/color'
 import Text from '../../atoms/Text'
 import styled from 'styled-components'
 import { DeviceContext } from 'src/index'
-import Wrap from '../../atoms/Wrap'
 import { Link } from 'react-router-dom'
 import { fontSize } from 'src/common/styles/fontSize'
 
@@ -28,7 +27,7 @@ const TextWrapper = styled.div`
 `
 
 const FooterContent = (
-  <Wrap>
+  <>
     <a href="https://diawel.me/">
       <TextWrapper>
         <Text {...textStyle}>diawel.me</Text>
@@ -39,7 +38,7 @@ const FooterContent = (
         <Text {...textStyle}>プライバシーポリシー</Text>
       </TextWrapper>
     </Link>
-  </Wrap>
+  </>
 )
 
 type StyledFoterStyleType = { justify: string }

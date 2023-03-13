@@ -1,6 +1,5 @@
 import { ReactNode } from 'react'
 import styled from 'styled-components'
-import Wrap from '../../atoms/Wrap'
 import Footer, { footerHeight } from '../../molecules/Footer'
 
 export type ColumnContentPropsType = {
@@ -11,12 +10,12 @@ export type ColumnContentPropsType = {
 const ColumnContent: React.FC<ColumnContentPropsType> = (props) => {
   const { children, hideFooter } = props
   return (
-    <Wrap>
+    <>
       <OuterWrapper>
         <InnerWrapper>{children}</InnerWrapper>
       </OuterWrapper>
       {hideFooter ? <></> : <Footer />}
-    </Wrap>
+    </>
   )
 }
 
