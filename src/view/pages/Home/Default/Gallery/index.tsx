@@ -6,6 +6,7 @@ import { fontSize } from 'src/common/styles/fontSize'
 import chevronDown from 'src/common/svg/chevronDown'
 import { subscription } from 'src/common/utils/db/subscription'
 import { sessionStorageKey } from 'src/common/utils/sessionStorage'
+import Button from 'src/view/components/atoms/Button'
 import Icon from 'src/view/components/atoms/Icon'
 import Input from 'src/view/components/atoms/Input'
 import SkeletonBox from 'src/view/components/atoms/SkeletonBox'
@@ -46,14 +47,23 @@ const Gallery: React.FC = () => {
         />
       )}
       <BottomNav>
-        <Link to="/channels">
-          <LinkContent>
-            <Text color={color.black} size={fontSize.small}>
-              すべて表示
-              <Icon svg={chevronDown} size="16px" rotate="270deg" />
-            </Text>
-          </LinkContent>
-        </Link>
+        <Button
+          onClick={() => {
+            sessionStorage.setItem(
+              sessionStorageKey.scrollAtList,
+              sessionStorage.getItem(sessionStorageKey.scrollAtGallery) || ''
+            )
+          }}
+        >
+          <Link to="/channels">
+            <LinkContent>
+              <Text color={color.black} size={fontSize.small}>
+                すべて表示
+                <Icon svg={chevronDown} size="16px" rotate="270deg" />
+              </Text>
+            </LinkContent>
+          </Link>
+        </Button>
         <Input
           type="text"
           value={filter}

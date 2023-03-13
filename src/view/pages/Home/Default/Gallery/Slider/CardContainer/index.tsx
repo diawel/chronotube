@@ -1,6 +1,6 @@
 import { ReactNode, useEffect, useRef, useState } from 'react'
 import { sessionStorageKey } from 'src/common/utils/sessionStorage'
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 
 export type CardContainerPropsType = {
   scroller: HTMLElement | null
@@ -61,7 +61,7 @@ const CardContainer: React.FC<CardContainerPropsType> = (props) => {
   return (
     <Container ref={containerRef}>
       {isVisible ? (
-        <div style={{ transform: `scale(${scale})` }}>{children}</div>
+        <Wrapper style={{ transform: `scale(${scale})` }}>{children}</Wrapper>
       ) : (
         <></>
       )}
@@ -74,6 +74,19 @@ const Container = styled.div`
   height: 320px;
   scroll-snap-align: center;
   margin: 0 ${sideMargin}px;
+`
+
+const show = keyframes`
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+`
+
+const Wrapper = styled.div`
+  animation: ${show} 0.3s ease-out both;
 `
 
 export default CardContainer

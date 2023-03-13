@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 import { ReactNode } from 'react'
 import RoundBox from 'src/view/components/atoms/RoundBox'
 import { color } from 'src/common/styles/color'
@@ -21,13 +21,15 @@ const PulldownBox: React.FC<PulldownListPropsType> = (props) => {
     return (
       <Base>
         <Background onClick={onClose} />
-        <Wrapper width={width}>
-          <RoundBox
-            shadow={`0px 16px 32px ${color.shadow}`}
-            background={color.white}
-          >
-            <InnerWrapper>{children}</InnerWrapper>
-          </RoundBox>
+        <Wrapper>
+          <Container width={width}>
+            <RoundBox
+              shadow={`0px 16px 32px ${color.shadow}`}
+              background={color.white}
+            >
+              <InnerWrapper>{children}</InnerWrapper>
+            </RoundBox>
+          </Container>
         </Wrapper>
       </Base>
     )
@@ -49,11 +51,26 @@ const Background = styled.div`
   height: 100vh;
 `
 
-type WrapperStyleType = {
+const show = keyframes`
+  0% {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`
+
+const Wrapper = styled.div`
+  animation: ${show} 0.15s ease-out both;
+`
+
+type ContainerStyleType = {
   width: string
 }
 
-const Wrapper = styled.div<WrapperStyleType>(
+const Container = styled.div<ContainerStyleType>(
   (style) => `
     width: ${style.width};
     position: absolute;

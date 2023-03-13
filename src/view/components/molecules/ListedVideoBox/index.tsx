@@ -57,6 +57,7 @@ const TextBox = styled.div`
   box-sizing: border-box;
   flex-direction: column;
   justify-content: center;
+  overflow: hidden;
 `
 
 export default ListedVideoBox

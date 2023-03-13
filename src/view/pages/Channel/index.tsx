@@ -7,7 +7,7 @@ import { watchHistory } from 'src/common/utils/db/watchHistory'
 import { VideoType } from 'src/common/utils/types/youtube'
 import { DeviceContext } from 'src/index'
 import EngageAddHistory from 'src/view/components/organisms/EngageAddHistory'
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 import ChannelHystory from './ChannelHistory'
 import IconBox from './IconBox'
 import KeyVideos from './KeyVideos'
@@ -99,25 +99,29 @@ const Channel: React.FC = () => {
     switch (deviceType) {
       case 'mobile':
         return (
-          <MobileContainer>
-            <IconWrapper>
-              <IconBox channel={channel} withPlayCount={historyCount > 0} />
-            </IconWrapper>
-            <VideoColumn padding="0" margin="0 auto">
-              {videoColumnInner}
-            </VideoColumn>
-          </MobileContainer>
+          <Wrapper>
+            <MobileContainer>
+              <IconWrapper>
+                <IconBox channel={channel} withPlayCount={historyCount > 0} />
+              </IconWrapper>
+              <VideoColumn padding="0" margin="0 auto">
+                {videoColumnInner}
+              </VideoColumn>
+            </MobileContainer>
+          </Wrapper>
         )
       case 'pc':
         return (
-          <PcContainer>
-            <IconColumn>
-              <IconBox channel={channel} withPlayCount={historyCount > 0} />
-            </IconColumn>
-            <VideoColumn padding="108px 24px" margin="0">
-              {videoColumnInner}
-            </VideoColumn>
-          </PcContainer>
+          <Wrapper>
+            <PcContainer>
+              <IconColumn>
+                <IconBox channel={channel} withPlayCount={historyCount > 0} />
+              </IconColumn>
+              <VideoColumn padding="108px 24px" margin="0">
+                {videoColumnInner}
+              </VideoColumn>
+            </PcContainer>
+          </Wrapper>
         )
     }
   }
@@ -125,28 +129,47 @@ const Channel: React.FC = () => {
   switch (deviceType) {
     case 'mobile':
       return (
-        <MobileContainer>
-          <IconWrapper>
-            <SkeletonIconBox />
-          </IconWrapper>
-          <VideoColumn padding="0" margin="0 auto">
-            <SkeletonKeyVideos />
-          </VideoColumn>
-        </MobileContainer>
+        <Wrapper>
+          <MobileContainer>
+            <IconWrapper>
+              <SkeletonIconBox />
+            </IconWrapper>
+            <VideoColumn padding="0" margin="0 auto">
+              <SkeletonKeyVideos />
+            </VideoColumn>
+          </MobileContainer>
+        </Wrapper>
       )
     case 'pc':
       return (
-        <PcContainer>
-          <IconColumn>
-            <SkeletonIconBox />
-          </IconColumn>
-          <VideoColumn padding="108px 24px" margin="0">
-            <SkeletonKeyVideos />
-          </VideoColumn>
-        </PcContainer>
+        <Wrapper>
+          <PcContainer>
+            <IconColumn>
+              <SkeletonIconBox />
+            </IconColumn>
+            <VideoColumn padding="108px 24px" margin="0">
+              <SkeletonKeyVideos />
+            </VideoColumn>
+          </PcContainer>
+        </Wrapper>
       )
   }
 }
+
+const show = keyframes`
+  0% {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`
+
+const Wrapper = styled.div`
+  animation: ${show} 0.3s ease-out both;
+`
 
 const PcContainer = styled.div`
   background: ${color.white};
