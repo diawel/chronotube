@@ -7,12 +7,7 @@ const SkeletonVideoBox: React.FC = () => {
   return (
     <Container>
       <ThumbnailWrapper>
-        <SkeletonBox
-          height="100%"
-          aspectRatio="16 / 9"
-          borderRadius="8px"
-          margin="0 16px 0 0"
-        />
+        <SkeletonBox height="100%" borderRadius="8px" aspectRatio="16 / 9" />
       </ThumbnailWrapper>
       <TextBox>
         <SkeletonBox width="100%" height={fontSize.regular} margin="0 0 10px" />
@@ -30,6 +25,8 @@ const Container = styled.div`
 
 const ThumbnailWrapper = styled.div`
   flex-shrink: 0;
+  margin-right: 16px;
+  height: 100%;
 `
 
 const TextBox = styled.div`
