@@ -7,6 +7,8 @@ import TitledValue from 'src/view/components/molecules/TitledValue'
 import styled from 'styled-components'
 import TextBlock from 'src/view/components/atoms/TextBlock'
 import { fontSize } from 'src/common/styles/fontSize'
+import SkeletonTitledValue from 'src/view/components/atoms/SkeletonBox/SkeletonTitledValue'
+import SkeletonTitledRange from 'src/view/components/atoms/SkeletonBox/SkeletonTitledRange'
 
 const Abstract: React.FC = () => {
   const liveQuery = useLiveQuery(async () => {
@@ -55,7 +57,12 @@ const Abstract: React.FC = () => {
       </Wrapper>
     )
   }
-  return <Wrapper></Wrapper>
+  return (
+    <Wrapper>
+      <SkeletonTitledValue />
+      <SkeletonTitledRange />
+    </Wrapper>
+  )
 }
 
 const TitleWrapper = styled.div`
@@ -63,7 +70,7 @@ const TitleWrapper = styled.div`
 `
 
 const Wrapper = styled.div`
-  margin: 64px 0;
+  padding: 64px 0;
 `
 
 export default Abstract

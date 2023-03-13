@@ -8,6 +8,7 @@ import SideSlider from 'src/view/components/atoms/SideSlider'
 import Wrap from 'src/view/components/atoms/Wrap'
 import { dateToString } from 'src/common/utils/dateToString'
 import { watchHistory } from 'src/common/utils/db/watchHistory'
+import SkeletonTitledValue from 'src/view/components/atoms/SkeletonBox/SkeletonTitledValue'
 
 const Abstract: React.FC = () => {
   const liveQuery = useLiveQuery(async () => {
@@ -56,6 +57,17 @@ const Abstract: React.FC = () => {
               : 'なし'
           }
         />
+      </Wrap>,
+    ]
+  } else {
+    Blocks = [
+      <Wrap key={0}>
+        <SkeletonTitledValue />
+        <SkeletonTitledValue />
+      </Wrap>,
+      <Wrap key={1}>
+        <SkeletonTitledValue />
+        <SkeletonTitledValue />
       </Wrap>,
     ]
   }

@@ -10,7 +10,7 @@ export type CardContainerPropsType = {
   children: ReactNode
 }
 
-const cardWidth = 380 - 128
+export const cardWidth = 380 - 128
 const sideMargin = 4
 export const cardOuterWidth = cardWidth + sideMargin * 2
 

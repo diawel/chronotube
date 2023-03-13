@@ -23,7 +23,7 @@ const TitleWrapper = styled.div`
 `
 
 const Wrapper = styled.div`
-  margin: 64px 0;
+  padding: 64px 0;
 `
 
 export default Abstract

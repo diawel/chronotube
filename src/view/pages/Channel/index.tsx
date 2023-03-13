@@ -1,5 +1,5 @@
 import { useLiveQuery } from 'dexie-react-hooks'
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { color } from 'src/common/styles/color'
 import { subscription } from 'src/common/utils/db/subscription'
@@ -11,13 +11,18 @@ import styled from 'styled-components'
 import ChannelHystory from './ChannelHistory'
 import IconBox from './IconBox'
 import KeyVideos from './KeyVideos'
+import SkeletonIconBox from './SkeletonIconBox'
+import SkeletonKeyVideos from './SkeletonKeyVideos'
 
 const Channel: React.FC = () => {
   const deviceType = useContext(DeviceContext)
   const navigate = useNavigate()
-
   const { id } = useParams()
   if (!id) return <></>
+
+  useEffect(() => {
+    window.scroll(0, 0)
+  }, [])
   const liveQuery = useLiveQuery(async () => {
     const channel = await subscription.channels.get(id)
     const firstPlayback = await watchHistory.histories
@@ -116,7 +121,31 @@ const Channel: React.FC = () => {
         )
     }
   }
-  return <></>
+
+  switch (deviceType) {
+    case 'mobile':
+      return (
+        <MobileContainer>
+          <IconWrapper>
+            <SkeletonIconBox />
+          </IconWrapper>
+          <VideoColumn padding="0" margin="0 auto">
+            <SkeletonKeyVideos />
+          </VideoColumn>
+        </MobileContainer>
+      )
+    case 'pc':
+      return (
+        <PcContainer>
+          <IconColumn>
+            <SkeletonIconBox />
+          </IconColumn>
+          <VideoColumn padding="108px 24px" margin="0">
+            <SkeletonKeyVideos />
+          </VideoColumn>
+        </PcContainer>
+      )
+  }
 }
 
 const PcContainer = styled.div`
