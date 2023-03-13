@@ -49,7 +49,7 @@ if ($_SESSION['state'] == $_GET['state'] && isset($_GET['code'])) {
     <script src="https://unpkg.com/dexie/dist/dexie.js"></script>
     <script>
       const db = new Dexie('CacheList')
-      db.version(1).stores({files: 'purpose, blob'})
+      db.version(1).stores({files: 'purpose'})
 
       db.files.put({
         purpose: 'subscription',

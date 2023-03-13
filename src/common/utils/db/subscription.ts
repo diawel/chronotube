@@ -96,7 +96,7 @@ export const updatePlayCount = async () => {
     [key: string]: number
   } = {}
   await subscription.channels.toCollection().each(async (channel: Channel) => {
-    playCountList[channel.id] = channel.playCount = await watchHistory.histories
+    playCountList[channel.id] = await watchHistory.histories
       .where({ 'uploader.id': channel.id })
       .count()
   })
