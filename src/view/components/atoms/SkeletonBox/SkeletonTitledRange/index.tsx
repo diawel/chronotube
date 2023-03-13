@@ -13,11 +13,11 @@ const SkeletonTitledRange: React.FC = () => {
         margin="8px 0 12px"
       />
 
-      <SkeletonBox width="160px" height={fontSize.title} margin="12px 0 8px" />
+      <SkeletonBox width="160px" height={fontSize.title} margin="10px 0" />
       <TextBlock color={color.black} size={fontSize.large}>
         ↓
       </TextBlock>
-      <SkeletonBox width="160px" height={fontSize.title} margin="12px 0 8px" />
+      <SkeletonBox width="160px" height={fontSize.title} margin="10px 0" />
     </Wrapper>
   )
 }

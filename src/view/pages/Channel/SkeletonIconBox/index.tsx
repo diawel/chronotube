@@ -11,7 +11,7 @@ const SkeletonIconBox: React.FC = () => {
         margin="12px 12px 16px"
         borderRadius="24px"
       />
-      <SkeletonBox width="220px" height={fontSize.medium} margin="0 0 12px" />
+      <SkeletonBox width="220px" height={fontSize.medium} margin="0 0 14px" />
       <SnippetWrapper>
         <SkeletonBox width="92px" height={fontSize.regular} margin="0 4px" />
         <SkeletonBox width="54px" height={fontSize.regular} margin="0 4px" />
