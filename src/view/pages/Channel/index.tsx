@@ -56,9 +56,10 @@ const Channel: React.FC = () => {
 
   if (liveQuery) {
     if (!liveQuery.channel) {
-      navigate('/')
+      navigate('/', { replace: true })
       return <></>
     }
+
     const {
       historyCount,
       channel,
