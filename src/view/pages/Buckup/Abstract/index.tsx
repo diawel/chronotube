@@ -8,7 +8,7 @@ const Abstract: React.FC = () => {
     <Wrapper>
       <TitleWrapper>
         <TextBlock color={color.black} size={fontSize.title} weight="bold">
-          再生履歴のバックアップ
+          再生履歴をバックアップ
         </TextBlock>
       </TitleWrapper>
       <TextBlock color={color.black} size={fontSize.regular}>
