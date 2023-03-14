@@ -1,5 +1,5 @@
 import { useLiveQuery } from 'dexie-react-hooks'
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { color } from 'src/common/styles/color'
 import { subscription } from 'src/common/utils/db/subscription'
@@ -56,6 +56,17 @@ const Channel: React.FC = () => {
       channelHistories: channelHistories,
     }
   })
+
+  useEffect(() => {
+    document
+      .querySelector('meta[name="theme-color"]')
+      ?.setAttribute('content', color.white)
+    return () => {
+      document
+        .querySelector('meta[name="theme-color"]')
+        ?.setAttribute('content', color.lightGray)
+    }
+  }, [])
 
   let node
 
@@ -180,6 +191,8 @@ const PcContainer = styled.div`
   min-height: 100vh;
   display: flex;
   justify-content: space-evenly;
+  margin-top: -8px;
+  padding-top: 8px;
 `
 
 const IconColumn = styled.div`
@@ -212,7 +225,8 @@ const VideoColumn = styled.div<VideoColumnWrapperStyleType>(
 const MobileContainer = styled.div`
   background: ${color.white};
   min-height: 100vh;
-  padding: 64px 16px;
+  padding: calc(64px + 8px) 16px 64px;
+  margin-top: -8px;
 `
 
 const IconWrapper = styled.div`
