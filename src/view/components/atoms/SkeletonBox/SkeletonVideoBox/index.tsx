@@ -1,4 +1,3 @@
-import { color } from 'src/common/styles/color'
 import { fontSize } from 'src/common/styles/fontSize'
 import styled from 'styled-components'
 import SkeletonBox from '..'
