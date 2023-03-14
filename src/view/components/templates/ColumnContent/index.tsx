@@ -1,6 +1,5 @@
-import { ReactNode } from 'react'
+import { ReactNode, useEffect } from 'react'
 import styled from 'styled-components'
-import Wrap from '../../atoms/Wrap'
 import Footer, { footerHeight } from '../../molecules/Footer'
 
 export type ColumnContentPropsType = {
@@ -10,13 +9,18 @@ export type ColumnContentPropsType = {
 
 const ColumnContent: React.FC<ColumnContentPropsType> = (props) => {
   const { children, hideFooter } = props
+
+  useEffect(() => {
+    window.scroll(0, 0)
+  }, [])
+
   return (
-    <Wrap>
+    <>
       <OuterWrapper>
         <InnerWrapper>{children}</InnerWrapper>
       </OuterWrapper>
       {hideFooter ? <></> : <Footer />}
-    </Wrap>
+    </>
   )
 }
 

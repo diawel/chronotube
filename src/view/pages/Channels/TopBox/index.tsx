@@ -62,6 +62,7 @@ const Wrapper = styled.div<WrapperStyleType>(
     box-shadow: ${style.shadow};
     position: sticky;
     top: 0;
+    z-index: 100;
     display: flex;
     align-items: center;
     height: 48px;

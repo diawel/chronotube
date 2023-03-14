@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useRef, useState } from 'react'
+import { ReactNode, useEffect, useRef } from 'react'
 import { sessionStorageKey } from 'src/common/utils/sessionStorage'
 import Button from 'src/view/components/atoms/Button'
 import styled from 'styled-components'
@@ -8,10 +8,6 @@ export type CardWrapperPropsType = {
   gap: string
   children: ReactNode
 }
-
-const cardWidth = 380 - 128
-const sideMargin = 4
-export const cardOuterWidth = cardWidth + sideMargin * 2
 
 const CardWrapper: React.FC<CardWrapperPropsType> = (props) => {
   const { id, gap, children } = props

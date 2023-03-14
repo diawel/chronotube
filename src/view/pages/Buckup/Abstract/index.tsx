@@ -8,7 +8,7 @@ const Abstract: React.FC = () => {
     <Wrapper>
       <TitleWrapper>
         <TextBlock color={color.black} size={fontSize.title} weight="bold">
-          再生履歴のバックアップ
+          再生履歴をバックアップ
         </TextBlock>
       </TitleWrapper>
       <TextBlock color={color.black} size={fontSize.regular}>
@@ -23,7 +23,7 @@ const TitleWrapper = styled.div`
 `
 
 const Wrapper = styled.div`
-  margin: 64px 0;
+  padding: 64px 0;
 `
 
 export default Abstract

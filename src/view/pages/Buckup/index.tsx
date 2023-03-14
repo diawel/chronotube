@@ -27,20 +27,19 @@ const Backup: React.FC = () => {
   return (
     <ColumnContent>
       <Abstract />
-      {liveQuery &&
-        (loading ? (
-          <DisabledButtonWrapper>
-            <PrimaryButton text="読み込み中" />
-          </DisabledButtonWrapper>
-        ) : liveQuery.historyCount ? (
-          <Button onClick={backup}>
-            <PrimaryButton text="再生履歴をバックアップ" />
-          </Button>
-        ) : (
-          <DisabledButtonWrapper>
-            <PrimaryButton text="再生履歴がありません" />
-          </DisabledButtonWrapper>
-        ))}
+      {!liveQuery || loading ? (
+        <DisabledButtonWrapper>
+          <PrimaryButton text="読み込み中" />
+        </DisabledButtonWrapper>
+      ) : liveQuery.historyCount ? (
+        <Button onClick={backup}>
+          <PrimaryButton text="再生履歴をバックアップ" />
+        </Button>
+      ) : (
+        <DisabledButtonWrapper>
+          <PrimaryButton text="再生履歴がありません" />
+        </DisabledButtonWrapper>
+      )}
     </ColumnContent>
   )
 }

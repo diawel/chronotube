@@ -22,16 +22,14 @@ const ListedVideoBox: React.FC<ListedVideoBoxPropsType> = (props) => {
         }
       />
       <TextBox>
-        <TitleWrapper>
-          <ClampedText
-            color={color.black}
-            size={fontSize.small}
-            weight="bold"
-            lineClamp="2"
-          >
-            {title}
-          </ClampedText>
-        </TitleWrapper>
+        <ClampedText
+          color={color.black}
+          size={fontSize.small}
+          weight="bold"
+          lineClamp="1"
+        >
+          {title}
+        </ClampedText>
         <TextBlock color={color.black} size={fontSize.small}>
           {snippet}
         </TextBlock>
@@ -55,16 +53,11 @@ const Thumbnail = styled.img`
 
 const TextBox = styled.div`
   display: flex;
-  width: 100%;
   height: 100%;
   box-sizing: border-box;
-  align-items: center;
-  justify-content: space-between;
-  line-height: 1.2;
-`
-
-const TitleWrapper = styled.div`
-  width: calc(100% - 68px);
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
 `
 
 export default ListedVideoBox

@@ -5,9 +5,9 @@ import TitledValue from 'src/view/components/molecules/TitledValue'
 import { useLiveQuery } from 'dexie-react-hooks'
 import { subscription } from 'src/common/utils/db/subscription'
 import SideSlider from 'src/view/components/atoms/SideSlider'
-import Wrap from 'src/view/components/atoms/Wrap'
 import { dateToString } from 'src/common/utils/dateToString'
 import { watchHistory } from 'src/common/utils/db/watchHistory'
+import SkeletonTitledValue from 'src/view/components/atoms/SkeletonBox/SkeletonTitledValue'
 
 const Abstract: React.FC = () => {
   const liveQuery = useLiveQuery(async () => {
@@ -25,7 +25,7 @@ const Abstract: React.FC = () => {
 
   if (liveQuery) {
     Blocks = [
-      <Wrap key={0}>
+      <>
         <TitledValue
           title="登録チャンネル数"
           value={
@@ -38,8 +38,8 @@ const Abstract: React.FC = () => {
             liveQuery.historyCount ? liveQuery.historyCount.toString() : 'なし'
           }
         />
-      </Wrap>,
-      <Wrap key={1}>
+      </>,
+      <>
         <TitledValue
           title="登録チャンネル最終更新"
           value={
@@ -56,7 +56,18 @@ const Abstract: React.FC = () => {
               : 'なし'
           }
         />
-      </Wrap>,
+      </>,
+    ]
+  } else {
+    Blocks = [
+      <>
+        <SkeletonTitledValue />
+        <SkeletonTitledValue />
+      </>,
+      <>
+        <SkeletonTitledValue />
+        <SkeletonTitledValue />
+      </>,
     ]
   }
 

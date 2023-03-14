@@ -6,11 +6,14 @@ import { fontSize } from 'src/common/styles/fontSize'
 import chevronDown from 'src/common/svg/chevronDown'
 import { subscription } from 'src/common/utils/db/subscription'
 import { sessionStorageKey } from 'src/common/utils/sessionStorage'
+import Button from 'src/view/components/atoms/Button'
 import Icon from 'src/view/components/atoms/Icon'
 import Input from 'src/view/components/atoms/Input'
+import SkeletonBox from 'src/view/components/atoms/SkeletonBox'
 import Text from 'src/view/components/atoms/Text'
 import styled from 'styled-components'
 import Slider from './Slider'
+import { cardWidth } from './Slider/CardContainer'
 
 const Gallery: React.FC = () => {
   const [filter, setFilter] = useState(
@@ -26,16 +29,32 @@ const Gallery: React.FC = () => {
     }
   })
 
-  if (liveQuery) {
-    return (
-      <div>
-        <TextWrapper>
-          <Text color={color.darkGray} size={fontSize.small}>
-            登録済みのチャンネル
-          </Text>
-        </TextWrapper>
+  return (
+    <div>
+      <TextWrapper>
+        <Text color={color.darkGray} size={fontSize.small}>
+          登録済みのチャンネル
+        </Text>
+      </TextWrapper>
+      {liveQuery ? (
         <Slider channels={liveQuery.channels} filter={filter} />
-        <BottomNav>
+      ) : (
+        <SkeletonBox
+          width={`${cardWidth}px`}
+          height="320px"
+          margin="0 auto"
+          borderRadius="24px"
+        />
+      )}
+      <BottomNav>
+        <Button
+          onClick={() => {
+            sessionStorage.setItem(
+              sessionStorageKey.scrollAtList,
+              sessionStorage.getItem(sessionStorageKey.scrollAtGallery) || ''
+            )
+          }}
+        >
           <Link to="/channels">
             <LinkContent>
               <Text color={color.black} size={fontSize.small}>
@@ -44,17 +63,16 @@ const Gallery: React.FC = () => {
               </Text>
             </LinkContent>
           </Link>
-          <Input
-            type="text"
-            value={filter}
-            valueSetter={setFilter}
-            placeholder="チャンネルを検索"
-          />
-        </BottomNav>
-      </div>
-    )
-  }
-  return <></>
+        </Button>
+        <Input
+          type="text"
+          value={filter}
+          valueSetter={setFilter}
+          placeholder="チャンネルを検索"
+        />
+      </BottomNav>
+    </div>
+  )
 }
 
 const TextWrapper = styled.div`

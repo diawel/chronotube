@@ -1,7 +1,6 @@
 import { Routes, Route } from 'react-router-dom'
 import Home from './pages/Home'
 import { cacheList } from 'src/common/utils/db/cacheList'
-import Wrap from './components/atoms/Wrap'
 import { useEffect } from 'react'
 import {
   storeChannels,

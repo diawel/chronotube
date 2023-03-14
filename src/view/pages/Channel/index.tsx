@@ -1,5 +1,5 @@
 import { useLiveQuery } from 'dexie-react-hooks'
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { color } from 'src/common/styles/color'
 import { subscription } from 'src/common/utils/db/subscription'
@@ -7,17 +7,22 @@ import { watchHistory } from 'src/common/utils/db/watchHistory'
 import { VideoType } from 'src/common/utils/types/youtube'
 import { DeviceContext } from 'src/index'
 import EngageAddHistory from 'src/view/components/organisms/EngageAddHistory'
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 import ChannelHystory from './ChannelHistory'
 import IconBox from './IconBox'
 import KeyVideos from './KeyVideos'
+import SkeletonIconBox from './SkeletonIconBox'
+import SkeletonKeyVideos from './SkeletonKeyVideos'
 
 const Channel: React.FC = () => {
   const deviceType = useContext(DeviceContext)
   const navigate = useNavigate()
-
   const { id } = useParams()
   if (!id) return <></>
+
+  useEffect(() => {
+    window.scroll(0, 0)
+  }, [])
   const liveQuery = useLiveQuery(async () => {
     const channel = await subscription.channels.get(id)
     const firstPlayback = await watchHistory.histories
@@ -94,30 +99,77 @@ const Channel: React.FC = () => {
     switch (deviceType) {
       case 'mobile':
         return (
-          <MobileContainer>
-            <IconWrapper>
-              <IconBox channel={channel} withPlayCount={historyCount > 0} />
-            </IconWrapper>
-            <VideoColumn padding="0" margin="0 auto">
-              {videoColumnInner}
-            </VideoColumn>
-          </MobileContainer>
+          <Wrapper>
+            <MobileContainer>
+              <IconWrapper>
+                <IconBox channel={channel} withPlayCount={historyCount > 0} />
+              </IconWrapper>
+              <VideoColumn padding="0" margin="0 auto">
+                {videoColumnInner}
+              </VideoColumn>
+            </MobileContainer>
+          </Wrapper>
         )
       case 'pc':
         return (
-          <PcContainer>
-            <IconColumn>
-              <IconBox channel={channel} withPlayCount={historyCount > 0} />
-            </IconColumn>
-            <VideoColumn padding="108px 24px" margin="0">
-              {videoColumnInner}
-            </VideoColumn>
-          </PcContainer>
+          <Wrapper>
+            <PcContainer>
+              <IconColumn>
+                <IconBox channel={channel} withPlayCount={historyCount > 0} />
+              </IconColumn>
+              <VideoColumn padding="108px 24px" margin="0">
+                {videoColumnInner}
+              </VideoColumn>
+            </PcContainer>
+          </Wrapper>
         )
     }
   }
-  return <></>
+
+  switch (deviceType) {
+    case 'mobile':
+      return (
+        <Wrapper>
+          <MobileContainer>
+            <IconWrapper>
+              <SkeletonIconBox />
+            </IconWrapper>
+            <VideoColumn padding="0" margin="0 auto">
+              <SkeletonKeyVideos />
+            </VideoColumn>
+          </MobileContainer>
+        </Wrapper>
+      )
+    case 'pc':
+      return (
+        <Wrapper>
+          <PcContainer>
+            <IconColumn>
+              <SkeletonIconBox />
+            </IconColumn>
+            <VideoColumn padding="108px 24px" margin="0">
+              <SkeletonKeyVideos />
+            </VideoColumn>
+          </PcContainer>
+        </Wrapper>
+      )
+  }
 }
+
+const show = keyframes`
+  0% {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`
+
+const Wrapper = styled.div`
+  animation: ${show} 0.3s ease-out both;
+`
 
 const PcContainer = styled.div`
   background: ${color.white};

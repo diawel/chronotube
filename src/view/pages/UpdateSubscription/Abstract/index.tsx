@@ -3,6 +3,7 @@ import { dateToString } from 'src/common/utils/dateToString'
 import TitledValue from 'src/view/components/molecules/TitledValue'
 import styled from 'styled-components'
 import { subscription } from 'src/common/utils/db/subscription'
+import SkeletonTitledValue from 'src/view/components/atoms/SkeletonBox/SkeletonTitledValue'
 
 const Abstract: React.FC = () => {
   const liveQuery = useLiveQuery(async () => {
@@ -33,11 +34,16 @@ const Abstract: React.FC = () => {
       </Wrapper>
     )
   }
-  return <Wrapper></Wrapper>
+  return (
+    <Wrapper>
+      <SkeletonTitledValue />
+      <SkeletonTitledValue />
+    </Wrapper>
+  )
 }
 
 const Wrapper = styled.div`
-  margin: 64px 0;
+  padding: 64px 0;
 `
 
 export default Abstract
