@@ -1,5 +1,5 @@
 import { useLiveQuery } from 'dexie-react-hooks'
-import { useContext, useEffect } from 'react'
+import { useContext } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { color } from 'src/common/styles/color'
 import { subscription } from 'src/common/utils/db/subscription'
