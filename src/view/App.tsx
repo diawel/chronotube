@@ -11,6 +11,8 @@ import UpdateSubscription from './pages/UpdateSubscription'
 import Backup from './pages/Buckup'
 import Channels from './pages/Channels'
 import Channel from './pages/Channel'
+import NotFound from './pages/NotFound'
+import Privacy from './pages/Privacy'
 
 const App: React.FC = () => {
   useEffect(() => {
@@ -37,11 +39,13 @@ const App: React.FC = () => {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
+      <Route path="/privacy" element={<Privacy />} />
       <Route path="/addhistory" element={<AddHistory />} />
       <Route path="/updatesubscription" element={<UpdateSubscription />} />
       <Route path="/backup" element={<Backup />} />
       <Route path="/channels" element={<Channels />} />
       <Route path="/channel/:id" element={<Channel />} />
+      <Route path="*" element={<NotFound />} />
     </Routes>
   )
 }
