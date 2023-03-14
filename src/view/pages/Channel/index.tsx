@@ -8,6 +8,7 @@ import { VideoType } from 'src/common/utils/types/youtube'
 import { DeviceContext } from 'src/index'
 import EngageAddHistory from 'src/view/components/organisms/EngageAddHistory'
 import styled, { keyframes } from 'styled-components'
+import InitPage from '../util/InitPage'
 import ChannelHystory from './ChannelHistory'
 import IconBox from './IconBox'
 import KeyVideos from './KeyVideos'
@@ -20,9 +21,6 @@ const Channel: React.FC = () => {
   const { id } = useParams()
   if (!id) return <></>
 
-  useEffect(() => {
-    window.scroll(0, 0)
-  }, [])
   const liveQuery = useLiveQuery(async () => {
     const channel = await subscription.channels.get(id)
     const firstPlayback = await watchHistory.histories
@@ -58,6 +56,8 @@ const Channel: React.FC = () => {
       channelHistories: channelHistories,
     }
   })
+
+  let node
 
   if (liveQuery) {
     if (!liveQuery.channel) {
@@ -98,38 +98,34 @@ const Channel: React.FC = () => {
 
     switch (deviceType) {
       case 'mobile':
-        return (
-          <Wrapper>
-            <MobileContainer>
-              <IconWrapper>
-                <IconBox channel={channel} withPlayCount={historyCount > 0} />
-              </IconWrapper>
-              <VideoColumn padding="0" margin="0 auto">
-                {videoColumnInner}
-              </VideoColumn>
-            </MobileContainer>
-          </Wrapper>
+        node = (
+          <MobileContainer>
+            <IconWrapper>
+              <IconBox channel={channel} withPlayCount={historyCount > 0} />
+            </IconWrapper>
+            <VideoColumn padding="0" margin="0 auto">
+              {videoColumnInner}
+            </VideoColumn>
+          </MobileContainer>
         )
+        break
       case 'pc':
-        return (
-          <Wrapper>
-            <PcContainer>
-              <IconColumn>
-                <IconBox channel={channel} withPlayCount={historyCount > 0} />
-              </IconColumn>
-              <VideoColumn padding="108px 24px" margin="0">
-                {videoColumnInner}
-              </VideoColumn>
-            </PcContainer>
-          </Wrapper>
+        node = (
+          <PcContainer>
+            <IconColumn>
+              <IconBox channel={channel} withPlayCount={historyCount > 0} />
+            </IconColumn>
+            <VideoColumn padding="108px 24px" margin="0">
+              {videoColumnInner}
+            </VideoColumn>
+          </PcContainer>
         )
+        break
     }
-  }
-
-  switch (deviceType) {
-    case 'mobile':
-      return (
-        <Wrapper>
+  } else {
+    switch (deviceType) {
+      case 'mobile':
+        node = (
           <MobileContainer>
             <IconWrapper>
               <SkeletonIconBox />
@@ -138,11 +134,10 @@ const Channel: React.FC = () => {
               <SkeletonKeyVideos />
             </VideoColumn>
           </MobileContainer>
-        </Wrapper>
-      )
-    case 'pc':
-      return (
-        <Wrapper>
+        )
+        break
+      case 'pc':
+        node = (
           <PcContainer>
             <IconColumn>
               <SkeletonIconBox />
@@ -151,9 +146,17 @@ const Channel: React.FC = () => {
               <SkeletonKeyVideos />
             </VideoColumn>
           </PcContainer>
-        </Wrapper>
-      )
+        )
+        break
+    }
   }
+
+  return (
+    <Wrapper>
+      <InitPage />
+      {node}
+    </Wrapper>
+  )
 }
 
 const show = keyframes`

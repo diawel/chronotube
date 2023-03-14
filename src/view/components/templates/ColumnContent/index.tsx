@@ -10,10 +10,6 @@ export type ColumnContentPropsType = {
 const ColumnContent: React.FC<ColumnContentPropsType> = (props) => {
   const { children, hideFooter } = props
 
-  useEffect(() => {
-    window.scroll(0, 0)
-  }, [])
-
   return (
     <>
       <OuterWrapper>

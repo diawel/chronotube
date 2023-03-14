@@ -3,6 +3,7 @@ import { createContext, useEffect, useState } from 'react'
 import TopBox from './TopBox'
 import SearchedChannelList from './SearchedChannelList'
 import { sessionStorageKey } from 'src/common/utils/sessionStorage'
+import InitPage from '../util/InitPage'
 
 type searchType = {
   filter: string
@@ -38,6 +39,7 @@ const Channels: React.FC = () => {
     <SearchContext.Provider
       value={{ ...{ filter, setFilter, sortBy, setSortBy } }}
     >
+      <InitPage />
       <TopBox />
       <SearchedChannelList />
     </SearchContext.Provider>

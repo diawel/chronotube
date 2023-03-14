@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { StoreWatchHistoryProgressType } from 'src/common/utils/db/watchHistory'
 import ColumnContent from 'src/view/components/templates/ColumnContent'
+import InitPage from '../util/InitPage'
 import Abstract from './Abstract'
 import CompleteButton from './CompleteButton'
 import Description from './Description'
@@ -14,6 +15,7 @@ const AddHistory: React.FC = () => {
 
   return (
     <ColumnContent>
+      <InitPage />
       {progress == 'ready' || progress == 'finished' ? (
         <Abstract />
       ) : (

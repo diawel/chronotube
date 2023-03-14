@@ -3,16 +3,16 @@ import ColumnContent from 'src/view/components/templates/ColumnContent'
 import InitPage from '../util/InitPage'
 import Abstract from './Abstract'
 
-const UpdateSubscription: React.FC = () => {
+const NotFound: React.FC = () => {
   return (
     <ColumnContent>
-      <InitPage />
+      <InitPage notFound={true} />
       <Abstract />
-      <a href="/api/redirect.php">
-        <PrimaryButton text="登録チャンネルを更新" />
+      <a href="/">
+        <PrimaryButton text="ホームに戻る" />
       </a>
     </ColumnContent>
   )
 }
 
-export default UpdateSubscription
+export default NotFound
