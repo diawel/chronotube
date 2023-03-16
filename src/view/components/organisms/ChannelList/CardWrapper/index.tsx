@@ -46,6 +46,7 @@ const Wrapper = styled.div<WrapperStyleType>(
     width: 200px;
     max-width: calc(50% - ${style.gap});
     margin: 0 calc(${style.gap} / 2) ${style.gap};
+    contain: layout;
   `
 )
 

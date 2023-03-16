@@ -39,15 +39,4 @@ const InnerWrapper = styled.div`
   color: ${color.black};
 `
 
-type ImageStyleType = {
-  rotate: string
-}
-
-const StyledImage = styled.img<ImageStyleType>(
-  (style) => `
-    width: 12px;
-    transform: rotate(${style.rotate});
-  `
-)
-
 export default ArrowCircle

@@ -69,9 +69,4 @@ const CardWrapper = styled.div<CardWrapperStyleType>(
   `
 )
 
-const EmptyResult = styled.div`
-  margin: 240px auto;
-  padding: 24px;
-`
-
 export default SkeletonChannelList

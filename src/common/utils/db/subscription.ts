@@ -92,15 +92,26 @@ export const storeChannels = async (
 }
 
 export const updatePlayCount = async () => {
-  const playCountList: {
-    [key: string]: number
-  } = {}
+  const devPlayCountList: { id: string; playCount: number }[] = []
+
   await subscription.channels.toCollection().each(async (channel: Channel) => {
-    playCountList[channel.id] = await watchHistory.histories
-      .where({ 'uploader.id': channel.id })
-      .count()
+    devPlayCountList.push({
+      id: channel.id,
+      playCount: await watchHistory.histories
+        .where({ 'uploader.id': channel.id })
+        .count(),
+    })
   })
-  await subscription.channels.toCollection().modify((channel: Channel) => {
-    channel.playCount = playCountList[channel.id]
-  })
+
+  const modifyChannel = (index: number) => {
+    if (!devPlayCountList[index]) return
+    subscription.channels
+      .update(devPlayCountList[index].id, {
+        playCount: devPlayCountList[index].playCount,
+      })
+      .then(() => {
+        modifyChannel(index + 1)
+      })
+  }
+  modifyChannel(0)
 }

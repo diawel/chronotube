@@ -12,7 +12,7 @@ const TopBox: React.FC = () => {
   const [isFloating, setIsFloating] = useState(false)
   useEffect(() => {
     const onBodyScroll = () => {
-      setIsFloating(window.scrollY != 0)
+      setIsFloating(window.scrollY > 0)
     }
     document.addEventListener('scroll', onBodyScroll)
     return () => document.removeEventListener('scroll', onBodyScroll)
@@ -30,17 +30,19 @@ const TopBox: React.FC = () => {
       background={isFloating ? color.lightGray : 'transparent'}
       shadow={isFloating ? `0px 16px 32px ${color.shadow}` : 'none'}
     >
-      {deviceType == 'pc' && (
-        <LogoWrapper>
-          <Link to="/">
-            <Logo height="36px" />
-          </Link>
-        </LogoWrapper>
-      )}
-      <InputWrapper>
-        <FilterInput />
-      </InputWrapper>
-      <SortBySelect />
+      <InnerWrapper>
+        {deviceType == 'pc' && (
+          <LogoWrapper>
+            <Link to="/">
+              <Logo height="36px" />
+            </Link>
+          </LogoWrapper>
+        )}
+        <InputWrapper>
+          <FilterInput />
+        </InputWrapper>
+        <SortBySelect />
+      </InnerWrapper>
     </Wrapper>
   )
 }
@@ -60,15 +62,20 @@ const Wrapper = styled.div<WrapperStyleType>(
     padding: ${style.padding};
     background: ${style.background};
     box-shadow: ${style.shadow};
-    position: sticky;
+    position: fixed;
     top: 0;
     z-index: 100;
-    display: flex;
-    align-items: center;
-    height: 48px;
-    transition: box-shadow 0.3s, padding 0.3s, background 0.15s;
+    width: 100%;
+    box-sizing: border-box;
+    transition: box-shadow 0.15s, padding 0.3s, background 0.15s;
   `
 )
+
+const InnerWrapper = styled.div`
+  display: flex;
+  display: flex;
+  align-items: center;
+`
 
 const InputWrapper = styled.div`
   width: 320px;
