@@ -74,6 +74,7 @@ const Container = styled.div`
   height: 320px;
   scroll-snap-align: center;
   margin: 0 ${sideMargin}px;
+  contain: layout;
 `
 
 const show = keyframes`

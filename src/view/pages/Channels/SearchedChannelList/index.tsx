@@ -19,17 +19,21 @@ const SearchedChannelList: React.FC = () => {
 
   if (liveQuery) {
     if (sortBy == 'playCount' && !liveQuery.historyCount)
-      return <EngageAddHistory />
+      return (
+        <Wrapper>
+          <EngageAddHistory />
+        </Wrapper>
+      )
     return (
-      <Wrapper>
+      <AnimatedWrapper>
         <ChannelList channels={liveQuery.channels} {...{ filter, sortBy }} />
-      </Wrapper>
+      </AnimatedWrapper>
     )
   }
   return (
-    <SkeletonWrapper>
+    <Wrapper>
       <SkeletonChannelList />
-    </SkeletonWrapper>
+    </Wrapper>
   )
 }
 
@@ -44,12 +48,12 @@ const show = keyframes`
   }
 `
 
-const Wrapper = styled.div`
+const AnimatedWrapper = styled.div`
   animation: ${show} 0.3s ease-out 0.2s both;
   margin: 80px 0 8px;
 `
 
-const SkeletonWrapper = styled.div`
+const Wrapper = styled.div`
   margin: 80px 0 8px;
 `
 

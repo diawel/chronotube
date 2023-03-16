@@ -4,6 +4,7 @@ import TopBox from './TopBox'
 import SearchedChannelList from './SearchedChannelList'
 import { sessionStorageKey } from 'src/common/utils/sessionStorage'
 import InitPage from '../util/InitPage'
+import ToTop from 'src/view/components/molecules/ToTop'
 
 type searchType = {
   filter: string
@@ -42,6 +43,7 @@ const Channels: React.FC = () => {
       <InitPage />
       <TopBox />
       <SearchedChannelList />
+      <ToTop />
     </SearchContext.Provider>
   )
 }

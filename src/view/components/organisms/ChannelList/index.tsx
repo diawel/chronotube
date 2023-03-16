@@ -46,31 +46,33 @@ const ChannelList: React.FC<ChannelListPropsType> = (props) => {
   }, [channels, sortBy])
 
   const gap = deviceType == 'mobile' ? '16px' : '24px'
+  const filteredChannels = sortedChannels.filter(
+    (channel) =>
+      !filter || channel.name.toLowerCase().includes(filter.toLowerCase())
+  )
 
   let cardIndex = 0
   return (
     <Wrapper gap={gap}>
-      {sortedChannels.map((channel) => {
+      {filteredChannels.slice().map((channel) => {
         const { id, name, subscribeDate, thumbnail, playCount } = channel
-        if (!filter || name.toLowerCase().includes(filter.toLowerCase())) {
-          cardIndex++
-          return (
-            <Link to={`/channel/${id}`} key={id}>
-              <CardWrapper {...{ id, gap }}>
-                <ChannelCard
-                  thumbnail={thumbnail.high}
-                  name={name}
-                  snippet={
-                    sortBy == 'subscribeDate'
-                      ? `${dateToString(subscribeDate)}に登録`
-                      : `${playCount}回再生`
-                  }
-                  listed={true}
-                />
-              </CardWrapper>
-            </Link>
-          )
-        }
+        cardIndex++
+        return (
+          <Link to={`/channel/${id}`} key={id}>
+            <CardWrapper {...{ id, gap }}>
+              <ChannelCard
+                thumbnail={thumbnail.high}
+                name={name}
+                snippet={
+                  sortBy == 'subscribeDate'
+                    ? `${dateToString(subscribeDate)}に登録`
+                    : `${playCount}回再生`
+                }
+                listed={true}
+              />
+            </CardWrapper>
+          </Link>
+        )
       })}
       {cardIndex > 0 &&
         [...Array(sortedChannels.length)].map((element, ei) => {
