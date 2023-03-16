@@ -1,5 +1,5 @@
 <?php
-if ($_GET['notfound'] != '0') {
+if (isset($_GET['not_found'])) {
   http_response_code(404);
 }
 
