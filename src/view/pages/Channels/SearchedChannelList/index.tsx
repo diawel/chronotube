@@ -26,7 +26,11 @@ const SearchedChannelList: React.FC = () => {
       </Wrapper>
     )
   }
-  return <SkeletonChannelList />
+  return (
+    <SkeletonWrapper>
+      <SkeletonChannelList />
+    </SkeletonWrapper>
+  )
 }
 
 const show = keyframes`
@@ -42,7 +46,11 @@ const show = keyframes`
 
 const Wrapper = styled.div`
   animation: ${show} 0.3s ease-out 0.2s both;
-  margin-bottom: 8px;
+  margin: 80px 0 8px;
+`
+
+const SkeletonWrapper = styled.div`
+  margin: 80px 0 8px;
 `
 
 export default SearchedChannelList
