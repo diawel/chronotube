@@ -28,7 +28,7 @@ const Backup: React.FC = () => {
 
   return (
     <ColumnContent>
-      <InitPage />
+      <InitPage pageTitle="再生履歴をバックアップ | Chronotube" />
       <Abstract />
       {!liveQuery || loading ? (
         <DisabledButtonWrapper>

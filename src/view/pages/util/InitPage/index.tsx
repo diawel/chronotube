@@ -1,17 +1,31 @@
 import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
+import { color } from 'src/common/styles/color'
 
 export type InitPagePropsType = {
   notFound?: boolean
+  themeColor?: string
+  pageTitle: string
 }
 
 const InitPage: React.FC<InitPagePropsType> = (props) => {
-  const { notFound } = props
+  const { notFound, themeColor, pageTitle } = props
   const location = useLocation()
 
   useEffect(() => {
     window.scroll(0, 0)
   }, [])
+
+  useEffect(() => {
+    document
+      .querySelector('meta[name="theme-color"]')
+      ?.setAttribute('content', themeColor || color.lightGray)
+  }, [themeColor])
+
+  useEffect(() => {
+    const title = document.querySelector('head title')
+    if (title) title.textContent = pageTitle
+  }, [pageTitle])
 
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search)

@@ -6,7 +6,7 @@ import Abstract from './Abstract'
 const NotFound: React.FC = () => {
   return (
     <ColumnContent>
-      <InitPage notFound={true} />
+      <InitPage notFound={true} pageTitle="404 Not Found | Chronotube" />
       <Abstract />
       <a href="/">
         <PrimaryButton text="ホームに戻る" />

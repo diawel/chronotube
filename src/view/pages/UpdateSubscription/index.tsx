@@ -9,7 +9,7 @@ import Description from './Description'
 const UpdateSubscription: React.FC = () => {
   return (
     <ColumnContent>
-      <InitPage />
+      <InitPage pageTitle="登録チャンネルを更新 | Chronotube" />
       <Abstract />
       <a href="/api/redirect.php">
         <PrimaryButton text="登録チャンネルを更新" />

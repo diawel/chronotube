@@ -17,7 +17,7 @@ const AddHistory: React.FC = () => {
 
   return (
     <ColumnContent>
-      <InitPage />
+      <InitPage pageTitle="再生履歴を追加 | Chronotube" />
       {progress == 'ready' || progress == 'finished' ? (
         <Abstract />
       ) : (
