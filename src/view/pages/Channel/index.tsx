@@ -1,5 +1,5 @@
 import { useLiveQuery } from 'dexie-react-hooks'
-import { useContext, useEffect } from 'react'
+import { useContext } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { color } from 'src/common/styles/color'
 import { subscription } from 'src/common/utils/db/subscription'
@@ -57,18 +57,7 @@ const Channel: React.FC = () => {
     }
   })
 
-  useEffect(() => {
-    document
-      .querySelector('meta[name="theme-color"]')
-      ?.setAttribute('content', color.white)
-    return () => {
-      document
-        .querySelector('meta[name="theme-color"]')
-        ?.setAttribute('content', color.lightGray)
-    }
-  }, [])
-
-  let node
+  let node, channelName
 
   if (liveQuery) {
     if (!liveQuery.channel) {
@@ -84,6 +73,8 @@ const Channel: React.FC = () => {
       triggerPlayback,
       channelHistories,
     } = liveQuery
+
+    channelName = channel.name
 
     let videoColumnInner = (
       <>
@@ -164,7 +155,10 @@ const Channel: React.FC = () => {
 
   return (
     <Wrapper>
-      <InitPage />
+      <InitPage
+        themeColor={color.white}
+        pageTitle={channelName ? `${channelName} | Chronotube` : 'Chronotube'}
+      />
       {node}
     </Wrapper>
   )

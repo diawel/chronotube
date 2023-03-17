@@ -40,7 +40,7 @@ const Channels: React.FC = () => {
     <SearchContext.Provider
       value={{ ...{ filter, setFilter, sortBy, setSortBy } }}
     >
-      <InitPage />
+      <InitPage pageTitle="登録チャンネル一覧 | Chronotube" />
       <TopBox />
       <SearchedChannelList />
       <ToTop />

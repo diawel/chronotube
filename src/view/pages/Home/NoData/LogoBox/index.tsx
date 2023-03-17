@@ -20,7 +20,7 @@ const LogoBox: React.FC = () => {
 
 const Wrapper = styled.div`
   text-align: center;
-  margin-bottom: 120px;
+  margin: 60px 0 120px;
 `
 
 export default LogoBox
