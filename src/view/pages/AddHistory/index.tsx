@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import { StoreWatchHistoryProgressType } from 'src/common/utils/db/watchHistory'
+import Ad from 'src/view/components/atoms/Ad'
 import ColumnContent from 'src/view/components/templates/ColumnContent'
+import styled from 'styled-components'
 import InitPage from '../util/InitPage'
 import Abstract from './Abstract'
 import CompleteButton from './CompleteButton'
@@ -27,8 +29,15 @@ const AddHistory: React.FC = () => {
         <CompleteButton progress={progress} />
       )}
       {progress == 'ready' && Description}
+      <AdWrapper>
+        <Ad />
+      </AdWrapper>
     </ColumnContent>
   )
 }
+
+const AdWrapper = styled.div`
+  margin-top: 80px;
+`
 
 export default AddHistory

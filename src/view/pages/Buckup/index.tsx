@@ -4,6 +4,7 @@ import {
   exportWatchHistories,
   watchHistory,
 } from 'src/common/utils/db/watchHistory'
+import Ad from 'src/view/components/atoms/Ad'
 import Button from 'src/view/components/atoms/Button'
 import PrimaryButton from 'src/view/components/molecules/PrimaryButton'
 import ColumnContent from 'src/view/components/templates/ColumnContent'
@@ -42,12 +43,19 @@ const Backup: React.FC = () => {
           <PrimaryButton text="再生履歴がありません" />
         </DisabledButtonWrapper>
       )}
+      <AdWrapper>
+        <Ad />
+      </AdWrapper>
     </ColumnContent>
   )
 }
 
 const DisabledButtonWrapper = styled.div`
   opacity: 0.5;
+`
+
+const AdWrapper = styled.div`
+  margin-top: 80px;
 `
 
 export default Backup
