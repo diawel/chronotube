@@ -8,7 +8,7 @@ import {
 } from 'src/common/utils/db/subscription'
 import AddHistory from './pages/AddHistory'
 import UpdateSubscription from './pages/UpdateSubscription'
-import Backup from './pages/Buckup'
+import Backup from './pages/Backup'
 import Channels from './pages/Channels'
 import Channel from './pages/Channel'
 import NotFound from './pages/NotFound'
