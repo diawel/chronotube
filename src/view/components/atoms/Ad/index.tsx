@@ -3,11 +3,6 @@ import styled from 'styled-components'
 const Ad: React.FC = () => {
   return (
     <Wrapper>
-      <script
-        async
-        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1491068566472383"
-        crossOrigin="anonymous"
-      ></script>
       <ins
         className="adsbygoogle"
         style={{ display: 'block' }}
@@ -16,7 +11,6 @@ const Ad: React.FC = () => {
         data-ad-format="auto"
         data-full-width-responsive="true"
       ></ins>
-      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </Wrapper>
   )
 }
