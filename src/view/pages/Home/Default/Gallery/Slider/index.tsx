@@ -97,7 +97,7 @@ const InnerWrapper = styled.div`
 `
 
 const EmptyResult = styled.div`
-  margin: -12px auto;
+  margin: 0 auto;
   padding: 0 24px;
   box-sizing: border-box;
   display: flex;
