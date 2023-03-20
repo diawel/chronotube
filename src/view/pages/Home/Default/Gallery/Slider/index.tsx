@@ -63,7 +63,11 @@ const Slider: React.FC<SliderPropsType> = (props) => {
           <></>
         )}
       </Scroller>
-      {cardIndex && deviceType == 'pc' && <SliderControl scroller={scroller} />}
+      {cardIndex && deviceType == 'pc' ? (
+        <SliderControl scroller={scroller} />
+      ) : (
+        <></>
+      )}
     </Wrapper>
   )
 }
