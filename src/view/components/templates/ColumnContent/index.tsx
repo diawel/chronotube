@@ -1,31 +1,18 @@
-import { ReactNode } from 'react'
 import styled from 'styled-components'
-import Footer, { footerHeight } from '../../molecules/Footer'
+import StandardContent, { StandardContentPropsType } from '../StandardContent'
 
-export type ColumnContentPropsType = {
-  children: ReactNode
-  hideFooter?: boolean
-} & InnerWrapperStyleType
+export type ColumnContentPropsType = StandardContentPropsType &
+  InnerWrapperStyleType
 
 const ColumnContent: React.FC<ColumnContentPropsType> = (props) => {
-  const { children, hideFooter, maxWidth } = props
+  const { children, maxWidth } = props
 
   return (
-    <>
-      <OuterWrapper>
-        <InnerWrapper maxWidth={maxWidth}>{children}</InnerWrapper>
-      </OuterWrapper>
-      {hideFooter ? <></> : <Footer />}
-    </>
+    <StandardContent>
+      <InnerWrapper maxWidth={maxWidth}>{children}</InnerWrapper>
+    </StandardContent>
   )
 }
-
-const OuterWrapper = styled.div`
-  min-height: calc(100svh - ${footerHeight});
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`
 
 type InnerWrapperStyleType = {
   maxWidth?: string
@@ -33,7 +20,7 @@ type InnerWrapperStyleType = {
 
 const InnerWrapper = styled.div<InnerWrapperStyleType>(
   (style) => `
-    width: 100%;
+    margin: 0 auto;
     max-width: ${style.maxWidth ? style.maxWidth : '416px'};
     box-sizing: border-box;
     padding: 16px;
