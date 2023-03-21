@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 
 let fetchDate: Date
+let lastWidth: number
 
 const Ad: React.FC = () => {
   const [isVisible, setIsVisible] = useState(true)
@@ -25,6 +26,9 @@ const Ad: React.FC = () => {
 
   useEffect(() => {
     const onResize = (): void => {
+      const width = window.innerWidth
+      if (width == lastWidth) return
+
       setIsVisible(false)
 
       const date = new Date()
@@ -33,6 +37,7 @@ const Ad: React.FC = () => {
       window.setTimeout(() => {
         checkFetchDate()
       }, 1000)
+      lastWidth = width
     }
 
     window.addEventListener('resize', onResize)
