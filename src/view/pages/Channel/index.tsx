@@ -6,6 +6,7 @@ import { subscription } from 'src/common/utils/db/subscription'
 import { watchHistory } from 'src/common/utils/db/watchHistory'
 import { VideoType } from 'src/common/utils/types/youtube'
 import { DeviceContext } from 'src/index'
+import Ad from 'src/view/components/atoms/Ad'
 import EngageAddHistory from 'src/view/components/organisms/EngageAddHistory'
 import styled, { keyframes } from 'styled-components'
 import InitPage from '../util/InitPage'
@@ -20,6 +21,12 @@ const Channel: React.FC = () => {
   const navigate = useNavigate()
   const { id } = useParams()
   if (!id) return <></>
+
+  const ad = (
+    <AdWrapper>
+      <Ad />
+    </AdWrapper>
+  )
 
   const liveQuery = useLiveQuery(async () => {
     const channel = await subscription.channels.get(id)
@@ -83,6 +90,7 @@ const Channel: React.FC = () => {
           mostPlayedVideo={mostPlayedVideo}
           triggerPlayback={triggerPlayback}
         />
+        {ad}
         <ChannelHystory
           histories={channelHistories}
           subscribeDate={channel.subscribeDate}
@@ -233,6 +241,10 @@ const IconWrapper = styled.div`
 
 const BlurBox = styled.div`
   filter: blur(2px);
+`
+
+const AdWrapper = styled.div`
+  margin: 48px 0;
 `
 
 export default Channel

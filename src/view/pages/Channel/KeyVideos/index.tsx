@@ -1,5 +1,4 @@
 import { VideoType } from 'src/common/utils/types/youtube'
-import styled from 'styled-components'
 import { History } from 'src/common/utils/db/watchHistory'
 import { dateToString } from 'src/common/utils/dateToString'
 import VideoBlock from './VideoBlock'
@@ -13,7 +12,7 @@ export type KeyVideosPropsType = {
 const KeyVideos: React.FC<KeyVideosPropsType> = (props) => {
   const { firstPlayback, mostPlayedVideo, triggerPlayback } = props
   return (
-    <Wrapper>
+    <div>
       <VideoBlock
         subtitle="はじめて再生した動画"
         id={firstPlayback?.id || ''}
@@ -38,12 +37,8 @@ const KeyVideos: React.FC<KeyVideosPropsType> = (props) => {
         title={triggerPlayback?.title || 'データがありません'}
         snippet={triggerPlayback ? triggerPlayback.uploader.name : '不明'}
       />
-    </Wrapper>
+    </div>
   )
 }
-
-const Wrapper = styled.div`
-  margin-bottom: 64px;
-`
 
 export default KeyVideos
