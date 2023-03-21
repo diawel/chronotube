@@ -14,15 +14,6 @@ const TitleWrapper = styled.div`
   margin-bottom: 16px;
 `
 
-const DescriptionImage = styled.img`
-  width: 100%;
-  mix-blend-mode: darken;
-  border: 1px solid ${color.darkGray};
-  border-radius: 5px;
-  box-sizing: border-box;
-  padding: 0 16px;
-`
-
 const Description = (
   <Wrapper>
     <TitleWrapper>

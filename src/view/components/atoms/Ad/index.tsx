@@ -1,22 +1,22 @@
-import styled from 'styled-components'
+import { useEffect } from 'react'
 
 const Ad: React.FC = () => {
+  useEffect(() => {
+    let adsbygoogle = (window as any).adsbygoogle
+    adsbygoogle = adsbygoogle || []
+    adsbygoogle.push({})
+  }, [])
+
   return (
-    <Wrapper>
-      <ins
-        className="adsbygoogle"
-        style={{ display: 'block', textAlign: 'center' }}
-        data-ad-layout="in-article"
-        data-ad-format="fluid"
-        data-ad-client="ca-pub-1491068566472383"
-        data-ad-slot="4777250544"
-      ></ins>
-    </Wrapper>
+    <ins
+      className="adsbygoogle"
+      style={{ display: 'block' }}
+      data-ad-client="ca-pub-1491068566472383"
+      data-ad-slot="9540915657"
+      data-ad-format="auto"
+      data-full-width-responsive="true"
+    />
   )
 }
-
-const Wrapper = styled.div`
-  overflow: auto;
-`
 
 export default Ad
