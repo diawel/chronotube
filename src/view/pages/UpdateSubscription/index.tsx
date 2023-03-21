@@ -15,15 +15,8 @@ const UpdateSubscription: React.FC = () => {
         <PrimaryButton text="登録チャンネルを更新" />
       </a>
       {Description}
-      <AdWrapper>
-        <Ad />
-      </AdWrapper>
     </ColumnContent>
   )
 }
-
-const AdWrapper = styled.div`
-  margin-top: 80px;
-`
 
 export default UpdateSubscription

@@ -29,15 +29,8 @@ const AddHistory: React.FC = () => {
         <CompleteButton progress={progress} />
       )}
       {progress == 'ready' && Description}
-      <AdWrapper>
-        <Ad />
-      </AdWrapper>
     </ColumnContent>
   )
 }
-
-const AdWrapper = styled.div`
-  margin-top: 80px;
-`
 
 export default AddHistory

@@ -43,19 +43,12 @@ const Backup: React.FC = () => {
           <PrimaryButton text="再生履歴がありません" />
         </DisabledButtonWrapper>
       )}
-      <AdWrapper>
-        <Ad />
-      </AdWrapper>
     </ColumnContent>
   )
 }
 
 const DisabledButtonWrapper = styled.div`
   opacity: 0.5;
-`
-
-const AdWrapper = styled.div`
-  margin-top: 80px;
 `
 
 export default Backup
