@@ -1,17 +1,24 @@
-import Footer from 'src/view/components/molecules/Footer'
+import Footer, { footerHeight } from 'src/view/components/molecules/Footer'
+import styled from 'styled-components'
 import Abstract from './Abstract'
 import Control from './Control'
 import Gallery from './Gallery'
 
 const Default: React.FC = () => {
   return (
-    <div>
-      <Abstract />
-      <Control />
-      <Gallery />
+    <>
+      <BodyWrapper>
+        <Abstract />
+        <Control />
+        <Gallery />
+      </BodyWrapper>
       <Footer />
-    </div>
+    </>
   )
 }
+
+const BodyWrapper = styled.div`
+  min-height: calc(100svh - ${footerHeight});
+`
 
 export default Default
