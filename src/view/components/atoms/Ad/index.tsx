@@ -1,9 +1,9 @@
-import { useContext, useEffect, useState } from 'react'
-import { DeviceContext } from 'src/index'
+import { useEffect, useState } from 'react'
+
+let fetchDate: Date
 
 const Ad: React.FC = () => {
   const [isVisible, setIsVisible] = useState(true)
-  const deviceType = useContext(DeviceContext)
 
   useEffect(() => {
     if (isVisible) {
@@ -13,13 +13,31 @@ const Ad: React.FC = () => {
     }
   }, [isVisible])
 
-  useEffect(() => {
-    if (!isVisible) setIsVisible(true)
-  }, [isVisible])
+  const checkFetchDate = () => {
+    const nowDate = new Date()
+
+    if (nowDate >= fetchDate) setIsVisible(true)
+    else
+      window.setTimeout(() => {
+        checkFetchDate()
+      }, fetchDate.getTime() - nowDate.getTime())
+  }
 
   useEffect(() => {
-    setIsVisible(false)
-  }, [deviceType])
+    const onResize = (): void => {
+      setIsVisible(false)
+
+      const date = new Date()
+      date.setSeconds(date.getSeconds() + 1)
+      fetchDate = date
+      window.setTimeout(() => {
+        checkFetchDate()
+      }, 1000)
+    }
+
+    window.addEventListener('resize', onResize)
+    return () => window.removeEventListener('resize', onResize)
+  }, [])
 
   if (isVisible)
     return (
