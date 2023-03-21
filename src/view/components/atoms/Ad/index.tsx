@@ -5,11 +5,11 @@ const Ad: React.FC = () => {
     <Wrapper>
       <ins
         className="adsbygoogle"
-        style={{ display: 'block' }}
+        style={{ display: 'block', textAlign: 'center' }}
+        data-ad-layout="in-article"
+        data-ad-format="fluid"
         data-ad-client="ca-pub-1491068566472383"
-        data-ad-slot="9540915657"
-        data-ad-format="auto"
-        data-full-width-responsive="true"
+        data-ad-slot="4777250544"
       ></ins>
     </Wrapper>
   )
