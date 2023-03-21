@@ -244,7 +244,7 @@ const BlurBox = styled.div`
 `
 
 const AdWrapper = styled.div`
-  margin: 48px 0;
+  margin: 64px 0;
 `
 
 export default Channel
