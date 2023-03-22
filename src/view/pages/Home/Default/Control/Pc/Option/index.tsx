@@ -19,8 +19,8 @@ const Option: React.FC<OptionPropsType> = (props) => {
 }
 
 const ButtonWrapper = styled.div`
-  display: inline-block;
   margin-right: 24px;
+  flex-shrink: 0;
 `
 
 export default Option
