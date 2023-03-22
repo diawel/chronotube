@@ -12,8 +12,10 @@ const Pc: React.FC = () => {
 }
 
 const Wrapper = styled.div`
-  padding: 0 60px;
+  padding: 0 36px 0 60px;
   margin-bottom: 16px;
+  display: flex;
+  overflow: auto;
 `
 
 export default Pc
