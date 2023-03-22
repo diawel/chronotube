@@ -16,13 +16,14 @@ const IconBox: React.FC<IconBoxPropsType> = (props) => {
   const { channel, withPlayCount } = props
   const { id, name, thumbnail, subscribeDate, playCount } = channel
 
-  const tweetText = withPlayCount
+  let tweetText = withPlayCount
     ? `わたしが「${name}」をチャンネル登録したのは${dateToString(
         subscribeDate
       )}、これまで再生した回数は${playCount}回でした。`
     : `わたしが「${name}」をチャンネル登録したのは${dateToString(
         subscribeDate
       )}でした。`
+  tweetText += ' #わたしの推し履歴 #Chronotube'
 
   return (
     <Wrapper>
@@ -44,9 +45,7 @@ const IconBox: React.FC<IconBoxPropsType> = (props) => {
         <a
           href={`https://twitter.com/share?text=${encodeURIComponent(
             tweetText
-          )}&url=${encodeURIComponent(
-            'https://chronotube.diawel.me/'
-          )}&hashtags=${encodeURIComponent(`わたしの推し履歴,Chronotube`)}`}
+          )}&url=${encodeURIComponent('https://chronotube.diawel.me/')}`}
           target="_blank"
           rel="nofollow"
         >
