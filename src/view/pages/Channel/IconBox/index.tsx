@@ -43,7 +43,7 @@ const IconBox: React.FC<IconBoxPropsType> = (props) => {
       </a>
       <TweetButtonWrapper>
         <a
-          href={`https://twitter.com/share?text=${encodeURIComponent(
+          href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(
             tweetText
           )}&url=${encodeURIComponent('https://chronotube.diawel.me/')}`}
           target="_blank"
