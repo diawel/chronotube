@@ -4,7 +4,6 @@ import {
   exportWatchHistories,
   watchHistory,
 } from 'src/common/utils/db/watchHistory'
-import Ad from 'src/view/components/atoms/Ad'
 import Button from 'src/view/components/atoms/Button'
 import PrimaryButton from 'src/view/components/molecules/PrimaryButton'
 import ColumnContent from 'src/view/components/templates/ColumnContent'

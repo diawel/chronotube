@@ -6,7 +6,6 @@ import { fontSize } from 'src/common/styles/fontSize'
 import chevronDown from 'src/common/svg/chevronDown'
 import { subscription } from 'src/common/utils/db/subscription'
 import { sessionStorageKey } from 'src/common/utils/sessionStorage'
-import Button from 'src/view/components/atoms/Button'
 import Icon from 'src/view/components/atoms/Icon'
 import Input from 'src/view/components/atoms/Input'
 import SkeletonBox from 'src/view/components/atoms/SkeletonBox'
@@ -14,6 +13,8 @@ import Text from 'src/view/components/atoms/Text'
 import styled from 'styled-components'
 import Slider from './Slider'
 import { cardWidth } from './Slider/CardContainer'
+
+let cachedLiveQuery: any
 
 const Gallery: React.FC = () => {
   const [filter, setFilter] = useState(
@@ -23,11 +24,26 @@ const Gallery: React.FC = () => {
     sessionStorage.setItem(sessionStorageKey.filter, filter)
   }, [filter])
 
-  const liveQuery = useLiveQuery(async () => {
-    return {
-      channels: await subscription.channels.toArray(),
-    }
-  })
+  const liveQuery =
+    useLiveQuery(async () => {
+      return {
+        channels: await subscription.channels.toArray(),
+      }
+    }) || cachedLiveQuery
+
+  let node
+  if (liveQuery) {
+    cachedLiveQuery = liveQuery
+    node = <Slider channels={liveQuery.channels} filter={filter} />
+  } else
+    node = (
+      <SkeletonBox
+        width={`${cardWidth}px`}
+        height="320px"
+        margin="0 auto"
+        borderRadius="24px"
+      />
+    )
 
   return (
     <div>
@@ -36,34 +52,16 @@ const Gallery: React.FC = () => {
           登録済みのチャンネル
         </Text>
       </TextWrapper>
-      {liveQuery ? (
-        <Slider channels={liveQuery.channels} filter={filter} />
-      ) : (
-        <SkeletonBox
-          width={`${cardWidth}px`}
-          height="320px"
-          margin="0 auto"
-          borderRadius="24px"
-        />
-      )}
+      {node}
       <BottomNav>
-        <Button
-          onClick={() => {
-            sessionStorage.setItem(
-              sessionStorageKey.scrollAtList,
-              sessionStorage.getItem(sessionStorageKey.scrollAtGallery) || ''
-            )
-          }}
-        >
-          <Link to="/channels">
-            <LinkContent>
-              <Text color={color.black} size={fontSize.small}>
-                すべて表示
-                <Icon svg={chevronDown} size="16px" rotate="270deg" />
-              </Text>
-            </LinkContent>
-          </Link>
-        </Button>
+        <Link to="/channels">
+          <LinkContent>
+            <Text color={color.black} size={fontSize.small}>
+              すべて表示
+              <Icon svg={chevronDown} size="16px" rotate="270deg" />
+            </Text>
+          </LinkContent>
+        </Link>
         <Input
           type="text"
           value={filter}

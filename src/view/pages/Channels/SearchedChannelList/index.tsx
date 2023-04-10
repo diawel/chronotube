@@ -5,19 +5,24 @@ import { watchHistory } from 'src/common/utils/db/watchHistory'
 import SkeletonChannelList from 'src/view/components/atoms/SkeletonBox/SkeletonChannelList'
 import ChannelList from 'src/view/components/organisms/ChannelList'
 import EngageAddHistory from 'src/view/components/organisms/EngageAddHistory'
-import styled, { keyframes } from 'styled-components'
+import styled from 'styled-components'
 import { SearchContext } from '..'
+
+let cachedLiveQuery: any
 
 const SearchedChannelList: React.FC = () => {
   const { filter, sortBy } = useContext(SearchContext)
-  const liveQuery = useLiveQuery(async () => {
-    return {
-      channels: await subscription.channels.toArray(),
-      historyCount: await watchHistory.histories.count(),
-    }
-  })
+  const liveQuery =
+    useLiveQuery(async () => {
+      return {
+        channels: await subscription.channels.toArray(),
+        historyCount: await watchHistory.histories.count(),
+      }
+    }) || cachedLiveQuery
 
   if (liveQuery) {
+    cachedLiveQuery = liveQuery
+
     if (sortBy == 'playCount' && !liveQuery.historyCount)
       return (
         <Wrapper>
@@ -25,9 +30,9 @@ const SearchedChannelList: React.FC = () => {
         </Wrapper>
       )
     return (
-      <AnimatedWrapper>
+      <Wrapper>
         <ChannelList channels={liveQuery.channels} {...{ filter, sortBy }} />
-      </AnimatedWrapper>
+      </Wrapper>
     )
   }
   return (
@@ -36,22 +41,6 @@ const SearchedChannelList: React.FC = () => {
     </Wrapper>
   )
 }
-
-const show = keyframes`
-  0% {
-    opacity: 0;
-    transform: translateY(8px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-`
-
-const AnimatedWrapper = styled.div`
-  animation: ${show} 0.3s ease-out 0.2s both;
-  margin: 80px 0 8px;
-`
 
 const Wrapper = styled.div`
   margin: 80px 0 8px;
