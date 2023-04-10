@@ -6,7 +6,6 @@ import { Channel } from 'src/common/utils/db/subscription'
 import { DeviceContext } from 'src/index'
 import styled from 'styled-components'
 import ChannelCard from '../../molecules/ChannelCard'
-import CardWrapper from './CardWrapper'
 import Text from '../../atoms/Text'
 import { color } from 'src/common/styles/color'
 
@@ -51,15 +50,13 @@ const ChannelList: React.FC<ChannelListPropsType> = (props) => {
       !filter || channel.name.toLowerCase().includes(filter.toLowerCase())
   )
 
-  let cardIndex = 0
   return (
     <Wrapper gap={gap}>
       {filteredChannels.slice().map((channel) => {
         const { id, name, subscribeDate, thumbnail, playCount } = channel
-        cardIndex++
         return (
           <Link to={`/channel/${id}`} key={id}>
-            <CardWrapper {...{ id, gap }}>
+            <CardWrapper {...{ gap }}>
               <ChannelCard
                 thumbnail={thumbnail.high}
                 name={name}
@@ -74,11 +71,11 @@ const ChannelList: React.FC<ChannelListPropsType> = (props) => {
           </Link>
         )
       })}
-      {cardIndex > 0 &&
+      {filteredChannels.length > 0 &&
         [...Array(sortedChannels.length)].map((element, ei) => {
           return <FillBox key={ei} gap={gap} />
         })}
-      {!cardIndex && (
+      {!filteredChannels.length && (
         <EmptyResult>
           <Text color={color.black} size={fontSize.medium} weight="bold">
             「{filter}」に一致するチャンネルがありません。
@@ -101,6 +98,19 @@ const Wrapper = styled.div<WrapperStyleType>(
     padding: 0 calc(${style.gap} / 2);
     width: 100%;
     box-sizing: border-box;
+  `
+)
+
+type CardWrapperStyleType = {
+  gap: string
+}
+
+const CardWrapper = styled.div<CardWrapperStyleType>(
+  (style) => `
+    width: 200px;
+    max-width: calc(50% - ${style.gap});
+    margin: 0 calc(${style.gap} / 2) ${style.gap};
+    contain: layout;
   `
 )
 
