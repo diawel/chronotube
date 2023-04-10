@@ -14,6 +14,8 @@ import styled from 'styled-components'
 import Slider from './Slider'
 import { cardWidth } from './Slider/CardContainer'
 
+let cachedLiveQuery: any
+
 const Gallery: React.FC = () => {
   const [filter, setFilter] = useState(
     sessionStorage.getItem(sessionStorageKey.filter) || ''
@@ -22,11 +24,26 @@ const Gallery: React.FC = () => {
     sessionStorage.setItem(sessionStorageKey.filter, filter)
   }, [filter])
 
-  const liveQuery = useLiveQuery(async () => {
-    return {
-      channels: await subscription.channels.toArray(),
-    }
-  })
+  const liveQuery =
+    useLiveQuery(async () => {
+      return {
+        channels: await subscription.channels.toArray(),
+      }
+    }) || cachedLiveQuery
+
+  let node
+  if (liveQuery) {
+    cachedLiveQuery = liveQuery
+    node = <Slider channels={liveQuery.channels} filter={filter} />
+  } else
+    node = (
+      <SkeletonBox
+        width={`${cardWidth}px`}
+        height="320px"
+        margin="0 auto"
+        borderRadius="24px"
+      />
+    )
 
   return (
     <div>
@@ -35,16 +52,7 @@ const Gallery: React.FC = () => {
           登録済みのチャンネル
         </Text>
       </TextWrapper>
-      {liveQuery ? (
-        <Slider channels={liveQuery.channels} filter={filter} />
-      ) : (
-        <SkeletonBox
-          width={`${cardWidth}px`}
-          height="320px"
-          margin="0 auto"
-          borderRadius="24px"
-        />
-      )}
+      {node}
       <BottomNav>
         <Link to="/channels">
           <LinkContent>

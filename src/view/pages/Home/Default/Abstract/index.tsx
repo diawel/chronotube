@@ -9,22 +9,27 @@ import { dateToString } from 'src/common/utils/dateToString'
 import { watchHistory } from 'src/common/utils/db/watchHistory'
 import SkeletonTitledValue from 'src/view/components/atoms/SkeletonBox/SkeletonTitledValue'
 
-const Abstract: React.FC = () => {
-  const liveQuery = useLiveQuery(async () => {
-    const channelsFetched = await subscription.meta.get('fetched')
-    const latestHistory = await watchHistory.histories.toCollection().last()
-    return {
-      channelCount: await subscription.channels.count(),
-      channelsFetchedAt: channelsFetched?.value as Date | undefined,
-      historyCount: await watchHistory.histories.count(),
-      latestPlaybackDate: latestHistory?.playbackDate,
-    }
-  })
+let cachedLiveQuery: any
 
-  let Blocks: ReactNode[] = []
+const Abstract: React.FC = () => {
+  const liveQuery =
+    useLiveQuery(async () => {
+      const channelsFetched = await subscription.meta.get('fetched')
+      const latestHistory = await watchHistory.histories.toCollection().last()
+      return {
+        channelCount: await subscription.channels.count(),
+        channelsFetchedAt: channelsFetched?.value as Date | undefined,
+        historyCount: await watchHistory.histories.count(),
+        latestPlaybackDate: latestHistory?.playbackDate,
+      }
+    }) || cachedLiveQuery
+
+  let blocks: ReactNode[] = []
 
   if (liveQuery) {
-    Blocks = [
+    cachedLiveQuery = liveQuery
+
+    blocks = [
       <>
         <TitledValue
           title="登録チャンネル数"
@@ -59,7 +64,7 @@ const Abstract: React.FC = () => {
       </>,
     ]
   } else {
-    Blocks = [
+    blocks = [
       <>
         <SkeletonTitledValue />
         <SkeletonTitledValue />
@@ -76,14 +81,14 @@ const Abstract: React.FC = () => {
     case 'mobile':
       return (
         <MobileWrapper>
-          <SideSlider margin="16px">{Blocks}</SideSlider>
+          <SideSlider margin="16px">{blocks}</SideSlider>
         </MobileWrapper>
       )
     case 'pc':
       return (
         <PcWrapper>
-          {Blocks.map((Block, index) => {
-            return <InnerWrapper key={index}>{Block}</InnerWrapper>
+          {blocks.map((block, index) => {
+            return <InnerWrapper key={index}>{block}</InnerWrapper>
           })}
         </PcWrapper>
       )
