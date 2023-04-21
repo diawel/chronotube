@@ -18,7 +18,7 @@ const Home: React.FC = () => {
   }
   return (
     <>
-      <InitPage pageTitle="Chronotube" background={color.lightGray} />
+      <InitPage pageTitle="Chronotube" />
       {node}
     </>
   )

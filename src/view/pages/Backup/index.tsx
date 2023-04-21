@@ -10,7 +10,6 @@ import ColumnContent from 'src/view/components/templates/ColumnContent'
 import styled from 'styled-components'
 import InitPage from '../util/InitPage'
 import Abstract from './Abstract'
-import { color } from 'src/common/styles/color'
 
 const Backup: React.FC = () => {
   const [loading, setLoading] = useState(false)
@@ -28,10 +27,7 @@ const Backup: React.FC = () => {
 
   return (
     <ColumnContent>
-      <InitPage
-        pageTitle="再生履歴をバックアップ | Chronotube"
-        background={color.lightGray}
-      />
+      <InitPage pageTitle="再生履歴をバックアップ | Chronotube" />
       <Abstract />
       {!liveQuery || loading ? (
         <DisabledButtonWrapper>

@@ -9,7 +9,6 @@ import CompleteButton from './CompleteButton'
 import Description from './Description'
 import Loading from './Loading'
 import UploadButton from './UploadButton'
-import { color } from 'src/common/styles/color'
 
 export type ProgressType = StoreWatchHistoryProgressType | 'ready' | 'init'
 
@@ -18,10 +17,7 @@ const AddHistory: React.FC = () => {
 
   return (
     <ColumnContent>
-      <InitPage
-        pageTitle="再生履歴を追加 | Chronotube"
-        background={color.lightGray}
-      />
+      <InitPage pageTitle="再生履歴を追加 | Chronotube" />
       {progress == 'ready' || progress == 'finished' ? (
         <Abstract />
       ) : (

@@ -8,10 +8,7 @@ import styled from 'styled-components'
 const Privacy: React.FC = () => {
   return (
     <ColumnContent maxWidth="640px">
-      <InitPage
-        pageTitle="プライバシーポリシー | Chronotube"
-        background={color.lightGray}
-      />
+      <InitPage pageTitle="プライバシーポリシー | Chronotube" />
       <Text color={color.black} size={fontSize.regular}>
         <h2>プライバシーポリシー</h2>
         Diawel（以下，「作者」といいます。）は，本ウェブサイト上で提供するサービス（以下,「本サービス」といいます。）における，利用者の皆さま（以下，「ユーザー」といいます。）の個人情報の取扱いについて，以下のとおりプライバシーポリシー（以下，「本ポリシー」といいます。）を定めます。

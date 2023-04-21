@@ -4,12 +4,12 @@ import { color } from 'src/common/styles/color'
 
 export type InitPagePropsType = {
   notFound?: boolean
-  background: string
+  themeColor?: string
   pageTitle: string
 }
 
 const InitPage: React.FC<InitPagePropsType> = (props) => {
-  const { notFound, background, pageTitle } = props
+  const { notFound, themeColor, pageTitle } = props
   const location = useLocation()
 
   useEffect(() => {
@@ -17,11 +17,10 @@ const InitPage: React.FC<InitPagePropsType> = (props) => {
   }, [])
 
   useEffect(() => {
-    document.body.style.background = background
     document
       .querySelector('meta[name="theme-color"]')
-      ?.setAttribute('content', background)
-  }, [background])
+      ?.setAttribute('content', themeColor || color.lightGray)
+  }, [themeColor])
 
   useEffect(() => {
     const title = document.querySelector('head title')

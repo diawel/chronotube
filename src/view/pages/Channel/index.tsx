@@ -15,6 +15,8 @@ import IconBox from './IconBox'
 import KeyVideos from './KeyVideos'
 import SkeletonIconBox from './SkeletonIconBox'
 import SkeletonKeyVideos from './SkeletonKeyVideos'
+import FixedFooter from 'src/view/components/molecules/FixedFooter'
+import Footer from 'src/view/components/molecules/Footer'
 
 const Channel: React.FC = () => {
   const deviceType = useContext(DeviceContext)
@@ -173,7 +175,7 @@ const Channel: React.FC = () => {
   return (
     <Wrapper>
       <InitPage
-        background={color.white}
+        themeColor={color.white}
         pageTitle={channelName ? `${channelName} | Chronotube` : 'Chronotube'}
       />
       {node}
@@ -197,6 +199,7 @@ const Wrapper = styled.div`
 `
 
 const PcContainer = styled.div`
+  background: ${color.white};
   width: 100%;
   min-height: 100vh;
   display: flex;
@@ -233,6 +236,7 @@ const VideoColumn = styled.div<VideoColumnWrapperStyleType>(
 )
 
 const MobileContainer = styled.div`
+  background: ${color.white};
   min-height: 100vh;
   padding: calc(64px + 8px) 16px 64px;
   margin-top: -8px;
