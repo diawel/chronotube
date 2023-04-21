@@ -5,6 +5,7 @@ import SearchedChannelList from './SearchedChannelList'
 import { sessionStorageKey } from 'src/common/utils/sessionStorage'
 import InitPage from '../util/InitPage'
 import ToTop from 'src/view/components/molecules/ToTop'
+import { color } from 'src/common/styles/color'
 
 type searchType = {
   filter: string
@@ -40,7 +41,10 @@ const Channels: React.FC = () => {
     <SearchContext.Provider
       value={{ ...{ filter, setFilter, sortBy, setSortBy } }}
     >
-      <InitPage pageTitle="登録チャンネル一覧 | Chronotube" />
+      <InitPage
+        pageTitle="登録チャンネル一覧 | Chronotube"
+        background={color.lightGray}
+      />
       <TopBox />
       <SearchedChannelList />
       <ToTop />

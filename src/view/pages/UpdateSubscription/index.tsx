@@ -5,11 +5,15 @@ import styled from 'styled-components'
 import InitPage from '../util/InitPage'
 import Abstract from './Abstract'
 import Description from './Description'
+import { color } from 'src/common/styles/color'
 
 const UpdateSubscription: React.FC = () => {
   return (
     <ColumnContent>
-      <InitPage pageTitle="登録チャンネルを更新 | Chronotube" />
+      <InitPage
+        pageTitle="登録チャンネルを更新 | Chronotube"
+        background={color.lightGray}
+      />
       <Abstract />
       <a href="/api/redirect.php">
         <PrimaryButton text="登録チャンネルを更新" />

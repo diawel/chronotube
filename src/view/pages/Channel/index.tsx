@@ -83,26 +83,35 @@ const Channel: React.FC = () => {
 
     channelName = channel.name
 
-    let videoColumnInner = (
-      <>
-        <KeyVideos
-          firstPlayback={firstPlayback}
-          mostPlayedVideo={mostPlayedVideo}
-          triggerPlayback={triggerPlayback}
-        />
-        {ad}
-        <ChannelHystory
-          histories={channelHistories}
-          subscribeDate={channel.subscribeDate}
-        />
-      </>
-    )
+    let videoColumnInner
 
-    if (!historyCount)
+    if (historyCount)
+      videoColumnInner = (
+        <>
+          <KeyVideos
+            firstPlayback={firstPlayback}
+            mostPlayedVideo={mostPlayedVideo}
+            triggerPlayback={triggerPlayback}
+          />
+          {ad}
+          <ChannelHystory
+            histories={channelHistories}
+            subscribeDate={channel.subscribeDate}
+          />
+        </>
+      )
+    else
       videoColumnInner = (
         <>
           <EngageAddHistory />
-          <BlurBox>{videoColumnInner}</BlurBox>
+          <BlurBox>
+            <KeyVideos
+              firstPlayback={firstPlayback}
+              mostPlayedVideo={mostPlayedVideo}
+              triggerPlayback={triggerPlayback}
+            />
+          </BlurBox>
+          {ad}
         </>
       )
 
@@ -164,7 +173,7 @@ const Channel: React.FC = () => {
   return (
     <Wrapper>
       <InitPage
-        themeColor={color.white}
+        background={color.white}
         pageTitle={channelName ? `${channelName} | Chronotube` : 'Chronotube'}
       />
       {node}
@@ -188,7 +197,6 @@ const Wrapper = styled.div`
 `
 
 const PcContainer = styled.div`
-  background: ${color.white};
   width: 100%;
   min-height: 100vh;
   display: flex;
@@ -225,7 +233,6 @@ const VideoColumn = styled.div<VideoColumnWrapperStyleType>(
 )
 
 const MobileContainer = styled.div`
-  background: ${color.white};
   min-height: 100vh;
   padding: calc(64px + 8px) 16px 64px;
   margin-top: -8px;
