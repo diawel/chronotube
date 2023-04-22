@@ -1,11 +1,9 @@
 import { useLiveQuery } from 'dexie-react-hooks'
-import { useContext } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { color } from 'src/common/styles/color'
 import { subscription } from 'src/common/utils/db/subscription'
 import { watchHistory } from 'src/common/utils/db/watchHistory'
 import { VideoType } from 'src/common/utils/types/youtube'
-import { DeviceContext } from 'src/index'
 import Ad from 'src/view/components/atoms/Ad'
 import EngageAddHistory from 'src/view/components/organisms/EngageAddHistory'
 import styled, { keyframes } from 'styled-components'
@@ -15,11 +13,9 @@ import IconBox from './IconBox'
 import KeyVideos from './KeyVideos'
 import SkeletonIconBox from './SkeletonIconBox'
 import SkeletonKeyVideos from './SkeletonKeyVideos'
-import FixedFooter from 'src/view/components/molecules/FixedFooter'
-import Footer from 'src/view/components/molecules/Footer'
+import ChannelColumns from 'src/view/components/templates/ChannelColumns'
 
 const Channel: React.FC = () => {
-  const deviceType = useContext(DeviceContext)
   const navigate = useNavigate()
   const { id } = useParams()
   if (!id) return <></>
@@ -66,7 +62,7 @@ const Channel: React.FC = () => {
     }
   })
 
-  let node, channelName
+  let abstractColumnInner, detailColumnInner, channelName
 
   if (liveQuery) {
     if (!liveQuery.channel) {
@@ -85,10 +81,12 @@ const Channel: React.FC = () => {
 
     channelName = channel.name
 
-    let videoColumnInner
+    abstractColumnInner = (
+      <IconBox channel={channel} withPlayCount={historyCount > 0} />
+    )
 
     if (historyCount)
-      videoColumnInner = (
+      detailColumnInner = (
         <>
           <KeyVideos
             firstPlayback={firstPlayback}
@@ -103,7 +101,7 @@ const Channel: React.FC = () => {
         </>
       )
     else
-      videoColumnInner = (
+      detailColumnInner = (
         <>
           <EngageAddHistory />
           <BlurBox>
@@ -116,60 +114,9 @@ const Channel: React.FC = () => {
           {ad}
         </>
       )
-
-    switch (deviceType) {
-      case 'mobile':
-        node = (
-          <MobileContainer>
-            <IconWrapper>
-              <IconBox channel={channel} withPlayCount={historyCount > 0} />
-            </IconWrapper>
-            <VideoColumn padding="0" margin="0 auto">
-              {videoColumnInner}
-            </VideoColumn>
-          </MobileContainer>
-        )
-        break
-      case 'pc':
-        node = (
-          <PcContainer>
-            <IconColumn>
-              <IconBox channel={channel} withPlayCount={historyCount > 0} />
-            </IconColumn>
-            <VideoColumn padding="108px 24px" margin="0">
-              {videoColumnInner}
-            </VideoColumn>
-          </PcContainer>
-        )
-        break
-    }
   } else {
-    switch (deviceType) {
-      case 'mobile':
-        node = (
-          <MobileContainer>
-            <IconWrapper>
-              <SkeletonIconBox />
-            </IconWrapper>
-            <VideoColumn padding="0" margin="0 auto">
-              <SkeletonKeyVideos />
-            </VideoColumn>
-          </MobileContainer>
-        )
-        break
-      case 'pc':
-        node = (
-          <PcContainer>
-            <IconColumn>
-              <SkeletonIconBox />
-            </IconColumn>
-            <VideoColumn padding="108px 24px" margin="0">
-              <SkeletonKeyVideos />
-            </VideoColumn>
-          </PcContainer>
-        )
-        break
-    }
+    abstractColumnInner = <SkeletonIconBox />
+    detailColumnInner = <SkeletonKeyVideos />
   }
 
   return (
@@ -178,7 +125,10 @@ const Channel: React.FC = () => {
         themeColor={color.white}
         pageTitle={channelName ? `${channelName} | Chronotube` : 'Chronotube'}
       />
-      {node}
+      <ChannelColumns
+        abstractColumn={abstractColumnInner}
+        detailColumn={detailColumnInner}
+      />
     </Wrapper>
   )
 }
@@ -196,58 +146,6 @@ const show = keyframes`
 
 const Wrapper = styled.div`
   animation: ${show} 0.3s ease-out both;
-`
-
-const PcContainer = styled.div`
-  background: ${color.white};
-  width: 100%;
-  min-height: 100vh;
-  display: flex;
-  justify-content: space-evenly;
-  margin-top: -8px;
-  padding-top: 8px;
-`
-
-const IconColumn = styled.div`
-  width: 280px;
-  height: 100svh;
-  padding: 24px;
-  box-sizing: border-box;
-  display: flex;
-  flex-shrink: 0;
-  justify-content: center;
-  align-items: center;
-  position: sticky;
-  top: 0;
-`
-
-type VideoColumnWrapperStyleType = {
-  padding: string
-  margin: string
-}
-
-const VideoColumn = styled.div<VideoColumnWrapperStyleType>(
-  (style) => `
-    padding: ${style.padding};
-    margin: ${style.margin};
-    width: 100%;
-    max-width: 440px;
-  `
-)
-
-const MobileContainer = styled.div`
-  background: ${color.white};
-  min-height: 100vh;
-  padding: calc(64px + 8px) 16px 64px;
-  margin-top: -8px;
-`
-
-const IconWrapper = styled.div`
-  width: 100%;
-  max-width: 240px;
-  margin: 0 auto 64px;
-  display: flex;
-  justify-content: center;
 `
 
 const BlurBox = styled.div`
