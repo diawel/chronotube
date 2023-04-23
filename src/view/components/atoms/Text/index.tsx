@@ -13,9 +13,9 @@ type SpanStyleType = {
 
 const Text = styled.span<SpanStyleType>(
   (style) => `
-    color: ${style.color ? style.color : 'inherit'};
-    font-size: ${style.size ? style.size : 'inherit'};
-    font-weight: ${style.weight ? style.weight : 'inherit'};
+    color: ${style.color ?? 'inherit'};
+    font-size: ${style.size ?? 'inherit'};
+    font-weight: ${style.weight ?? 'inherit'};
   `
 )
 

@@ -63,7 +63,7 @@ const Share: React.FC = () => {
     const searchParams = new URLSearchParams(location.search)
     let parsed
     try {
-      parsed = JSON.parse(searchParams.get('d') || '')
+      parsed = JSON.parse(searchParams.get('d') ?? '')
     } catch {}
     const decoded = SharedData.decode(parsed)
     if (isRight(decoded)) setSharedData(decoded.right)

@@ -22,7 +22,7 @@ type ClampContainerStyleType = {
 const ClampContainer = styled.div<ClampContainerStyleType>(
   (style) => `
     -webkit-line-clamp: ${style.lineClamp};
-    color: ${style.color ? style.color : 'inherit'};
+    color: ${style.color ?? 'inherit'};
     display: -webkit-box;
     -webkit-box-orient: vertical;
     overflow: hidden;

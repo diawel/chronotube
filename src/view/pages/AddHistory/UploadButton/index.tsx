@@ -20,7 +20,7 @@ const UploadButton: React.FC<UploadButtonPropsType> = (props) => {
       if (!files.fileList[0]) return
       progressSetter('init')
       let jsonText = '[]'
-      switch ((files.fileList[0].name.match(/\.\w+$/) || [])[0]) {
+      switch ((files.fileList[0].name.match(/\.\w+$/) ?? [])[0]) {
         case '.json':
           jsonText = await files.fileList[0].text()
           break

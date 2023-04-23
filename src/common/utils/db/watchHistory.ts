@@ -64,10 +64,10 @@ export const storeWatchHistories = async (
 ) => {
   progressSetter && progressSetter('parse')
   const parsedHistories = histories.map((history) => {
-    const parsedTitleUrl = history.titleUrl.match(/v=([\w-]+)/) || []
-    const parsedTitle = history.title.match(/(.*)\sを視聴しました/) || []
+    const parsedTitleUrl = history.titleUrl.match(/v=([\w-]+)/) ?? []
+    const parsedTitle = history.title.match(/(.*)\sを視聴しました/) ?? []
     const parsedSubtitleUrl =
-      history.subtitles[0].url?.match(/\/channel\/([\w-]+)/) || []
+      history.subtitles[0].url?.match(/\/channel\/([\w-]+)/) ?? []
 
     return {
       playbackDate: new Date(history.time),

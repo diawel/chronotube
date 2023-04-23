@@ -2,7 +2,7 @@ import { useContext, useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
 import ChannelCard from 'src/view/components/molecules/ChannelCard'
 import CardContainer, { cardOuterWidth } from './CardContainer'
-import { Channel } from 'src/common/utils/db/subscription'
+import { ChannelType } from 'src/common/utils/db/subscription'
 import { Link } from 'react-router-dom'
 import { dateToString } from 'src/common/utils/dateToString'
 import { DeviceContext } from 'src/index'
@@ -12,7 +12,7 @@ import { color } from 'src/common/styles/color'
 import { fontSize } from 'src/common/styles/fontSize'
 
 export type SliderPropsType = {
-  channels: Channel[]
+  channels: ChannelType[]
   filter: string
 }
 

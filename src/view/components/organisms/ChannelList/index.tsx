@@ -2,7 +2,7 @@ import { useContext, useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import { fontSize } from 'src/common/styles/fontSize'
 import { dateToString } from 'src/common/utils/dateToString'
-import { Channel } from 'src/common/utils/db/subscription'
+import { ChannelType } from 'src/common/utils/db/subscription'
 import { DeviceContext } from 'src/index'
 import styled from 'styled-components'
 import ChannelCard from '../../molecules/ChannelCard'
@@ -10,7 +10,7 @@ import Text from '../../atoms/Text'
 import { color } from 'src/common/styles/color'
 
 export type ChannelListPropsType = {
-  channels: Channel[]
+  channels: ChannelType[]
   filter: string
   sortBy: SortByType
 }
@@ -21,7 +21,7 @@ const sortByShouldReversed = {
   subscribeDate: false,
   playCount: true,
 }
-const sortByKey = (channels: Channel[], key: SortByType) => {
+const sortByKey = (channels: ChannelType[], key: SortByType) => {
   if (sortByShouldReversed[key]) {
     return [...channels].sort((a, b) => {
       if (a[key] > b[key]) return -1
