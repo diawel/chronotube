@@ -44,10 +44,11 @@ const UploadButton: React.FC<UploadButtonPropsType> = (props) => {
           }
           break
       }
-      await storeWatchHistories(
-        validateHistoryies(JSON.parse(jsonText)),
-        progressSetter
-      )
+      let parsed
+      try {
+        parsed = JSON.parse(jsonText)
+      } catch {}
+      await storeWatchHistories(validateHistoryies(parsed), progressSetter)
     },
     acceptTypeList: ['.json', '.zip'],
   }

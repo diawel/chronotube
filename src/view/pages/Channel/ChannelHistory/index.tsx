@@ -1,6 +1,5 @@
 import EnclosedTitle from 'src/view/components/molecules/EnclosedTitle'
 import styled from 'styled-components'
-import { History } from 'src/common/utils/db/watchHistory'
 import ListedVideoBox from 'src/view/components/molecules/ListedVideoBox'
 import { dateToString } from 'src/common/utils/dateToString'
 import { color } from 'src/common/styles/color'
@@ -9,11 +8,11 @@ import { fontSize } from 'src/common/styles/fontSize'
 import { ReactNode } from 'react'
 
 export type ChannelHistoryPropsType = {
-  histories: History[]
+  histories: { id: string; title: string; playbackDate: Date }[]
   subscribeDate: Date
 }
 
-const ChannelHystory: React.FC<ChannelHistoryPropsType> = (props) => {
+const ChannelHistory: React.FC<ChannelHistoryPropsType> = (props) => {
   const { histories, subscribeDate } = props
 
   let isSubscribed = false
@@ -82,4 +81,4 @@ const PlaybackWrapper = styled.div`
   margin-bottom: 12px;
 `
 
-export default ChannelHystory
+export default ChannelHistory

@@ -4,7 +4,7 @@ import * as t from 'io-ts'
 import { isRight } from 'fp-ts/lib/Either'
 import { updatePlayCount } from './subscription'
 
-export interface History {
+export type HistoryType = {
   header: string
   id: string
   title: string
@@ -18,7 +18,7 @@ export interface Meta {
 }
 
 class WatchHistory extends Dexie {
-  histories!: Table<History>
+  histories!: Table<HistoryType>
   meta!: Table<Meta>
 
   constructor() {
@@ -34,7 +34,7 @@ export const watchHistory = new WatchHistory()
 
 export type StoreWatchHistoryProgressType = 'parse' | 'store' | 'finished'
 
-const History = t.type({
+const RawHistory = t.type({
   header: t.string,
   title: t.string,
   titleUrl: t.string,
@@ -47,19 +47,19 @@ const History = t.type({
   time: t.string,
 })
 
-type HistoryType = t.TypeOf<typeof History>
+type RawHistoryType = t.TypeOf<typeof RawHistory>
 
-export const validateHistoryies = (rawHistories: any): HistoryType[] => {
+export const validateHistoryies = (rawHistories: any): RawHistoryType[] => {
   if (Array.isArray(rawHistories)) {
     return rawHistories.filter((rawHistory: any) => {
-      return isRight(History.decode(rawHistory))
+      return isRight(RawHistory.decode(rawHistory))
     })
   }
   return []
 }
 
 export const storeWatchHistories = async (
-  histories: HistoryType[],
+  histories: RawHistoryType[],
   progressSetter?: (progress: StoreWatchHistoryProgressType) => void
 ) => {
   progressSetter && progressSetter('parse')
@@ -98,7 +98,7 @@ export const exportWatchHistories = async (
   progressSetter && progressSetter('read')
   const histories = await watchHistory.histories.toArray()
   progressSetter && progressSetter('convert')
-  const convertedHistories: HistoryType[] = histories.map((history) => {
+  const convertedHistories: RawHistoryType[] = histories.map((history) => {
     return {
       header: history.header,
       title: `${history.title} を視聴しました`,

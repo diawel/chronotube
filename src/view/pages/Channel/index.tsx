@@ -3,16 +3,15 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { color } from 'src/common/styles/color'
 import { subscription } from 'src/common/utils/db/subscription'
 import { watchHistory } from 'src/common/utils/db/watchHistory'
-import { VideoType } from 'src/common/utils/types/youtube'
 import Ad from 'src/view/components/atoms/Ad'
 import EngageAddHistory from 'src/view/components/organisms/EngageAddHistory'
 import styled, { keyframes } from 'styled-components'
 import InitPage from '../util/InitPage'
-import ChannelHystory from './ChannelHistory'
+import ChannelHistory from './ChannelHistory'
 import IconBox from './IconBox'
-import KeyVideos from './KeyVideos'
+import KeyVideos from 'src/view/components/organisms/KeyVideos'
 import SkeletonIconBox from './SkeletonIconBox'
-import SkeletonKeyVideos from './SkeletonKeyVideos'
+import SkeletonKeyVideos from 'src/view/components/atoms/SkeletonBox/SkeletonKeyVideos'
 import ChannelColumns from 'src/view/components/templates/ChannelColumns'
 
 const Channel: React.FC = () => {
@@ -35,7 +34,11 @@ const Channel: React.FC = () => {
       .where({ 'uploader.id': id })
       .toArray()
     const channelVideos: {
-      [key: string]: VideoType & { playCount: number }
+      [key: string]: {
+        id: string
+        title: string
+        playCount: number
+      }
     } = {}
     channelHistories.forEach((history) => {
       if (!channelVideos[history.id])
@@ -82,7 +85,15 @@ const Channel: React.FC = () => {
     channelName = channel.name
 
     abstractColumnInner = (
-      <IconBox channel={channel} withPlayCount={historyCount > 0} />
+      <IconBox
+        {...{
+          historyCount,
+          channel,
+          firstPlayback,
+          mostPlayedVideo,
+          triggerPlayback,
+        }}
+      />
     )
 
     if (historyCount)
@@ -94,7 +105,7 @@ const Channel: React.FC = () => {
             triggerPlayback={triggerPlayback}
           />
           {ad}
-          <ChannelHystory
+          <ChannelHistory
             histories={channelHistories}
             subscribeDate={channel.subscribeDate}
           />

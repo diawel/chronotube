@@ -1,12 +1,15 @@
-import { VideoType } from 'src/common/utils/types/youtube'
-import { History } from 'src/common/utils/db/watchHistory'
 import { dateToString } from 'src/common/utils/dateToString'
 import VideoBlock from './VideoBlock'
+import { ChannelAbstractType } from 'src/common/utils/types/youtube'
 
 export type KeyVideosPropsType = {
-  firstPlayback?: History
-  mostPlayedVideo?: VideoType & { playCount: number }
-  triggerPlayback?: History
+  firstPlayback?: { id: string; title: string; playbackDate: Date }
+  mostPlayedVideo?: { id: string; title: string; playCount: number }
+  triggerPlayback?: {
+    id: string
+    title: string
+    uploader: ChannelAbstractType
+  }
 }
 
 const KeyVideos: React.FC<KeyVideosPropsType> = (props) => {

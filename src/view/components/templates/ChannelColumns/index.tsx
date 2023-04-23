@@ -16,19 +16,19 @@ const ChannelColumns: React.FC<ChannelColumnsPruopsType> = (props) => {
     case 'mobile':
       return (
         <MobileContainer>
-          <IconWrapper>{abstractColumn}</IconWrapper>
-          <VideoColumn padding="0" margin="0 auto">
+          <AbstractWrapper>{abstractColumn}</AbstractWrapper>
+          <DetailColumn padding="0" margin="0 auto">
             {detailColumn}
-          </VideoColumn>
+          </DetailColumn>
         </MobileContainer>
       )
     case 'pc':
       return (
         <PcContainer>
-          <IconColumn>{abstractColumn}</IconColumn>
-          <VideoColumn padding="108px 24px" margin="0">
+          <AbstractColumn>{abstractColumn}</AbstractColumn>
+          <DetailColumn padding="108px 24px" margin="0">
             {detailColumn}
-          </VideoColumn>
+          </DetailColumn>
         </PcContainer>
       )
   }
@@ -44,7 +44,7 @@ const PcContainer = styled.div`
   padding-top: 8px;
 `
 
-const IconColumn = styled.div`
+const AbstractColumn = styled.div`
   width: 280px;
   height: 100svh;
   padding: 24px;
@@ -57,12 +57,12 @@ const IconColumn = styled.div`
   top: 0;
 `
 
-type VideoColumnWrapperStyleType = {
+type DetailColumnWrapperStyleType = {
   padding: string
   margin: string
 }
 
-const VideoColumn = styled.div<VideoColumnWrapperStyleType>(
+const DetailColumn = styled.div<DetailColumnWrapperStyleType>(
   (style) => `
     padding: ${style.padding};
     margin: ${style.margin};
@@ -78,7 +78,7 @@ const MobileContainer = styled.div`
   margin-top: -8px;
 `
 
-const IconWrapper = styled.div`
+const AbstractWrapper = styled.div`
   width: 100%;
   max-width: 240px;
   margin: 0 auto 64px;
