@@ -18,13 +18,13 @@ function cache_channel($id) {
   $elements = json_decode(json_encode($xmlObject), true);
 
   $channel = [
-    'name' => search_tag($elements, ['tag' => 'meta', 'attribute' => ['property' => 'og:title']])["@attributes"]["content"],
-    'description' => search_tag($elements, ['tag' => 'meta', 'attribute' => ['property' => 'og:description']])["@attributes"]["content"],
-    'thumbnail' => search_tag($elements, ['tag' => 'meta', 'attribute' => ['property' => 'og:image']])["@attributes"]["content"],
+    'name' => search_tag($elements, ['tag' => 'meta', 'attribute' => ['property' => 'og:title']])["@attributes"]["content"] ?? '',
+    'description' => search_tag($elements, ['tag' => 'meta', 'attribute' => ['property' => 'og:description']])["@attributes"]["content"] ?? '',
+    'thumbnail' => search_tag($elements, ['tag' => 'meta', 'attribute' => ['property' => 'og:image']])["@attributes"]["content"] ?? 'https://yt3.googleusercontent.com/a/default-user',
   ];
 
   file_put_contents("./cached_channels/$id.json", json_encode($channel));
-  return channel;
+  return $channel;
 }
 
 function check_tag($element, $filter) {
