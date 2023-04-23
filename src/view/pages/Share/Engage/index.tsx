@@ -31,7 +31,6 @@ type WrapperStyleType = {
 const Wrapper = styled.div<WrapperStyleType>(
   (style) => `
     padding: ${style.padding};
-    max-width: 384px;
     border-radius: 24px;
     background: ${color.lightGray};
     margin: 64px auto;
