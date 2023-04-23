@@ -11,6 +11,7 @@ import { isRight } from 'fp-ts/lib/These'
 import SkeletonIconBox from './SkeletonIconBox'
 import SkeletonKeyVideos from 'src/view/components/atoms/SkeletonBox/SkeletonKeyVideos'
 import ChannelColumns from 'src/view/components/templates/ChannelColumns'
+import Engage from './Engage'
 
 const SharedChannel = t.type({
   id: t.string,
@@ -107,6 +108,7 @@ const Share: React.FC = () => {
               : undefined
           }
         />
+        <Engage />
       </>
     )
   } else {
