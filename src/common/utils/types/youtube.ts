@@ -12,10 +12,3 @@ export type ThumbnailsType = {
 export type ThumbnailType = {
   url: string
 }
-
-export type VideoType = {
-  header: string
-  id: string
-  title: string
-  uploader: ChannelAbstractType
-}

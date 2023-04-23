@@ -12,8 +12,8 @@ const Logo: React.FC<LogoProps> = (props) => {
 }
 const StyledImage = styled.img<ImageStyleType>(
   (style) => `
-    width: ${style.width ? style.width : 'auto'};
-    height: ${style.height ? style.height : 'auto'};
+    width: ${style.width ?? 'auto'};
+    height: ${style.height ?? 'auto'};
   `
 )
 

@@ -13,6 +13,7 @@ import Channels from './pages/Channels'
 import Channel from './pages/Channel'
 import NotFound from './pages/NotFound'
 import Privacy from './pages/Privacy'
+import Share from './pages/Share'
 
 const App: React.FC = () => {
   useEffect(() => {
@@ -20,9 +21,11 @@ const App: React.FC = () => {
       .each(async (file) => {
         switch (file.purpose) {
           case 'subscription':
-            await storeChannels(
-              validateChannels(JSON.parse(await file.blob.text()))
-            )
+            let parsed
+            try {
+              parsed = JSON.parse(await file.blob.text())
+            } catch {}
+            await storeChannels(validateChannels(parsed))
             break
           default:
             console.error('Unknown cache')
@@ -45,6 +48,7 @@ const App: React.FC = () => {
       <Route path="/backup" element={<Backup />} />
       <Route path="/channels" element={<Channels />} />
       <Route path="/channel/:id" element={<Channel />} />
+      <Route path="/share" element={<Share />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   )

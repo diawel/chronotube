@@ -4,7 +4,7 @@ import * as t from 'io-ts'
 import { isRight } from 'fp-ts/lib/Either'
 import { watchHistory } from './watchHistory'
 
-export interface Channel {
+export type ChannelType = {
   id: string
   name: string
   subscribeDate: Date
@@ -18,7 +18,7 @@ export interface Meta {
 }
 
 class Subscription extends Dexie {
-  channels!: Table<Channel>
+  channels!: Table<ChannelType>
   meta!: Table<Meta>
 
   constructor() {
@@ -42,7 +42,7 @@ const Thumbnail = t.type({
   url: t.string,
 })
 
-const Channel = t.type({
+const RawChannel = t.type({
   snippet: t.type({
     publishedAt: t.string,
     resourceId: t.type({ channelId: t.string }),
@@ -55,18 +55,18 @@ const Channel = t.type({
   }),
 })
 
-type ChannelType = t.TypeOf<typeof Channel>
+type RawChannelType = t.TypeOf<typeof RawChannel>
 
-export const validateChannels = (rawChannels: any): ChannelType[] => {
+export const validateChannels = (rawChannels: any): RawChannelType[] => {
   if (Array.isArray(rawChannels))
     return rawChannels.filter((rawChannel: any) => {
-      return isRight(Channel.decode(rawChannel))
+      return isRight(RawChannel.decode(rawChannel))
     })
   return []
 }
 
 export const storeChannels = async (
-  channels: ChannelType[],
+  channels: RawChannelType[],
   progressSetter?: (progress: StoreSubscriptionProgressType) => void
 ) => {
   progressSetter && progressSetter('init')
@@ -94,14 +94,16 @@ export const storeChannels = async (
 export const updatePlayCount = async () => {
   const devPlayCountList: { id: string; playCount: number }[] = []
 
-  await subscription.channels.toCollection().each(async (channel: Channel) => {
-    devPlayCountList.push({
-      id: channel.id,
-      playCount: await watchHistory.histories
-        .where({ 'uploader.id': channel.id })
-        .count(),
+  await subscription.channels
+    .toCollection()
+    .each(async (channel: ChannelType) => {
+      devPlayCountList.push({
+        id: channel.id,
+        playCount: await watchHistory.histories
+          .where({ 'uploader.id': channel.id })
+          .count(),
+      })
     })
-  })
 
   const modifyChannel = (index: number) => {
     if (!devPlayCountList[index]) return

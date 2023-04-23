@@ -9,7 +9,7 @@ const Ad: React.FC = () => {
   useEffect(() => {
     if (isVisible) {
       let adsbygoogle = (window as any).adsbygoogle
-      adsbygoogle = adsbygoogle || []
+      adsbygoogle = adsbygoogle ?? []
       adsbygoogle.push({})
     }
   }, [isVisible])

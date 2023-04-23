@@ -21,10 +21,10 @@ export const SearchContext = createContext<searchType>({
 
 const Channels: React.FC = () => {
   const [filter, setFilter] = useState(
-    sessionStorage.getItem(sessionStorageKey.filter) || ''
+    sessionStorage.getItem(sessionStorageKey.filter) ?? ''
   )
   const [sortBy, setSortBy] = useState<SortByType>(
-    (sessionStorage.getItem(sessionStorageKey.sortBy) as SortByType) ||
+    (sessionStorage.getItem(sessionStorageKey.sortBy) as SortByType) ??
       'subscribeDate'
   )
 

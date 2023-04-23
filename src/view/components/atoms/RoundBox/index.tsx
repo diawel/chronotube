@@ -13,8 +13,8 @@ type RoundBoxStyleType = {
 const RoundBox = styled.div<RoundBoxStyleType>(
   (style) => `
     border-radius: 24px;
-    box-shadow: ${style.shadow ? style.shadow : 'none'};
-    background: ${style.background ? style.background : 'none'};
+    box-shadow: ${style.shadow ?? 'none'};
+    background: ${style.background ?? 'none'};
   `
 )
 

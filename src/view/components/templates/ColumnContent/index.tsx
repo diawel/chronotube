@@ -21,7 +21,7 @@ type InnerWrapperStyleType = {
 const InnerWrapper = styled.div<InnerWrapperStyleType>(
   (style) => `
     margin: 0 auto;
-    max-width: ${style.maxWidth ? style.maxWidth : '416px'};
+    max-width: ${style.maxWidth ?? '416px'};
     box-sizing: border-box;
     padding: 16px;
   `

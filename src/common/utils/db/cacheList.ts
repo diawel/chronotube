@@ -1,12 +1,12 @@
 import Dexie, { Table } from 'dexie'
 
-export interface File {
+export type FileType = {
   purpose: string
   blob: Blob
 }
 
 class CacheList extends Dexie {
-  files!: Table<File>
+  files!: Table<FileType>
 
   constructor() {
     super('CacheList')
