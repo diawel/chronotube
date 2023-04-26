@@ -1,4 +1,10 @@
 <?php
+$host = parse_url($_SERVER['HTTP_REFERER'])['host'];
+if ($host != 'chronotube.diawel.me' && $host != 'localhost') {
+  header('Location: https://yt3.googleusercontent.com/a/default-user');
+  exit;
+}
+
 require_once 'cache_channel.php';
 
 if (isset($_GET['id']) && preg_match('/^[\w-]+$/', $_GET['id'])) {
