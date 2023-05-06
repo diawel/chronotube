@@ -87,7 +87,7 @@ const IconBox: React.FC<IconBoxPropsType> = (props) => {
         </TextBlock>
         <SnippetWrapper>
           <Snippet text={`${dateToString(subscribeDate)}に登録`} />
-          {historyCount && <Snippet text={`${playCount}回再生`} />}
+          {historyCount ? <Snippet text={`${playCount}回再生`} /> : <></>}
         </SnippetWrapper>
       </a>
       <TweetButtonWrapper>
