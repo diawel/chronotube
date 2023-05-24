@@ -1,4 +1,4 @@
 <?php
-$PATH = [
-  'Google' => '../lib/google'
+const $PATH = [
+  'GOOGLE_API' => '../lib/google'
 ];

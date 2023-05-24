@@ -21,7 +21,7 @@ const IconBox: React.FC<IconBoxPropsType> = (props) => {
         target="_blank"
         rel="nofollow"
       >
-        <Icon src={`/api/channel_thumbnail.php?id=${id}`} />
+        <Icon src={`/api/channel-thumbnail.php?id=${id}`} />
         <TextBlock color={color.black} size={fontSize.medium} weight="bold">
           {name}
         </TextBlock>

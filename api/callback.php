@@ -8,35 +8,41 @@ if ($_SESSION['state'] == $_GET['state'] && isset($_GET['code'])) {
   unset($_SESSION['state']);
 
   require_once 'path.php';
-  require_once $PATH['Google'] . '/vendor/autoload.php';
+  require_once $PATH['GOOGLE_API'] . '/vendor/autoload.php';
 
   $client = new Google_Client();
-  $client->setAuthConfig($PATH['Google'] . '/client_secret.json');
+  $client->setAuthConfig($PATH['GOOGLE_API'] . '/client_secret.json');
   $client->authenticate($_GET['code']);
 
   $service = new Google_Service_YouTube($client);
 
   $channels = [];
 
-  function fetch($pageToken) {
+  function fetch($pageToken)
+  {
     global $service, $channels;
 
-    $queryParams = [
+    $query_params = [
       'maxResults' => 50,
       'mine' => true,
-      'pageToken' => $pageToken
+      'pageToken' => $pageToken,
     ];
-    $response = $service->subscriptions->listSubscriptions('snippet', $queryParams);
+    $response = $service->subscriptions->listSubscriptions(
+      'snippet',
+      $query_params
+    );
     $channels = array_merge($channels, $response->items);
 
-    if ($response->nextPageToken) fetch($response->nextPageToken);
+    if ($response->nextPageToken) {
+      fetch($response->nextPageToken);
+    }
   }
   fetch(null);
 
   $GLOBALS['subscription'] = $channels;
 } else {
   header('Location: /');
-  exit;
+  exit();
 }
 ?>
 
@@ -54,7 +60,11 @@ if ($_SESSION['state'] == $_GET['state'] && isset($_GET['code'])) {
       db.files.put({
         purpose: 'subscription',
         blob: new Blob([
-          '<?php echo str_replace(['\\', "'"], ['\\\\', "\\'"], json_encode($subscription)) ?>'
+          '<?php echo str_replace(
+            ['\\', "'"],
+            ['\\\\', "\\'"],
+            json_encode($subscription)
+          ); ?>'
         ], {type: 'application/json'})
       }).then(() => {
         location.href = '/'
