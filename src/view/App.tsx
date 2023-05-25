@@ -1,11 +1,5 @@
 import { Routes, Route, BrowserRouter } from 'react-router-dom'
 import Home from './pages/Home'
-import { cacheList } from 'src/common/utils/db/cacheList'
-import { useEffect } from 'react'
-import {
-  storeChannels,
-  validateChannels,
-} from 'src/common/utils/db/subscription'
 import AddHistory from './pages/AddHistory'
 import UpdateSubscription from './pages/UpdateSubscription'
 import Backup from './pages/Backup'
@@ -16,30 +10,6 @@ import Privacy from './pages/Privacy'
 import Share from './pages/Share'
 
 const App: React.FC = () => {
-  useEffect(() => {
-    cacheList.files
-      .each(async (file) => {
-        switch (file.purpose) {
-          case 'subscription':
-            let parsed
-            try {
-              parsed = JSON.parse(await file.blob.text())
-            } catch {}
-            await storeChannels(validateChannels(parsed))
-            console.log('done')
-            break
-          default:
-            console.error('Unknown cache')
-        }
-      })
-      .then(async () => {
-        await cacheList.files.clear()
-      })
-      .catch((error) => {
-        console.error(error)
-      })
-  }, [])
-
   return (
     <BrowserRouter>
       <Routes>

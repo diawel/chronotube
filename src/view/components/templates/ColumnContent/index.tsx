@@ -1,14 +1,17 @@
 import styled from 'styled-components'
-import StandardContent, { StandardContentPropsType } from '../StandardContent'
+import StandardContent from '../StandardContent'
+import { ReactNode } from 'react'
 
-export type ColumnContentPropsType = StandardContentPropsType &
-  InnerWrapperStyleType
+export type ColumnContentPropsType = InnerWrapperStyleType & {
+  hideFooter?: boolean
+  children: ReactNode
+}
 
 const ColumnContent: React.FC<ColumnContentPropsType> = (props) => {
-  const { children, maxWidth } = props
+  const { children, maxWidth, hideFooter } = props
 
   return (
-    <StandardContent>
+    <StandardContent hideFooter={hideFooter}>
       <InnerWrapper maxWidth={maxWidth}>{children}</InnerWrapper>
     </StandardContent>
   )

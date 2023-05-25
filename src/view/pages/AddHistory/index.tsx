@@ -22,7 +22,7 @@ const AddHistory: React.FC = () => {
   const [progress, setProgress] = useState<ProgressType>('ready')
 
   return (
-    <ColumnContent>
+    <ColumnContent hideFooter={progressSnippet[progress] != ''}>
       <InitPage pageTitle="再生履歴を追加 | Chronotube" />
       {progress == 'ready' || progress == 'finished' ? (
         <Abstract />
