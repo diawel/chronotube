@@ -8,10 +8,10 @@ if ($_SESSION['state'] == $_GET['state'] && isset($_GET['code'])) {
   unset($_SESSION['state']);
 
   require_once 'path.php';
-  require_once $PATH['GOOGLE_API'] . '/vendor/autoload.php';
+  require_once PATH['GOOGLE_API'] . '/vendor/autoload.php';
 
   $client = new Google_Client();
-  $client->setAuthConfig($PATH['GOOGLE_API'] . '/client_secret.json');
+  $client->setAuthConfig(PATH['GOOGLE_API'] . '/client_secret.json');
   $client->authenticate($_GET['code']);
 
   $service = new Google_Service_YouTube($client);

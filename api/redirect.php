@@ -4,7 +4,7 @@ session_start();
 require_once 'path.php';
 
 $client_secret = json_decode(
-  file_get_contents($PATH['GOOGLE_API'] . '/client_secret.json'),
+  file_get_contents(PATH['GOOGLE_API'] . '/client_secret.json'),
   true
 );
 
