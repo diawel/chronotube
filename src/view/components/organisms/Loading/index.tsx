@@ -3,22 +3,13 @@ import { fontSize } from 'src/common/styles/fontSize'
 import LoadingIcon from 'src/view/components/atoms/LoadingIcon'
 import TextBlock from 'src/view/components/atoms/TextBlock'
 import styled from 'styled-components'
-import { ProgressType } from '..'
 
 export type LoadingPropsType = {
-  progress: ProgressType
-}
-
-const progressSnippet: { [index in ProgressType]: string } = {
-  ready: '',
-  init: '初期化中',
-  parse: 'JSONデータを解析中',
-  store: 'データベースに格納中',
-  finished: '',
+  loadingSnippet: string
 }
 
 const Loading: React.FC<LoadingPropsType> = (props) => {
-  const { progress } = props
+  const { loadingSnippet } = props
 
   return (
     <Wrapper>
@@ -26,7 +17,7 @@ const Loading: React.FC<LoadingPropsType> = (props) => {
         <LoadingIcon />
       </IconWrapper>
       <TextBlock color={color.black} size={fontSize.small}>
-        {progressSnippet[progress]}
+        {loadingSnippet}
       </TextBlock>
     </Wrapper>
   )
