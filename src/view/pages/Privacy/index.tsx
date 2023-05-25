@@ -2,7 +2,7 @@ import { color } from 'src/common/styles/color'
 import { fontSize } from 'src/common/styles/fontSize'
 import ColumnContent from 'src/view/components/templates/ColumnContent'
 import Text from 'src/view/components/atoms/Text'
-import InitPage from '../util/InitPage'
+import InitPage from '../../components/utils/InitPage'
 import styled from 'styled-components'
 
 const Privacy: React.FC = () => {

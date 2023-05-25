@@ -3,7 +3,7 @@ import { createContext, useEffect, useState } from 'react'
 import TopBox from './TopBox'
 import SearchedChannelList from './SearchedChannelList'
 import { sessionStorageKey } from 'src/common/utils/sessionStorage'
-import InitPage from '../util/InitPage'
+import InitPage from '../../components/utils/InitPage'
 import ToTop from 'src/view/components/molecules/ToTop'
 
 type searchType = {
