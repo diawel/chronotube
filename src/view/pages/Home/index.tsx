@@ -2,7 +2,7 @@ import NoData from './NoData'
 import Default from './Default'
 import { useLiveQuery } from 'dexie-react-hooks'
 import { subscription } from 'src/common/utils/db/subscription'
-import InitPage from '../util/InitPage'
+import InitPage from '../../components/utils/InitPage'
 import { color } from 'src/common/styles/color'
 
 const Home: React.FC = () => {

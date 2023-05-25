@@ -1,6 +1,6 @@
 import PrimaryButton from 'src/view/components/molecules/PrimaryButton'
 import ColumnContent from 'src/view/components/templates/ColumnContent'
-import InitPage from '../util/InitPage'
+import InitPage from '../../components/utils/InitPage'
 import Abstract from './Abstract'
 
 const NotFound: React.FC = () => {

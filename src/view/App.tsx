@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, BrowserRouter } from 'react-router-dom'
 import Home from './pages/Home'
 import { cacheList } from 'src/common/utils/db/cacheList'
 import { useEffect } from 'react'
@@ -26,6 +26,7 @@ const App: React.FC = () => {
               parsed = JSON.parse(await file.blob.text())
             } catch {}
             await storeChannels(validateChannels(parsed))
+            console.log('done')
             break
           default:
             console.error('Unknown cache')
@@ -40,17 +41,19 @@ const App: React.FC = () => {
   }, [])
 
   return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/privacy" element={<Privacy />} />
-      <Route path="/addhistory" element={<AddHistory />} />
-      <Route path="/updatesubscription" element={<UpdateSubscription />} />
-      <Route path="/backup" element={<Backup />} />
-      <Route path="/channels" element={<Channels />} />
-      <Route path="/channel/:id" element={<Channel />} />
-      <Route path="/share" element={<Share />} />
-      <Route path="*" element={<NotFound />} />
-    </Routes>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/privacy" element={<Privacy />} />
+        <Route path="/addhistory" element={<AddHistory />} />
+        <Route path="/updatesubscription" element={<UpdateSubscription />} />
+        <Route path="/backup" element={<Backup />} />
+        <Route path="/channels" element={<Channels />} />
+        <Route path="/channel/:id" element={<Channel />} />
+        <Route path="/share" element={<Share />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </BrowserRouter>
   )
 }
 

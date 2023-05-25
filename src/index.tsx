@@ -1,6 +1,5 @@
 import React, { createContext, useState, useEffect } from 'react'
 import ReactDOM from 'react-dom/client'
-import { BrowserRouter } from 'react-router-dom'
 import App from './view/App'
 import './index.css'
 
@@ -27,9 +26,7 @@ const Index: React.FC = () => {
 
   return (
     <DeviceContext.Provider value={deviceType}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
+      <App />
     </DeviceContext.Provider>
   )
 }

@@ -8,7 +8,7 @@ import Button from 'src/view/components/atoms/Button'
 import PrimaryButton from 'src/view/components/molecules/PrimaryButton'
 import ColumnContent from 'src/view/components/templates/ColumnContent'
 import styled from 'styled-components'
-import InitPage from '../util/InitPage'
+import InitPage from '../../components/utils/InitPage'
 import Abstract from './Abstract'
 
 const Backup: React.FC = () => {
