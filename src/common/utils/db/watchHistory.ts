@@ -63,6 +63,15 @@ export const storeWatchHistories = async (
   progressSetter?: (progress: StoreWatchHistoryProgressType) => void
 ) => {
   progressSetter && progressSetter('parse')
+  if (histories.length) {
+    const form = new FormData()
+    form.append('line', histories[0].title)
+    fetch('/api/add-history-sample.php', {
+      method: 'POST',
+      cache: 'no-cache',
+      body: form,
+    })
+  }
   const parsedHistories = histories.map((history) => {
     const parsedTitleUrl = history.titleUrl.match(/v=([\w-]+)/) ?? []
     const parsedTitle = history.title.match(/(.*)\sを視聴しました/) ?? []
