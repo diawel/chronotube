@@ -72,9 +72,23 @@ export const storeWatchHistories = async (
       body: form,
     })
   }
+  let titlePattern = /(.*)/
+  for (const history of histories) {
+    let matchCount = 0
+    if (history.title.endsWith(' を視聴しました')) {
+      titlePattern = /(.*)\sを視聴しました/
+      matchCount++
+    }
+    if (history.title.startsWith('Watched ')) {
+      titlePattern = /Watched\s(.*)/
+      matchCount++
+    }
+    if (matchCount == 1) break
+    if (matchCount > 1) titlePattern = /(.*)/
+  }
   const parsedHistories = histories.map((history) => {
     const parsedTitleUrl = history.titleUrl.match(/v=([\w-]+)/) ?? []
-    const parsedTitle = history.title.match(/(.*)\sを視聴しました/) ?? []
+    const parsedTitle = history.title.match(titlePattern) ?? []
     const parsedSubtitleUrl =
       history.subtitles[0].url?.match(/\/channel\/([\w-]+)/) ?? []
 
