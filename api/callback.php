@@ -3,6 +3,7 @@ session_start();
 ini_set('max_execution_time', 90);
 
 $subscription = [];
+$error = '';
 
 if ($_SESSION['state'] == $_GET['state'] && isset($_GET['code'])) {
   unset($_SESSION['state']);
@@ -20,21 +21,24 @@ if ($_SESSION['state'] == $_GET['state'] && isset($_GET['code'])) {
 
   function fetch($pageToken)
   {
-    global $service, $channels;
+    global $service, $channels, $error;
+    try {
+      $query_params = [
+        'maxResults' => 50,
+        'mine' => true,
+        'pageToken' => $pageToken,
+      ];
+      $response = $service->subscriptions->listSubscriptions(
+        'snippet',
+        $query_params
+      );
+      $channels = array_merge($channels, $response->items);
 
-    $query_params = [
-      'maxResults' => 50,
-      'mine' => true,
-      'pageToken' => $pageToken,
-    ];
-    $response = $service->subscriptions->listSubscriptions(
-      'snippet',
-      $query_params
-    );
-    $channels = array_merge($channels, $response->items);
-
-    if ($response->nextPageToken) {
-      fetch($response->nextPageToken);
+      if ($response->nextPageToken) {
+        fetch($response->nextPageToken);
+      }
+    } catch (Google_Exception $e) {
+      $error = '登録チャンネルの取得に失敗しました。';
     }
   }
   fetch(null);
@@ -52,7 +56,12 @@ if ($_SESSION['state'] == $_GET['state'] && isset($_GET['code'])) {
     <meta charset="UTF-8" />
   </head>
   <body>
-    <script src="https://unpkg.com/dexie/dist/dexie.js"></script>
+    <?php if ($error) {
+      echo "<p>$error</p>";
+      echo '<p>時間をおいて、やり直してください。</p>';
+    } else {
+       ?>
+<script src="https://unpkg.com/dexie/dist/dexie.js"></script>
     <script>
       const db = new Dexie('CacheList')
       db.version(1).stores({files: 'purpose'})
@@ -72,5 +81,7 @@ if ($_SESSION['state'] == $_GET['state'] && isset($_GET['code'])) {
         console.error(error)
       })
     </script>
+      <?php
+    } ?>
   </body>
 </html>
