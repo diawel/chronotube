@@ -13,7 +13,7 @@ if ($_SESSION['state'] == $_GET['state'] && isset($_GET['code'])) {
 
   $client = new Google_Client();
   $client->setAuthConfig(PATH['GOOGLE_API'] . '/client_secret.json');
-  $client->authenticate($_GET['code']);
+  $client->fetchAccessTokenWithAuthCode($_GET['code']);
 
   $service = new Google_Service_YouTube($client);
 
