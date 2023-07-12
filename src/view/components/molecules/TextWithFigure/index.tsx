@@ -4,12 +4,12 @@ import { fontSize } from 'src/common/styles/fontSize'
 import TextBlock from 'src/view/components/atoms/TextBlock'
 import styled from 'styled-components'
 
-export type DescriptionSectionPropsType = {
+export type TextWithFigurePropsType = {
   text: ReactNode
   figure: ReactNode
 }
 
-const DescriptionSection: React.FC<DescriptionSectionPropsType> = (props) => {
+const TextWithFigure: React.FC<TextWithFigurePropsType> = (props) => {
   const { text, figure } = props
   return (
     <Wrapper>
@@ -31,4 +31,4 @@ const TextWrapper = styled.div`
   margin-bottom: 8px;
 `
 
-export default DescriptionSection
+export default TextWithFigure

@@ -3,8 +3,8 @@ import { fontSize } from 'src/common/styles/fontSize'
 import TextBlock from 'src/view/components/atoms/TextBlock'
 import PrimaryButton from 'src/view/components/molecules/PrimaryButton'
 import styled from 'styled-components'
-import DescriptionSection from './DescriptionSection'
 import Text from 'src/view/components/atoms/Text'
+import TextWithFigure from 'src/view/components/molecules/TextWithFigure'
 
 const Wrapper = styled.div`
   margin-top: 80px;
@@ -21,7 +21,7 @@ const Description = (
         ブランドアカウントを使用している場合
       </TextBlock>
     </TitleWrapper>
-    <DescriptionSection
+    <TextWithFigure
       text={
         <>
           Google
