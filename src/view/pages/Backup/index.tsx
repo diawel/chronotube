@@ -10,6 +10,7 @@ import ColumnContent from 'src/view/components/templates/ColumnContent'
 import styled from 'styled-components'
 import InitPage from '../../components/utils/InitPage'
 import Abstract from './Abstract'
+import Clear from './Clear'
 
 const Backup: React.FC = () => {
   const [loading, setLoading] = useState(false)
@@ -42,6 +43,7 @@ const Backup: React.FC = () => {
           <PrimaryButton text="再生履歴がありません" />
         </DisabledButtonWrapper>
       )}
+      <Clear />
     </ColumnContent>
   )
 }

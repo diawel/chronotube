@@ -2,8 +2,8 @@ import { color } from 'src/common/styles/color'
 import { fontSize } from 'src/common/styles/fontSize'
 import TextBlock from 'src/view/components/atoms/TextBlock'
 import PrimaryButton from 'src/view/components/molecules/PrimaryButton'
+import TextWithFigure from 'src/view/components/molecules/TextWithFigure'
 import styled from 'styled-components'
-import DescriptionSection from './DescriptionSection'
 
 const Wrapper = styled.div`
   margin-top: 80px;
@@ -29,7 +29,7 @@ const Description = (
         再生履歴の書き出し方
       </TextBlock>
     </TitleWrapper>
-    <DescriptionSection
+    <TextWithFigure
       text="Google データエクスポートにアクセスします。"
       figure={
         <a href="https://takeout.google.com/" target="_blank" rel="nofollow">
@@ -37,24 +37,23 @@ const Description = (
         </a>
       }
     />
-    <DescriptionSection
+    <TextWithFigure
       text="「YouTube と YouTube Music」の項目のみにチェックを付けます。"
       figure={<DescriptionImage src="/image/addhistory_0.png" />}
     />
-
-    <DescriptionSection
+    <TextWithFigure
       text="エクスポートする項目を「履歴」のみにします。"
       figure={<DescriptionImage src="/image/addhistory_1.png" />}
     />
-    <DescriptionSection
+    <TextWithFigure
       text="履歴の形式を「JSON」にします。"
       figure={<DescriptionImage src="/image/addhistory_2.png" />}
     />
-    <DescriptionSection
+    <TextWithFigure
       text="画面下部に進んで「エクスポートを作成」します。"
       figure={<DescriptionImage src="/image/addhistory_3.png" />}
     />
-    <DescriptionSection
+    <TextWithFigure
       text="完了後に届くメールから、データをダウンロードします。"
       figure={<DescriptionImage src="/image/addhistory_4.png" />}
     />
