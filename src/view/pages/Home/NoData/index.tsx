@@ -11,6 +11,9 @@ const NoData: React.FC = () => {
       <a href="/api/redirect.php">
         <PrimaryButton text="ログインしてデータを取得" />
       </a>
+      <p>
+        現在、急激なユーザー数の増加により、時間帯によっては登録チャンネルの取得に失敗することがあります。その場合には、時間をおいて再度お試しいただきますようお願いいたします。
+      </p>
       <AdWrapper>
         <Ad />
       </AdWrapper>
