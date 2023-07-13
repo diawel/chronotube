@@ -6,6 +6,9 @@ import Description from './Description'
 import { useLiveQuery } from 'dexie-react-hooks'
 import { subscription } from 'src/common/utils/db/subscription'
 import styled from 'styled-components'
+import { color } from 'src/common/styles/color'
+import { fontSize } from 'src/common/styles/fontSize'
+import Text from 'src/view/components/atoms/Text'
 
 const UpdateSubscription: React.FC = () => {
   const liveQuery = useLiveQuery(async () => {
@@ -34,7 +37,9 @@ const UpdateSubscription: React.FC = () => {
         </DisabledButtonWrapper>
       )}
       <p>
-        現在、急激なユーザー数の増加に伴い、登録チャンネルの更新頻度を制限しています。また、時間帯によっては登録チャンネルの更新に失敗することがあります。その場合には、時間をおいて再度お試しいただきますようお願いいたします。
+        <Text color={color.black} size={fontSize.regular}>
+          現在、急激なユーザー数の増加に伴い、登録チャンネルの更新頻度を制限しています。また、時間帯によっては登録チャンネルの更新に失敗することがあります。その場合には、時間をおいて再度お試しいただきますようお願いいたします。
+        </Text>
       </p>
       {Description}
     </ColumnContent>
