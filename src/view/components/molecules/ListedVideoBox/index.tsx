@@ -3,11 +3,13 @@ import { fontSize } from 'src/common/styles/fontSize'
 import styled from 'styled-components'
 import ClampedText from '../../atoms/ClampedText'
 import TextBlock from '../../atoms/TextBlock'
+import { ReactNode } from 'react'
+import NoTranslate from '../../atoms/NoTranslate'
 
 export type ListedVideoBoxPropsType = {
   id: string
   title: string
-  snippet: string
+  snippet: ReactNode
 }
 
 const ListedVideoBox: React.FC<ListedVideoBoxPropsType> = (props) => {
@@ -28,7 +30,7 @@ const ListedVideoBox: React.FC<ListedVideoBoxPropsType> = (props) => {
           weight="bold"
           lineClamp="1"
         >
-          {title}
+          <NoTranslate>{title}</NoTranslate>
         </ClampedText>
         <TextBlock color={color.black} size={fontSize.small}>
           {snippet}

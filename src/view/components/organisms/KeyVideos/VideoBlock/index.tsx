@@ -1,3 +1,4 @@
+import { ReactNode } from 'react'
 import EnclosedTitle from 'src/view/components/molecules/EnclosedTitle'
 import VideoBox from 'src/view/components/molecules/VideoBox'
 import styled from 'styled-components'
@@ -6,7 +7,7 @@ export type VideoBlockPropsType = {
   subtitle: string
   id: string
   title: string
-  snippet: string
+  snippet: ReactNode
 }
 
 const VideoBlock: React.FC<VideoBlockPropsType> = (props) => {

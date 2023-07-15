@@ -1,6 +1,7 @@
 import { dateToString } from 'src/common/utils/dateToString'
 import VideoBlock from './VideoBlock'
 import { ChannelAbstractType } from 'src/common/utils/types/youtube'
+import NoTranslate from '../../atoms/NoTranslate'
 
 export type KeyVideosPropsType = {
   firstPlayback?: { id: string; title: string; playbackDate: Date }
@@ -38,7 +39,13 @@ const KeyVideos: React.FC<KeyVideosPropsType> = (props) => {
         subtitle="出会う直前に再生した動画"
         id={triggerPlayback?.id ?? ''}
         title={triggerPlayback?.title ?? 'データがありません'}
-        snippet={triggerPlayback ? triggerPlayback.uploader.name : '不明'}
+        snippet={
+          triggerPlayback ? (
+            <NoTranslate>{triggerPlayback.uploader.name}</NoTranslate>
+          ) : (
+            '不明'
+          )
+        }
       />
     </div>
   )

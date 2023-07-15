@@ -7,6 +7,7 @@ import SmallButton from 'src/view/components/molecules/SmallButton'
 import styled from 'styled-components'
 import Snippet from './Snippet'
 import { ChannelAbstractType } from 'src/common/utils/types/youtube'
+import NoTranslate from 'src/view/components/atoms/NoTranslate'
 
 export type IconBoxPropsType = {
   historyCount: number
@@ -83,7 +84,7 @@ const IconBox: React.FC<IconBoxPropsType> = (props) => {
       >
         <Icon src={thumbnail.high.url} />
         <TextBlock color={color.black} size={fontSize.medium} weight="bold">
-          {name}
+          <NoTranslate>{name}</NoTranslate>
         </TextBlock>
         <SnippetWrapper>
           <Snippet text={`${dateToString(subscribeDate)}に登録`} />

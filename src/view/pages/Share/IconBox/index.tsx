@@ -5,6 +5,7 @@ import TextBlock from 'src/view/components/atoms/TextBlock'
 import styled from 'styled-components'
 import Snippet from './Snippet'
 import { SharedChannelType } from '..'
+import NoTranslate from 'src/view/components/atoms/NoTranslate'
 
 export type IconBoxPropsType = {
   channel: SharedChannelType
@@ -23,7 +24,7 @@ const IconBox: React.FC<IconBoxPropsType> = (props) => {
       >
         <Icon src={`/api/channel-thumbnail.php?id=${id}`} />
         <TextBlock color={color.black} size={fontSize.medium} weight="bold">
-          {name}
+          <NoTranslate>{name}</NoTranslate>
         </TextBlock>
         <SnippetWrapper>
           <Snippet text={`${dateToString(new Date(subscribeDate))}に登録`} />
