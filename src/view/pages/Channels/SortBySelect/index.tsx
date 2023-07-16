@@ -71,7 +71,6 @@ const SortBySelect: React.FC = () => {
 
 const Wrapper = styled.div`
   flex-shrink: 0;
-  width: 112px;
 `
 
 const SelectBox = styled.div`
@@ -80,10 +79,10 @@ const SelectBox = styled.div`
   color: ${color.black};
   font-size: ${fontSize.small};
   display: flex;
+  gap: 8px;
   align-items: center;
   justify-content: space-between;
   padding: 0 12px 0 24px;
-  width: 100%;
   height: 48px;
   box-sizing: border-box;
 `
