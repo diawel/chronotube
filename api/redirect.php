@@ -22,6 +22,7 @@ $query = http_build_query([
   'response_type' => 'code',
   'scope' => 'https://www.googleapis.com/auth/youtube.readonly',
   'state' => $state,
+  'prompt' => 'select_account',
 ]);
 
 header('Location: https://accounts.google.com/o/oauth2/v2/auth?' . $query);

@@ -2,7 +2,6 @@ import PrimaryButton from 'src/view/components/molecules/PrimaryButton'
 import ColumnContent from 'src/view/components/templates/ColumnContent'
 import InitPage from '../../components/utils/InitPage'
 import Abstract from './Abstract'
-import Description from './Description'
 import { useLiveQuery } from 'dexie-react-hooks'
 import { subscription } from 'src/common/utils/db/subscription'
 import styled from 'styled-components'
@@ -41,7 +40,6 @@ const UpdateSubscription: React.FC = () => {
           現在、急激なユーザー数の増加に伴い、登録チャンネルの更新頻度を制限しています。また、時間帯によっては登録チャンネルの更新に失敗することがあります。その場合には、時間をおいて再度お試しいただきますようお願いいたします。
         </Text>
       </p>
-      {Description}
     </ColumnContent>
   )
 }
