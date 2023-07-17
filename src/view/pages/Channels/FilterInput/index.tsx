@@ -1,6 +1,7 @@
 import { useContext } from 'react'
 import Input from 'src/view/components/atoms/Input'
 import { SearchContext } from '..'
+import { mlString } from 'src/common/utils/switchLanguages'
 
 const FilterInput: React.FC = () => {
   const { filter, setFilter } = useContext(SearchContext)
@@ -10,7 +11,10 @@ const FilterInput: React.FC = () => {
       type="text"
       value={filter}
       valueSetter={setFilter}
-      placeholder="チャンネルを検索"
+      placeholder={mlString({
+        ja: 'チャンネルを検索',
+        en: 'Search channels',
+      })}
     />
   )
 }

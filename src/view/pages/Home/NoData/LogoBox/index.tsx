@@ -5,6 +5,7 @@ import TextBlock from 'src/view/components/atoms/TextBlock'
 import Logo from 'src/view/components/atoms/Logo'
 import { color } from 'src/common/styles/color'
 import { fontSize } from 'src/common/styles/fontSize'
+import { ml } from 'src/common/utils/switchLanguages'
 
 const LogoBox: React.FC = () => {
   const DeviceType = useContext(DeviceContext)
@@ -12,7 +13,10 @@ const LogoBox: React.FC = () => {
     <Wrapper>
       <Logo width={DeviceType === 'mobile' ? '220px' : '280px'} />
       <TextBlock color={color.black} size={fontSize.regular}>
-        YouTubeのチャンネル登録日を検索
+        {ml({
+          ja: 'YouTubeのチャンネル登録日を検索',
+          en: 'Find the date you subscribed to YouTube channels.',
+        })}
       </TextBlock>
     </Wrapper>
   )

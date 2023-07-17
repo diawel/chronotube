@@ -2,6 +2,7 @@ import { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { color } from 'src/common/styles/color'
 import { fontSize } from 'src/common/styles/fontSize'
+import { ml, mlString } from 'src/common/utils/switchLanguages'
 import { DeviceContext } from 'src/index'
 import TextBlock from 'src/view/components/atoms/TextBlock'
 import PrimaryButton from 'src/view/components/molecules/PrimaryButton'
@@ -14,11 +15,19 @@ const Engage: React.FC = () => {
     <Wrapper padding={deviceType == 'mobile' ? '16px' : '24px'}>
       <TextWrapper>
         <TextBlock color={color.black} size={fontSize.large} weight="bold">
-          YouTubeにログインして、#あなたの推し履歴 が確認できます。
+          {ml({
+            ja: 'YouTubeにログインして、#あなたの推し履歴 が確認できます。',
+            en: 'Log in to YouTube to see #YourFavoriteHistory.',
+          })}
         </TextBlock>
       </TextWrapper>
       <Link to="/">
-        <PrimaryButton text="#わたしの推し履歴 を調べる" />
+        <PrimaryButton
+          text={mlString({
+            ja: '#わたしの推し履歴 を調べる',
+            en: 'Check #MyFavoriteHistory',
+          })}
+        />
       </Link>
     </Wrapper>
   )

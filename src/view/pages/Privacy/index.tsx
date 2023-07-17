@@ -4,11 +4,17 @@ import ColumnContent from 'src/view/components/templates/ColumnContent'
 import Text from 'src/view/components/atoms/Text'
 import InitPage from '../../components/utils/InitPage'
 import styled from 'styled-components'
+import { mlString } from 'src/common/utils/switchLanguages'
 
 const Privacy: React.FC = () => {
   return (
     <ColumnContent maxWidth="640px">
-      <InitPage pageTitle="プライバシーポリシー | Chronotube" />
+      <InitPage
+        pageTitle={`${mlString({
+          ja: 'プライバシーポリシー',
+          en: 'Privacy Policy',
+        })} | Chronotube`}
+      />
       <Text color={color.black} size={fontSize.regular}>
         <h2>プライバシーポリシー</h2>
         Diawel（以下，「作者」といいます。）は，本ウェブサイト上で提供するサービス（以下,「本サービス」といいます。）における，利用者の皆さま（以下，「ユーザー」といいます。）の個人情報の取扱いについて，以下のとおりプライバシーポリシー（以下，「本ポリシー」といいます。）を定めます。

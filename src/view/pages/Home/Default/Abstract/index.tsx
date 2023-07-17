@@ -8,6 +8,7 @@ import SideSlider from 'src/view/components/atoms/SideSlider'
 import { dateToString } from 'src/common/utils/dateToString'
 import { watchHistory } from 'src/common/utils/db/watchHistory'
 import SkeletonTitledValue from 'src/view/components/atoms/SkeletonBox/SkeletonTitledValue'
+import { mlString } from 'src/common/utils/switchLanguages'
 
 let cachedLiveQuery: any
 
@@ -32,13 +33,19 @@ const Abstract: React.FC = () => {
     blocks = [
       <>
         <TitledValue
-          title="登録チャンネル数"
+          title={mlString({
+            ja: '登録チャンネル数',
+            en: 'Subscribed channels',
+          })}
           value={
             liveQuery.channelCount ? liveQuery.channelCount.toString() : 'なし'
           }
         />
         <TitledValue
-          title="総再生数"
+          title={mlString({
+            ja: '総再生数',
+            en: 'Total views',
+          })}
           value={
             liveQuery.historyCount ? liveQuery.historyCount.toString() : 'なし'
           }
@@ -46,7 +53,10 @@ const Abstract: React.FC = () => {
       </>,
       <>
         <TitledValue
-          title="登録チャンネル最終更新"
+          title={mlString({
+            ja: '登録チャンネル最終更新',
+            en: 'Last subscriptions update',
+          })}
           value={
             liveQuery.channelsFetchedAt
               ? dateToString(liveQuery.channelsFetchedAt)
@@ -54,7 +64,10 @@ const Abstract: React.FC = () => {
           }
         />
         <TitledValue
-          title="最新の再生履歴"
+          title={mlString({
+            ja: '最新の再生履歴',
+            en: 'Latest watch history',
+          })}
           value={
             liveQuery.latestPlaybackDate
               ? dateToString(liveQuery.latestPlaybackDate)

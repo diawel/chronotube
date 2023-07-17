@@ -10,6 +10,7 @@ import SliderControl from './SliderControl'
 import Text from 'src/view/components/atoms/Text'
 import { color } from 'src/common/styles/color'
 import { fontSize } from 'src/common/styles/fontSize'
+import { ml } from 'src/common/utils/switchLanguages'
 
 export type SliderPropsType = {
   channels: ChannelType[]
@@ -40,7 +41,10 @@ const Slider: React.FC<SliderPropsType> = (props) => {
             <ChannelCard
               thumbnail={thumbnail.high}
               name={name}
-              snippet={`${dateToString(subscribeDate)}に登録`}
+              snippet={ml({
+                ja: `${dateToString(subscribeDate)}に登録`,
+                en: `Subscribed on ${dateToString(subscribeDate)}`,
+              })}
             />
           </CardContainer>
         </Link>
@@ -56,7 +60,10 @@ const Slider: React.FC<SliderPropsType> = (props) => {
         ) : channels.length ? (
           <EmptyResult>
             <Text color={color.black} size={fontSize.medium} weight="bold">
-              「{filter}」に一致するチャンネルがありません。
+              {ml({
+                ja: `「${filter}」に一致するチャンネルがありません。`,
+                en: `No channels match "${filter}".`,
+              })}
             </Text>
           </EmptyResult>
         ) : (

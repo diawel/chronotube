@@ -9,6 +9,7 @@ import TextBlock from 'src/view/components/atoms/TextBlock'
 import { fontSize } from 'src/common/styles/fontSize'
 import SkeletonTitledValue from 'src/view/components/atoms/SkeletonBox/SkeletonTitledValue'
 import SkeletonTitledRange from 'src/view/components/atoms/SkeletonBox/SkeletonTitledRange'
+import { mlString } from 'src/common/utils/switchLanguages'
 
 const Abstract: React.FC = () => {
   const liveQuery = useLiveQuery(async () => {
@@ -25,20 +26,26 @@ const Abstract: React.FC = () => {
       return (
         <Wrapper>
           <TitledValue
-            title="総再生数"
+            title={mlString({
+              ja: '総再生数',
+              en: 'Total views',
+            })}
             value={liveQuery.historyCount.toString()}
           />
           <TitledRange
-            title="再生履歴の期間"
+            title={mlString({
+              ja: '再生履歴の期間',
+              en: 'Watch history period',
+            })}
             start={
               liveQuery.historyDuration[0]
                 ? dateToString(liveQuery.historyDuration[0])
-                : 'なし'
+                : ''
             }
             end={
               liveQuery.historyDuration[1]
                 ? dateToString(liveQuery.historyDuration[1])
-                : 'なし'
+                : ''
             }
           />
         </Wrapper>

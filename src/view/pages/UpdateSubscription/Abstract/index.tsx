@@ -4,6 +4,7 @@ import TitledValue from 'src/view/components/molecules/TitledValue'
 import styled from 'styled-components'
 import { subscription } from 'src/common/utils/db/subscription'
 import SkeletonTitledValue from 'src/view/components/atoms/SkeletonBox/SkeletonTitledValue'
+import { mlString } from 'src/common/utils/switchLanguages'
 
 const Abstract: React.FC = () => {
   const liveQuery = useLiveQuery(async () => {
@@ -18,13 +19,19 @@ const Abstract: React.FC = () => {
     return (
       <Wrapper>
         <TitledValue
-          title="登録チャンネル数"
+          title={mlString({
+            ja: '登録チャンネル数',
+            en: 'Subscribed channels',
+          })}
           value={
             liveQuery.channelCount ? liveQuery.channelCount.toString() : 'なし'
           }
         />
         <TitledValue
-          title="登録チャンネル最終更新"
+          title={mlString({
+            ja: '登録チャンネル最終更新',
+            en: 'Last subscriptions update',
+          })}
           value={
             liveQuery.channelsFetchedAt
               ? dateToString(liveQuery.channelsFetchedAt)

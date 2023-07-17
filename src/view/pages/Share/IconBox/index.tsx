@@ -6,6 +6,7 @@ import styled from 'styled-components'
 import Snippet from './Snippet'
 import { SharedChannelType } from '..'
 import NoTranslate from 'src/view/components/atoms/NoTranslate'
+import { mlString } from 'src/common/utils/switchLanguages'
 
 export type IconBoxPropsType = {
   channel: SharedChannelType
@@ -27,8 +28,18 @@ const IconBox: React.FC<IconBoxPropsType> = (props) => {
           <NoTranslate>{name}</NoTranslate>
         </TextBlock>
         <SnippetWrapper>
-          <Snippet text={`${dateToString(new Date(subscribeDate))}に登録`} />
-          <Snippet text={`${playCount}回再生`} />
+          <Snippet
+            text={mlString({
+              ja: `${dateToString(new Date(subscribeDate))}に登録`,
+              en: `Subscribed on ${dateToString(new Date(subscribeDate))}`,
+            })}
+          />
+          <Snippet
+            text={mlString({
+              ja: `${playCount}回再生`,
+              en: `${playCount} views`,
+            })}
+          />
         </SnippetWrapper>
       </a>
     </Wrapper>

@@ -10,12 +10,25 @@ import PulldownBox from 'src/view/components/molecules/PulldownBox'
 import { SortByType } from 'src/view/components/organisms/ChannelList'
 import styled from 'styled-components'
 import { SearchContext } from '..'
+import { mlString } from 'src/common/utils/switchLanguages'
 
 export type KeyValuePairType = { key: string; value: SortByType }
 
 const keyValuePair: KeyValuePairType[] = [
-  { key: '登録日順', value: 'subscribeDate' },
-  { key: '再生数順', value: 'playCount' },
+  {
+    key: mlString({
+      ja: '登録日順',
+      en: 'Subscribe date',
+    }),
+    value: 'subscribeDate',
+  },
+  {
+    key: mlString({
+      ja: '再生数順',
+      en: 'Views',
+    }),
+    value: 'playCount',
+  },
 ]
 
 const SortBySelect: React.FC = () => {

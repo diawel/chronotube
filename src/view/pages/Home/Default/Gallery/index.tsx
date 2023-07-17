@@ -13,6 +13,7 @@ import Text from 'src/view/components/atoms/Text'
 import styled from 'styled-components'
 import Slider from './Slider'
 import { cardWidth } from './Slider/CardContainer'
+import { ml, mlString } from 'src/common/utils/switchLanguages'
 
 let cachedLiveQuery: any
 
@@ -49,7 +50,10 @@ const Gallery: React.FC = () => {
     <div>
       <TextWrapper>
         <Text color={color.darkGray} size={fontSize.small}>
-          登録済みのチャンネル
+          {ml({
+            ja: '登録済みのチャンネル',
+            en: 'Channels',
+          })}
         </Text>
       </TextWrapper>
       {node}
@@ -57,7 +61,10 @@ const Gallery: React.FC = () => {
         <Link to="/channels">
           <LinkContent>
             <Text color={color.black} size={fontSize.small}>
-              すべて表示
+              {ml({
+                ja: 'すべて表示',
+                en: 'Show all',
+              })}
               <Icon svg={chevronDown} size="16px" rotate="270deg" />
             </Text>
           </LinkContent>
@@ -66,7 +73,10 @@ const Gallery: React.FC = () => {
           type="text"
           value={filter}
           valueSetter={setFilter}
-          placeholder="チャンネルを検索"
+          placeholder={mlString({
+            ja: 'チャンネルを検索',
+            en: 'Search channels',
+          })}
         />
       </BottomNav>
     </div>

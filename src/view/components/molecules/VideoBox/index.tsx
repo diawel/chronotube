@@ -5,11 +5,12 @@ import ClampedText from '../../atoms/ClampedText'
 import TextBlock from '../../atoms/TextBlock'
 import NoTranslate from '../../atoms/NoTranslate'
 import { ReactNode } from 'react'
+import { ml } from 'src/common/utils/switchLanguages'
 
 export type VideoBoxPropsType = {
-  id: string
-  title: string
-  snippet: ReactNode
+  id?: string
+  title?: string
+  snippet?: ReactNode
 }
 
 const VideoBox: React.FC<VideoBoxPropsType> = (props) => {
@@ -30,7 +31,11 @@ const VideoBox: React.FC<VideoBoxPropsType> = (props) => {
           weight="bold"
           lineClamp="2"
         >
-          <NoTranslate>{title}</NoTranslate>
+          {title ? (
+            <NoTranslate>{title}</NoTranslate>
+          ) : (
+            ml({ ja: 'データがありません', en: 'Missing data' })
+          )}
         </ClampedText>
         <TextBlock color={color.black} size={fontSize.small}>
           {snippet}

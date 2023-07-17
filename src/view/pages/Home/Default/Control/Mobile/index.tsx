@@ -5,6 +5,7 @@ import PrimaryButton from 'src/view/components/molecules/PrimaryButton'
 import PulldownButton from './PulldownButton'
 import { Link } from 'react-router-dom'
 import Pulldown from 'src/view/pages/Home/Default/Control/Mobile/PulldownOption'
+import { mlString } from 'src/common/utils/switchLanguages'
 
 const Mobile: React.FC = () => {
   const [isPulldownOpen, setIsPulldownOpen] = useState(false)
@@ -13,7 +14,12 @@ const Mobile: React.FC = () => {
       <StableButtons>
         <PrimaryButtonWrapper>
           <Link to="/updatesubscription">
-            <PrimaryButton text="登録チャンネルを更新" />
+            <PrimaryButton
+              text={mlString({
+                ja: '登録チャンネルを更新',
+                en: 'Update subscriptions',
+              })}
+            />
           </Link>
         </PrimaryButtonWrapper>
         <PulldownButton
@@ -26,8 +32,20 @@ const Mobile: React.FC = () => {
         isOpen={isPulldownOpen}
         isOpenSetter={setIsPulldownOpen}
       >
-        <Pulldown linkTo="/addhistory" text="再生履歴を追加" />
-        <Pulldown linkTo="/backup" text="再生履歴をバックアップ" />
+        <Pulldown
+          linkTo="/addhistory"
+          text={mlString({
+            ja: '再生履歴を追加',
+            en: 'Add watch history',
+          })}
+        />
+        <Pulldown
+          linkTo="/backup"
+          text={mlString({
+            ja: '再生履歴をバックアップ',
+            en: 'Backup watch history',
+          })}
+        />
       </PulldownBox>
     </Wrapper>
   )
