@@ -9,7 +9,7 @@ import TextBlock from 'src/view/components/atoms/TextBlock'
 import { fontSize } from 'src/common/styles/fontSize'
 import SkeletonTitledValue from 'src/view/components/atoms/SkeletonBox/SkeletonTitledValue'
 import SkeletonTitledRange from 'src/view/components/atoms/SkeletonBox/SkeletonTitledRange'
-import { mlString } from 'src/common/utils/switchLanguages'
+import { ml, mlString } from 'src/common/utils/switchLanguages'
 
 const Abstract: React.FC = () => {
   const liveQuery = useLiveQuery(async () => {
@@ -55,11 +55,17 @@ const Abstract: React.FC = () => {
       <Wrapper>
         <TitleWrapper>
           <TextBlock color={color.black} size={fontSize.title} weight="bold">
-            再生履歴を追加
+            {ml({
+              ja: '再生履歴を追加',
+              en: 'Add watch history',
+            })}
           </TextBlock>
         </TitleWrapper>
         <TextBlock color={color.black} size={fontSize.regular}>
-          再生履歴を追加すると、より詳しい情報が確認できます。
+          {ml({
+            ja: '再生履歴を追加すると、より詳しい情報が確認できます。',
+            en: 'Add your watch history to see more information.',
+          })}
         </TextBlock>
       </Wrapper>
     )

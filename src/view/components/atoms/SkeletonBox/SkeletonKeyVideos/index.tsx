@@ -8,13 +8,13 @@ const SkeletonKeyVideos: React.FC = () => {
       <VideoBlock
         subtitle={mlString({
           ja: 'はじめて再生した動画',
-          en: 'First viewed',
+          en: 'First watched',
         })}
       />
       <VideoBlock
         subtitle={mlString({
           ja: 'もっとも再生した動画',
-          en: 'Most viewed',
+          en: 'Most views',
         })}
       />
       <VideoBlock

@@ -21,7 +21,7 @@ const KeyVideos: React.FC<KeyVideosPropsType> = (props) => {
       <VideoBlock
         subtitle={mlString({
           ja: 'はじめて再生した動画',
-          en: 'First viewed',
+          en: 'First watched',
         })}
         id={firstPlayback?.id}
         title={firstPlayback?.title}
@@ -37,7 +37,7 @@ const KeyVideos: React.FC<KeyVideosPropsType> = (props) => {
       <VideoBlock
         subtitle={mlString({
           ja: 'もっとも再生した動画',
-          en: 'Most viewed',
+          en: 'Most views',
         })}
         id={mostPlayedVideo?.id}
         title={mostPlayedVideo?.title}

@@ -52,7 +52,7 @@ const Gallery: React.FC = () => {
         <Text color={color.darkGray} size={fontSize.small}>
           {ml({
             ja: '登録済みのチャンネル',
-            en: 'Channels',
+            en: 'Subscriptions',
           })}
         </Text>
       </TextWrapper>

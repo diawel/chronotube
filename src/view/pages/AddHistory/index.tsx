@@ -49,7 +49,7 @@ const AddHistory: React.FC = () => {
       ) : (
         <CompleteButton progress={progress} />
       )}
-      {progress == 'ready' && Description}
+      {progress == 'ready' && <Description />}
     </ColumnContent>
   )
 }

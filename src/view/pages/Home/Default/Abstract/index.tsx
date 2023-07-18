@@ -38,7 +38,7 @@ const Abstract: React.FC = () => {
             en: 'Subscribed channels',
           })}
           value={
-            liveQuery.channelCount ? liveQuery.channelCount.toString() : 'なし'
+            liveQuery.channelCount ? liveQuery.channelCount.toString() : ''
           }
         />
         <TitledValue
@@ -47,7 +47,12 @@ const Abstract: React.FC = () => {
             en: 'Total views',
           })}
           value={
-            liveQuery.historyCount ? liveQuery.historyCount.toString() : 'なし'
+            liveQuery.historyCount
+              ? liveQuery.historyCount.toString()
+              : mlString({
+                  ja: 'なし',
+                  en: 'No data',
+                })
           }
         />
       </>,
@@ -60,7 +65,7 @@ const Abstract: React.FC = () => {
           value={
             liveQuery.channelsFetchedAt
               ? dateToString(liveQuery.channelsFetchedAt)
-              : 'なし'
+              : ''
           }
         />
         <TitledValue
@@ -71,7 +76,10 @@ const Abstract: React.FC = () => {
           value={
             liveQuery.latestPlaybackDate
               ? dateToString(liveQuery.latestPlaybackDate)
-              : 'なし'
+              : mlString({
+                  ja: 'なし',
+                  en: 'No data',
+                })
           }
         />
       </>,

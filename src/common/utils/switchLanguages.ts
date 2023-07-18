@@ -26,3 +26,7 @@ export const mlString = (multiLanguageString: {
 }) => {
   return multiLanguageString[currentLanguage]
 }
+
+export const getCurrentLanguage = () => {
+  return currentLanguage
+}
