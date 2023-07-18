@@ -11,6 +11,7 @@ import styled from 'styled-components'
 import InitPage from '../../components/utils/InitPage'
 import Abstract from './Abstract'
 import Clear from './Clear'
+import { mlString } from 'src/common/utils/switchLanguages'
 
 const Backup: React.FC = () => {
   const [loading, setLoading] = useState(false)
@@ -28,19 +29,39 @@ const Backup: React.FC = () => {
 
   return (
     <ColumnContent>
-      <InitPage pageTitle="再生履歴をバックアップ | Chronotube" />
+      <InitPage
+        pageTitle={`${mlString({
+          ja: '再生履歴をバックアップ',
+          en: 'Backup watch history',
+        })} | Chronotube`}
+      />
       <Abstract />
       {!liveQuery || loading ? (
         <DisabledButtonWrapper>
-          <PrimaryButton text="読み込み中" />
+          <PrimaryButton
+            text={mlString({
+              ja: '読み込み中',
+              en: 'Loading',
+            })}
+          />
         </DisabledButtonWrapper>
       ) : liveQuery.historyCount ? (
         <Button onClick={backup}>
-          <PrimaryButton text="再生履歴をバックアップ" />
+          <PrimaryButton
+            text={mlString({
+              ja: '再生履歴をバックアップ',
+              en: 'Backup watch history',
+            })}
+          />
         </Button>
       ) : (
         <DisabledButtonWrapper>
-          <PrimaryButton text="再生履歴がありません" />
+          <PrimaryButton
+            text={mlString({
+              ja: '再生履歴がありません',
+              en: 'No watch history',
+            })}
+          />
         </DisabledButtonWrapper>
       )}
       <Clear />

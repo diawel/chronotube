@@ -8,6 +8,7 @@ import styled from 'styled-components'
 import ChannelCard from '../../molecules/ChannelCard'
 import Text from '../../atoms/Text'
 import { color } from 'src/common/styles/color'
+import { ml } from 'src/common/utils/switchLanguages'
 
 export type ChannelListPropsType = {
   channels: ChannelType[]
@@ -62,8 +63,11 @@ const ChannelList: React.FC<ChannelListPropsType> = (props) => {
                 name={name}
                 snippet={
                   sortBy == 'subscribeDate'
-                    ? `${dateToString(subscribeDate)}に登録`
-                    : `${playCount}回再生`
+                    ? ml({
+                        ja: `${dateToString(subscribeDate)}に登録`,
+                        en: `Subscribed on ${dateToString(subscribeDate)}`,
+                      })
+                    : ml({ ja: `${playCount}回再生`, en: `${playCount} views` })
                 }
                 listed={true}
               />

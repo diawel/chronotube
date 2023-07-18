@@ -7,6 +7,8 @@ import SmallButton from 'src/view/components/molecules/SmallButton'
 import styled from 'styled-components'
 import Snippet from './Snippet'
 import { ChannelAbstractType } from 'src/common/utils/types/youtube'
+import NoTranslate from 'src/view/components/atoms/NoTranslate'
+import { mlString } from 'src/common/utils/switchLanguages'
 
 export type IconBoxPropsType = {
   historyCount: number
@@ -31,17 +33,31 @@ const IconBox: React.FC<IconBoxPropsType> = (props) => {
   const { id, name, thumbnail, subscribeDate, playCount } = channel
 
   let tweetText = historyCount
-    ? `わたしが「${name}」をチャンネル登録したのは${dateToString(
-        subscribeDate
-      )}、これまで再生した回数は${playCount}回でした。`
-    : `わたしが「${name}」をチャンネル登録したのは${dateToString(
-        subscribeDate
-      )}でした。`
-  tweetText += '\n#わたしの推し履歴 #Chronotube'
+    ? mlString({
+        ja: `わたしが「${name}」をチャンネル登録したのは${dateToString(
+          subscribeDate
+        )}、これまで再生した回数は${playCount}回でした。`,
+        en: `I subscribed to "${name}" on ${dateToString(
+          subscribeDate
+        )} and have watched the videos ${playCount} times.`,
+      })
+    : mlString({
+        ja: `わたしが「${name}」をチャンネル登録したのは${dateToString(
+          subscribeDate
+        )}でした。`,
+        en: `I subscribed to "${name}" on ${dateToString(subscribeDate)}.`,
+      })
+  tweetText += `\n${mlString({
+    ja: '#わたしの推し履歴 #Chronotube',
+    en: '#MyFavoriteHistory #Chronotube',
+  })}`
 
   let shareUrl = 'https://chronotube.diawel.me/'
   if (historyCount) {
-    tweetText += '\n\n▼詳しい結果を見る'
+    tweetText += `\n\n${mlString({
+      ja: '▼詳しい結果を見る',
+      en: '▼See more details',
+    })}`
     shareUrl += `share?d=${encodeURIComponent(
       JSON.stringify({
         channel: { ...{ id, name, subscribeDate, playCount } },
@@ -83,11 +99,25 @@ const IconBox: React.FC<IconBoxPropsType> = (props) => {
       >
         <Icon src={thumbnail.high.url} />
         <TextBlock color={color.black} size={fontSize.medium} weight="bold">
-          {name}
+          <NoTranslate>{name}</NoTranslate>
         </TextBlock>
         <SnippetWrapper>
-          <Snippet text={`${dateToString(subscribeDate)}に登録`} />
-          {historyCount ? <Snippet text={`${playCount}回再生`} /> : <></>}
+          <Snippet
+            text={mlString({
+              ja: `${dateToString(subscribeDate)}に登録`,
+              en: `Subscribed on ${dateToString(subscribeDate)}`,
+            })}
+          />
+          {historyCount ? (
+            <Snippet
+              text={mlString({
+                ja: `${playCount}回再生`,
+                en: `${playCount} views`,
+              })}
+            />
+          ) : (
+            <></>
+          )}
         </SnippetWrapper>
       </a>
       <TweetButtonWrapper>
@@ -98,7 +128,12 @@ const IconBox: React.FC<IconBoxPropsType> = (props) => {
           target="_blank"
           rel="nofollow"
         >
-          <SmallButton text="#結果をツイートする" />
+          <SmallButton
+            text={mlString({
+              ja: '#結果をツイートする',
+              en: 'Tweet this result',
+            })}
+          />
         </a>
       </TweetButtonWrapper>
     </Wrapper>

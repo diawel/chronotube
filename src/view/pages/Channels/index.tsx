@@ -5,6 +5,7 @@ import SearchedChannelList from './SearchedChannelList'
 import { sessionStorageKey } from 'src/common/utils/sessionStorage'
 import InitPage from '../../components/utils/InitPage'
 import ToTop from 'src/view/components/molecules/ToTop'
+import { mlString } from 'src/common/utils/switchLanguages'
 
 type searchType = {
   filter: string
@@ -40,7 +41,12 @@ const Channels: React.FC = () => {
     <SearchContext.Provider
       value={{ ...{ filter, setFilter, sortBy, setSortBy } }}
     >
-      <InitPage pageTitle="登録チャンネル一覧 | Chronotube" />
+      <InitPage
+        pageTitle={`${mlString({
+          ja: '登録チャンネル一覧',
+          en: 'All channels',
+        })} | Chronotube`}
+      />
       <TopBox />
       <SearchedChannelList />
       <ToTop />

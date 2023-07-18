@@ -1,12 +1,31 @@
 import styled from 'styled-components'
 import Option from './Option'
+import { mlString } from 'src/common/utils/switchLanguages'
 
 const Pc: React.FC = () => {
   return (
     <Wrapper>
-      <Option linkTo="/updatesubscription" text="登録チャンネルを更新" />
-      <Option linkTo="/addhistory" text="再生履歴を追加" />
-      <Option linkTo="/backup" text="再生履歴をバックアップ" />
+      <Option
+        linkTo="/updatesubscription"
+        text={mlString({
+          ja: '登録チャンネルを更新',
+          en: 'Update subscriptions',
+        })}
+      />
+      <Option
+        linkTo="/addhistory"
+        text={mlString({
+          ja: '再生履歴を追加',
+          en: 'Add watch history',
+        })}
+      />
+      <Option
+        linkTo="/backup"
+        text={mlString({
+          ja: '再生履歴をバックアップ',
+          en: 'Backup watch history',
+        })}
+      />
     </Wrapper>
   )
 }

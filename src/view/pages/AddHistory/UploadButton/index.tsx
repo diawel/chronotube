@@ -7,6 +7,7 @@ import FileUploader, {
 } from 'src/view/components/atoms/FileUploader'
 import PrimaryButton from 'src/view/components/molecules/PrimaryButton'
 import { ProgressType } from '..'
+import { mlString } from 'src/common/utils/switchLanguages'
 
 export type UploadButtonPropsType = {
   progressSetter: (progress: ProgressType) => void
@@ -56,7 +57,12 @@ const UploadButton: React.FC<UploadButtonPropsType> = (props) => {
   return (
     <FileUploader.Drop {...uploadConfig}>
       <FileUploader.Dialog {...uploadConfig}>
-        <PrimaryButton text="再生履歴を追加" />
+        <PrimaryButton
+          text={mlString({
+            ja: '再生履歴を追加',
+            en: 'Add watch history',
+          })}
+        />
       </FileUploader.Dialog>
     </FileUploader.Drop>
   )

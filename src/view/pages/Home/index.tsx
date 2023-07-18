@@ -10,6 +10,7 @@ import { useEffect, useState } from 'react'
 import ColumnContent from 'src/view/components/templates/ColumnContent'
 import Loading from 'src/view/components/organisms/Loading'
 import { checkCachedSubscription } from 'src/common/utils/db/cacheList'
+import { mlString } from 'src/common/utils/switchLanguages'
 
 const Home: React.FC = () => {
   const [isCacheCecked, setIsCacheCecked] = useState(false)
@@ -22,9 +23,18 @@ const Home: React.FC = () => {
     checkCachedSubscription((progress: StoreSubscriptionProgressType) => {
       setLoadingSnippet(
         {
-          init: '初期化中',
-          parse: 'JSONデータを解析中',
-          store: 'データベースに格納中',
+          init: mlString({
+            ja: '初期化中',
+            en: 'Initializing',
+          }),
+          parse: mlString({
+            ja: 'JSONデータを解析中',
+            en: 'Parsing JSON data',
+          }),
+          store: mlString({
+            ja: 'データベースに格納中',
+            en: 'Storing data to database',
+          }),
           finished: '',
         }[progress]
       )

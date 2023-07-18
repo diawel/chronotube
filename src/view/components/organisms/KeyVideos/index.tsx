@@ -1,6 +1,8 @@
 import { dateToString } from 'src/common/utils/dateToString'
 import VideoBlock from './VideoBlock'
 import { ChannelAbstractType } from 'src/common/utils/types/youtube'
+import NoTranslate from '../../atoms/NoTranslate'
+import { ml, mlString } from 'src/common/utils/switchLanguages'
 
 export type KeyVideosPropsType = {
   firstPlayback?: { id: string; title: string; playbackDate: Date }
@@ -17,28 +19,51 @@ const KeyVideos: React.FC<KeyVideosPropsType> = (props) => {
   return (
     <div>
       <VideoBlock
-        subtitle="はじめて再生した動画"
-        id={firstPlayback?.id ?? ''}
-        title={firstPlayback?.title ?? 'データがありません'}
+        subtitle={mlString({
+          ja: 'はじめて再生した動画',
+          en: 'First watched',
+        })}
+        id={firstPlayback?.id}
+        title={firstPlayback?.title}
         snippet={
           firstPlayback
-            ? `${dateToString(firstPlayback.playbackDate)}に再生`
-            : '不明'
+            ? ml({
+                ja: `${dateToString(firstPlayback.playbackDate)}に再生`,
+                en: `Played on ${dateToString(firstPlayback.playbackDate)}`,
+              })
+            : ml({ ja: '不明', en: 'Unknown' })
         }
       />
       <VideoBlock
-        subtitle="もっとも再生した動画"
-        id={mostPlayedVideo?.id ?? ''}
-        title={mostPlayedVideo?.title ?? 'データがありません'}
+        subtitle={mlString({
+          ja: 'もっとも再生した動画',
+          en: 'Most views',
+        })}
+        id={mostPlayedVideo?.id}
+        title={mostPlayedVideo?.title}
         snippet={
-          mostPlayedVideo ? `${mostPlayedVideo.playCount}回再生` : '不明'
+          mostPlayedVideo
+            ? ml({
+                ja: `${mostPlayedVideo.playCount}回再生`,
+                en: `${mostPlayedVideo.playCount} views`,
+              })
+            : ml({ ja: '不明', en: 'Unknown' })
         }
       />
       <VideoBlock
-        subtitle="出会う直前に再生した動画"
-        id={triggerPlayback?.id ?? ''}
-        title={triggerPlayback?.title ?? 'データがありません'}
-        snippet={triggerPlayback ? triggerPlayback.uploader.name : '不明'}
+        subtitle={mlString({
+          ja: '出会う直前に再生した動画',
+          en: 'Viewed just before encounter',
+        })}
+        id={triggerPlayback?.id}
+        title={triggerPlayback?.title}
+        snippet={
+          triggerPlayback ? (
+            <NoTranslate>{triggerPlayback.uploader.name}</NoTranslate>
+          ) : (
+            ml({ ja: '不明', en: 'Unknown' })
+          )
+        }
       />
     </div>
   )

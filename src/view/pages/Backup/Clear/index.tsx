@@ -9,6 +9,7 @@ import { subscription } from 'src/common/utils/db/subscription'
 import { watchHistory } from 'src/common/utils/db/watchHistory'
 import { useNavigate } from 'react-router-dom'
 import TextWithFigure from 'src/view/components/molecules/TextWithFigure'
+import { ml, mlString } from 'src/common/utils/switchLanguages'
 
 const Wrapper = styled.div`
   margin-top: 80px;
@@ -25,28 +26,47 @@ const Clear: React.FC = () => {
     <Wrapper>
       <TitleWrapper>
         <TextBlock color={color.black} size={fontSize.medium} weight="bold">
-          すべてのデータを削除
+          {ml({
+            ja: 'すべてのデータを削除',
+            en: 'Clear all data',
+          })}
         </TextBlock>
       </TitleWrapper>
       <TextWithFigure
-        text={
-          <>
-            このボタンを押すと、すべてのデータが削除されます。再生履歴は
-            <Text weight="bold">再ログインを行っても復元されません。</Text>
-            必ずバックアップを取得してから、削除を行ってください。
-          </>
-        }
+        text={ml({
+          ja: (
+            <>
+              このボタンを押すと、すべてのデータが削除されます。再生履歴は
+              <Text weight="bold">再ログインを行っても復元されません。</Text>
+              必ずバックアップを取得してから、削除を行ってください。
+            </>
+          ),
+          en: (
+            <>
+              All data will be deleted if you click this button. Watch history
+              will not be restored even if you log in again. Be sure to back up
+              your watch history before deleting.
+            </>
+          ),
+        })}
         figure={
           <Button
             onClick={() => {
-              if (confirm('本当に削除しますか？')) {
+              if (
+                confirm(
+                  mlString({
+                    ja: '本当に削除しますか？',
+                    en: 'Do you really want to clear all data?',
+                  })
+                )
+              ) {
                 subscription.channels.clear()
                 watchHistory.histories.clear()
                 navigate('/')
               }
             }}
           >
-            <PrimaryButton text="すべてのデータを削除" />
+            <PrimaryButton text="Clear all data" />
           </Button>
         }
       />

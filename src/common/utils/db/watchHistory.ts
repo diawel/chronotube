@@ -83,6 +83,10 @@ export const storeWatchHistories = async (
       titlePattern = /Watched\s(.*)/
       matchCount++
     }
+    if (history.title.endsWith(' 시청했습니다.')) {
+      titlePattern = /(.*)\s시청했습니다\./
+      matchCount++
+    }
     if (matchCount == 1) break
     if (matchCount > 1) titlePattern = /(.*)/
   }
@@ -124,7 +128,7 @@ export const exportWatchHistories = async (
   const convertedHistories: RawHistoryType[] = histories.map((history) => {
     return {
       header: history.header,
-      title: `${history.title} を視聴しました`,
+      title: `Watched ${history.title}`,
       titleUrl: `https://www.youtube.com/watch?v=${history.id}`,
       subtitles: [
         {

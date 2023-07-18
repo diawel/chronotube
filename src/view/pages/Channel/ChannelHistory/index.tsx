@@ -6,6 +6,7 @@ import { color } from 'src/common/styles/color'
 import TextBlock from 'src/view/components/atoms/TextBlock'
 import { fontSize } from 'src/common/styles/fontSize'
 import { ReactNode } from 'react'
+import { ml, mlString } from 'src/common/utils/switchLanguages'
 
 export type ChannelHistoryPropsType = {
   histories: { id: string; title: string; playbackDate: Date }[]
@@ -21,7 +22,10 @@ const ChannelHistory: React.FC<ChannelHistoryPropsType> = (props) => {
       <PlaybackWrapper key={'subscribeCard'}>
         <SubscribeBanner>
           <TextBlock color={color.black} size={fontSize.small}>
-            {`${dateToString(subscribeDate)}にチャンネル登録`}
+            {ml({
+              ja: `${dateToString(subscribeDate)}にチャンネル登録`,
+              en: `Subscribed on ${dateToString(subscribeDate)}`,
+            })}
           </TextBlock>
         </SubscribeBanner>
       </PlaybackWrapper>
@@ -56,7 +60,12 @@ const ChannelHistory: React.FC<ChannelHistoryPropsType> = (props) => {
   return (
     <div>
       <TitleWrapper>
-        <EnclosedTitle text="すべての再生履歴" />
+        <EnclosedTitle
+          text={mlString({
+            ja: 'すべての再生履歴',
+            en: 'All watch history',
+          })}
+        />
       </TitleWrapper>
       {historyList}
     </div>

@@ -12,6 +12,7 @@ import SkeletonIconBox from './SkeletonIconBox'
 import SkeletonKeyVideos from 'src/view/components/atoms/SkeletonBox/SkeletonKeyVideos'
 import ChannelColumns from 'src/view/components/templates/ChannelColumns'
 import Engage from './Engage'
+import { mlString } from 'src/common/utils/switchLanguages'
 
 const SharedChannel = t.type({
   id: t.string,
@@ -129,7 +130,10 @@ const Share: React.FC = () => {
     <Wrapper>
       <InitPage
         themeColor={color.white}
-        pageTitle="シェアされた結果 | Chronotube"
+        pageTitle={`${mlString({
+          ja: 'シェアされた結果',
+          en: 'Shared result',
+        })} | Chronotube`}
       />
       <ChannelColumns
         abstractColumn={abstractColumnInner}

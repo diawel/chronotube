@@ -4,11 +4,13 @@ import { ThumbnailType } from 'src/common/utils/types/youtube'
 import styled from 'styled-components'
 import ClampedText from '../../atoms/ClampedText'
 import RoundBox from '../../atoms/RoundBox'
+import NoTranslate from '../../atoms/NoTranslate'
+import { ReactNode } from 'react'
 
 export type ChannelCardPropsType = {
   thumbnail: ThumbnailType
   name: string
-  snippet: string
+  snippet: ReactNode
   listed?: boolean
 }
 
@@ -24,7 +26,7 @@ const ChannelCard: React.FC<ChannelCardPropsType> = (props) => {
           size={listed ? fontSize.regular : fontSize.medium}
           weight="bold"
         >
-          {name}
+          <NoTranslate>{name}</NoTranslate>
         </ClampedText>
         <ClampedText
           lineClamp="1"

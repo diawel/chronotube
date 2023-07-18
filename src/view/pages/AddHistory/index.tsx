@@ -7,14 +7,24 @@ import CompleteButton from './CompleteButton'
 import Description from './Description'
 import UploadButton from './UploadButton'
 import Loading from 'src/view/components/organisms/Loading'
+import { mlString } from 'src/common/utils/switchLanguages'
 
 export type ProgressType = StoreWatchHistoryProgressType | 'ready' | 'init'
 
 const progressSnippet: { [index in ProgressType]: string } = {
   ready: '',
-  init: '初期化中',
-  parse: 'JSONデータを解析中',
-  store: 'データベースに格納中',
+  init: mlString({
+    ja: '初期化中',
+    en: 'Initializing',
+  }),
+  parse: mlString({
+    ja: 'JSONデータを解析中',
+    en: 'Parsing JSON data',
+  }),
+  store: mlString({
+    ja: 'データベースに格納中',
+    en: 'Storing data to database',
+  }),
   finished: '',
 }
 
@@ -23,7 +33,12 @@ const AddHistory: React.FC = () => {
 
   return (
     <ColumnContent hideFooter={progressSnippet[progress] != ''}>
-      <InitPage pageTitle="再生履歴を追加 | Chronotube" />
+      <InitPage
+        pageTitle={`${mlString({
+          ja: '再生履歴を追加',
+          en: 'Add watch history',
+        })} | Chronotube`}
+      />
       {progress == 'ready' || progress == 'finished' ? (
         <Abstract />
       ) : (
@@ -34,7 +49,7 @@ const AddHistory: React.FC = () => {
       ) : (
         <CompleteButton progress={progress} />
       )}
-      {progress == 'ready' && Description}
+      {progress == 'ready' && <Description />}
     </ColumnContent>
   )
 }

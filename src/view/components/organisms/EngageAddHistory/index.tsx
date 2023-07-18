@@ -6,6 +6,7 @@ import { DeviceContext } from 'src/index'
 import styled from 'styled-components'
 import TextBlock from '../../atoms/TextBlock'
 import PrimaryButton from '../../molecules/PrimaryButton'
+import { ml, mlString } from 'src/common/utils/switchLanguages'
 
 const EngageAddHistory: React.FC = () => {
   const deviceType = useContext(DeviceContext)
@@ -14,11 +15,16 @@ const EngageAddHistory: React.FC = () => {
     <Wrapper padding={deviceType == 'mobile' ? '16px' : '24px'}>
       <TextWrapper>
         <TextBlock color={color.black} size={fontSize.large} weight="bold">
-          再生履歴を追加すると、より詳しい情報が確認できます。
+          {ml({
+            ja: '再生履歴を追加すると、より詳しい情報が確認できます。',
+            en: 'Add your watch history to see more information.',
+          })}
         </TextBlock>
       </TextWrapper>
       <Link to="/addhistory">
-        <PrimaryButton text="再生履歴を追加" />
+        <PrimaryButton
+          text={mlString({ ja: '再生履歴を追加', en: 'Add watch history' })}
+        />
       </Link>
     </Wrapper>
   )
