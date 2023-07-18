@@ -1,0 +1,22 @@
+{
+  "short_name": "Chronotube",
+  "name": "Chronotube",
+  "description": "YouTubeの履歴を分析して、チャンネル登録日や登録のきっかけになった動画などを分析します。",
+  "display": "standalone",
+  "start_url": "/",
+  "orientation": "portrait",
+  "background_color": "#f2f2f2",
+  "theme_color": "#121212",
+  "icons": [
+    {
+      "src": "image/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "image/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
