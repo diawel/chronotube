@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import { DeviceContext } from 'src/index'
 import { Link } from 'react-router-dom'
 import { fontSize } from 'src/common/styles/fontSize'
+import { ml } from 'src/common/utils/switchLanguages'
 
 export const footerHeight = '40px'
 
@@ -35,7 +36,12 @@ const FooterContent = (
     </a>
     <Link to="/privacy">
       <TextWrapper>
-        <Text {...textStyle}>プライバシーポリシー</Text>
+        <Text {...textStyle}>
+          {ml({
+            ja: 'プライバシーポリシー',
+            en: 'Privacy Policy',
+          })}
+        </Text>
       </TextWrapper>
     </Link>
   </>
