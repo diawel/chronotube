@@ -66,7 +66,12 @@ const Clear: React.FC = () => {
               }
             }}
           >
-            <PrimaryButton text="Clear all data" />
+            <PrimaryButton
+              text={mlString({
+                ja: 'すべてのデータを削除',
+                en: 'Clear all data',
+              })}
+            />
           </Button>
         }
       />
