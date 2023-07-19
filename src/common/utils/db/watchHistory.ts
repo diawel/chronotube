@@ -87,6 +87,16 @@ export const storeWatchHistories = async (
       titlePattern = /(.*)\s시청했습니다\./
       matchCount++
     }
+    // ドイツ語
+    if (history.title.endsWith(' angesehen')) {
+      titlePattern = /(.*)\sangesehen/
+      matchCount++
+    }
+    // フランス語
+    if (history.title.startsWith('Vous avez regardé ')) {
+      titlePattern = /Vous avez regardé\s(.*)/
+      matchCount++
+    }
     if (matchCount == 1) break
     if (matchCount > 1) titlePattern = /(.*)/
   }
