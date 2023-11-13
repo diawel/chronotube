@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { color } from 'src/common/styles/color'
 import { fontSize } from 'src/common/styles/fontSize'
 import styled from 'styled-components'
@@ -12,6 +13,8 @@ export type InputPropsType = {
 
 const Input: React.FC<InputPropsType> = (props) => {
   const { type, value, valueSetter, placeholder, onBlur } = props
+  const [isComposing, setIsComposing] = useState(false)
+
   return (
     <StyledInput
       onChange={(event) => {
@@ -19,9 +22,13 @@ const Input: React.FC<InputPropsType> = (props) => {
       }}
       {...{ type, value, placeholder, onBlur }}
       onKeyDown={(event) => {
-        if (event.key === 'Enter') {
-          event.currentTarget.blur()
-        }
+        if (!isComposing && event.key === 'Enter') event.currentTarget.blur()
+      }}
+      onCompositionStart={() => {
+        setIsComposing(true)
+      }}
+      onCompositionEnd={() => {
+        setIsComposing(false)
       }}
     />
   )

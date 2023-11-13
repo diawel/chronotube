@@ -19,7 +19,7 @@ let cachedLiveQuery: any
 
 const Gallery: React.FC = () => {
   const [filter, setFilter] = useState(
-    sessionStorage.getItem(sessionStorageKey.filter) || ''
+    sessionStorage.getItem(sessionStorageKey.filter) ?? ''
   )
   useEffect(() => {
     sessionStorage.setItem(sessionStorageKey.filter, filter)
@@ -30,7 +30,7 @@ const Gallery: React.FC = () => {
       return {
         channels: await subscription.channels.toArray(),
       }
-    }) || cachedLiveQuery
+    }) ?? cachedLiveQuery
 
   let node
   if (liveQuery) {
