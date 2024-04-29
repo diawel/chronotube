@@ -2,18 +2,12 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "start": "vite",
-    "dev": "vite serve --port 3000",
+    "dev": "vite --port 3000 --host",
     "build": "tsc && vite build",
-    "preview": "vite preview --port 3001",
-    "fmt:write": "prettier --write src/**/*",
-    "fmt:check": "prettier --check src/**/*",
-    "lint:eslint": "eslint --ext .jsx,.js,.tsx,.ts src/",
-    "fix:eslint": "eslint --fix --ext .js,.jsx,.ts,.tsx src/"
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview"
   },
   "dependencies": {
-    "@reduxjs/toolkit": "^1.8.4",
-    "axios": "^1.6.1",
     "dexie": "^3.2.3",
     "dexie-react-hooks": "^1.1.1",
     "fp-ts": "^2.13.1",
