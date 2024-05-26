@@ -41,7 +41,11 @@ function cache_channel($id)
       'https://yt3.googleusercontent.com/a/default-user',
   ];
 
-  file_put_contents("./cached-channels/$id.json", json_encode($channel));
+  file_put_contents(
+    "./cached-channels/$id.json",
+    json_encode($channel),
+    LOCK_EX
+  );
   return $channel;
 }
 
